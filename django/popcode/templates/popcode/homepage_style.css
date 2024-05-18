@@ -1,0 +1,390 @@
+.element-home {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.element-home .div {
+  background-color: #ffffff;
+  overflow: hidden;
+  width: 1920px;
+  height: 1257px;
+  position: relative;
+}
+
+.element-home .header {
+  position: absolute;
+  width: 2022px;
+  height: 922px;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+}
+
+.element-home .overlap {
+  position: relative;
+  width: 2022px;
+  height: 1381px;
+}
+
+.element-home .base {
+  position: absolute;
+  width: 1920px;
+  height: 1126px;
+  top: 0;
+  left: 0;
+  background-color: #fff8f2;
+}
+
+.element-home .objects {
+  position: absolute;
+  width: 1994px;
+  height: 1281px;
+  top: 100px;
+  left: 28px;
+}
+
+.element-home .overlap-group {
+  position: relative;
+  width: 1892px;
+  height: 1158px;
+  top: -2px;
+}
+
+.element-home .elements {
+  position: absolute;
+  width: 1672px;
+  height: 754px;
+  top: 0;
+  left: 220px;
+}
+
+.element-home .image {
+  position: absolute;
+  width: 1053px;
+  height: 531px;
+  top: 130px;
+  left: 346px;
+}
+
+.element-home .alarm-clock-copy {
+  position: absolute;
+  width: 162px;
+  height: 179px;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.element-home .CLIPBOARD-VERIFIED {
+  position: absolute;
+  width: 178px;
+  height: 191px;
+  top: 340px;
+  left: 875px;
+  object-fit: cover;
+}
+
+.element-home .mobile-screen {
+  position: absolute;
+  width: 582px;
+  height: 890px;
+  top: 268px;
+  left: 1310px;
+}
+
+.element-home .img {
+  position: absolute;
+  width: 502px;
+  height: 744px;
+  top: 280px;
+  left: 0;
+}
+
+.element-home .content {
+  position: absolute;
+  width: 800px;
+  height: 420px;
+  top: 320px;
+  left: 560px;
+}
+
+.element-home .button {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 24px 40px;
+  position: absolute;
+  top: 344px;
+  left: 280px;
+  background-color: #ff553e;
+  border-radius: 40px;
+}
+
+.element-home .text-wrapper {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Poppins", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.element-home .texts {
+  position: absolute;
+  width: 804px;
+  height: 276px;
+  top: 0;
+  left: 0;
+}
+
+.element-home .an-enim-nullam {
+  position: absolute;
+  width: 595px;
+  top: 204px;
+  left: 89px;
+  opacity: 0.8;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #3f1f1d;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 36px;
+}
+
+.element-home .a-collaborative-time {
+  position: absolute;
+  width: 800px;
+  top: 0;
+  left: 0;
+  font-family: "Poppins", Helvetica;
+  font-weight: 700;
+  color: #1c0e0d;
+  font-size: 64px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 90px;
+}
+
+.element-home .top {
+  position: absolute;
+  width: 782px;
+  height: 60px;
+  top: 40px;
+  left: 765px;
+}
+
+.element-home .sign-up {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px 32px;
+  position: absolute;
+  top: 0;
+  left: 647px;
+  background-color: #ff553e;
+  border-radius: 34px;
+}
+
+.element-home .text-wrapper-2 {
+  position: absolute;
+  top: 16px;
+  left: 562px;
+  font-family: "Poppins", Helvetica;
+  font-weight: 500;
+  color: #ff553e;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.element-home .navbar {
+  position: absolute;
+  width: 429px;
+  height: 24px;
+  top: 18px;
+  left: 0;
+}
+
+.element-home .text-wrapper-3 {
+  left: 0;
+  position: absolute;
+  top: 0;
+  font-family: "Poppins", Helvetica;
+  font-weight: 400;
+  color: #1c0e0d;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.element-home .text-wrapper-4 {
+  left: 112px;
+  position: absolute;
+  top: 0;
+  font-family: "Poppins", Helvetica;
+  font-weight: 400;
+  color: #1c0e0d;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.element-home .text-wrapper-5 {
+  left: 238px;
+  position: absolute;
+  top: 0;
+  font-family: "Poppins", Helvetica;
+  font-weight: 400;
+  color: #1c0e0d;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.element-home .text-wrapper-6 {
+  left: 347px;
+  position: absolute;
+  top: 0;
+  font-family: "Poppins", Helvetica;
+  font-weight: 400;
+  color: #1c0e0d;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.element-home .logo {
+  position: absolute;
+  width: 179px;
+  height: 40px;
+  top: 50px;
+  left: 375px;
+}
+
+.element-home .fun-fact {
+  position: absolute;
+  width: 1920px;
+  height: 970px;
+  top: 922px;
+  left: 0;
+}
+
+.element-home .expertises-wrapper {
+  height: 335px;
+  background-image: url(./img/vector.svg);
+  background-size: 100% 100%;
+}
+
+.element-home .expertises {
+  position: relative;
+  width: 696px;
+  height: 92px;
+  top: 94px;
+  left: 455px;
+}
+
+.element-home .cusomer {
+  position: absolute;
+  width: 87px;
+  height: 92px;
+  top: 0;
+  left: 613px;
+}
+
+.element-home .text-wrapper-7 {
+  position: absolute;
+  top: 74px;
+  left: 0;
+  opacity: 0.6;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #3f3f3f;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.element-home .text-wrapper-8 {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  font-family: "Poppins", Helvetica;
+  font-weight: 600;
+  color: #18063c;
+  font-size: 48px;
+  letter-spacing: 0;
+  line-height: 64px;
+  white-space: nowrap;
+}
+
+.element-home .total-download {
+  position: absolute;
+  width: 136px;
+  height: 92px;
+  top: 0;
+  left: 289px;
+}
+
+.element-home .text-wrapper-9 {
+  position: absolute;
+  top: 0;
+  left: 22px;
+  font-family: "Poppins", Helvetica;
+  font-weight: 600;
+  color: #18063c;
+  font-size: 48px;
+  letter-spacing: 0;
+  line-height: 64px;
+  white-space: nowrap;
+}
+
+.element-home .active-user {
+  position: absolute;
+  width: 113px;
+  height: 92px;
+  top: 0;
+  left: 0;
+}
+
+.element-home .text-wrapper-10 {
+  position: absolute;
+  top: 74px;
+  left: 7px;
+  opacity: 0.6;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #3f3f3f;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.element-home .text-wrapper-11 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Poppins", Helvetica;
+  font-weight: 600;
+  color: #18063c;
+  font-size: 48px;
+  letter-spacing: 0;
+  line-height: 64px;
+  white-space: nowrap;
+}
