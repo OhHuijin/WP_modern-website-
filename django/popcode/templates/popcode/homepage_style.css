@@ -55,11 +55,11 @@
 
 .element-home .elements {
   position: absolute;
-  width: 572px;
+  width: 672px;
   /* height: 754px; */
-  top: 320px;
+  top: 100px;
   text-align: center;
-  left: 630px;
+  left: 580px;
 }
 
 .element-home .image {
@@ -288,10 +288,10 @@
 
 .element-home .logo {
   position: absolute;
-  width: 179px;
-  height: 40px;
-  top: 50px;
-  left: 375px;
+  width: 200px;
+  /* height: 40px; */
+  top: -20px;
+  left: 175px;
 }
 
 .element-home .fun-fact {
