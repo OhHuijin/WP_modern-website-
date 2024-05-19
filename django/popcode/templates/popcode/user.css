@@ -1,3 +1,12 @@
+.logo {
+    position: absolute; /* 절대 위치 */
+    top: 70px; /* 상단에서 10px 떨어진 곳에 위치 */
+    left: 100px; /* 좌측에서 10px 떨어진 곳에 위치 */
+    width: 200px; /* 로고 이미지의 너비를 100px로 설정 */
+    height: auto; /* 너비에 맞춰 높이 자동 조정 */
+    padding: 10px; /* 로고 주변에 패딩 추가 */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -11,7 +20,7 @@ body {
 }
 
 h1 {
-    margin-top: 20px;
+    margin-top: 200px;
     text-align: center;
 }
 
