@@ -21,9 +21,15 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     background-color: rgb(255, 206, 206);
     background: url('../assets/background_image.jpg');
     background-color : rgb(255, 206, 206);
+=======
+    background-color: white;
+    background: url('../assets/background_image.jpg');
+    /* background-color : black; */
+>>>>>>> d20937a8fe211998652ca72cf0e75b2c66a9147e
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -32,7 +38,11 @@ main{
 .game-quiz-container{
     width: 40rem;
     height: 30rem;
+<<<<<<< HEAD
     background-color: rgb(255, 255, 245);
+=======
+    background-color: #ffc107;
+>>>>>>> d20937a8fe211998652ca72cf0e75b2c66a9147e
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +68,12 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     border: 2px solid rgb(255, 247, 226);
+=======
+    border: 2px solid darkgray;
+    background-color: beige;
+>>>>>>> d20937a8fe211998652ca72cf0e75b2c66a9147e
     border-radius: 25px;
 }
 
@@ -81,6 +96,7 @@ main{
     width: 45%;
     height: 3rem;
     border: 2px solid darkgray;
+    background-color: beige;
     border-radius: 20px;
     overflow: hidden;
 }
@@ -127,6 +143,7 @@ input[type=radio]:checked ~ .option {
     color: rgb(25, 25, 25);
     font-weight: 600;
     border: 2px solid gray;
+    background-color: beige;
     cursor: pointer;
     outline: none;
 }
@@ -166,7 +183,11 @@ input[type=radio]:checked ~ .option {
 .modal-content-container h1{
     font-size: 1.3rem;
     height: 3rem;
+<<<<<<< HEAD
     color: rgb(253, 255, 244);
+=======
+    color: #ffc107;
+>>>>>>> d20937a8fe211998652ca72cf0e75b2c66a9147e
     text-align: center;
 }
 
@@ -198,7 +219,7 @@ input[type=radio]:checked ~ .option {
     background: none;
     outline: none;
     border: 1px solid rgb(252, 242, 241);
-    color: white;
+    color: #ffc107;
     font-size: 1.1rem;
     cursor: pointer;
     border-radius: 20px;
