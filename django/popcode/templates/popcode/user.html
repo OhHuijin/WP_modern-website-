@@ -7,34 +7,44 @@
     <link rel="stylesheet" href="user.css">
 </head>
 <body>
-
     <img src="img/popcode.svg" alt="Logo" class="logo">
 
-    <h1>User Information</h1>
-    <div class="settings-container">
-        <form id="settingsForm">
-            <div class="input-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" disabled>
-            </div>
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" disabled>
-            </div>
-            <div class="input-group">
-                <label for="userId">ID:</label>
-                <input type="text" id="userId" name="userId" disabled>
-            </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" disabled>
-            </div>
-            <div class="form-buttons">
-                <button type="button" id="editButton">Edit</button>
-                <button type="submit" id="saveButton" disabled>Save</button>
-                <button type="button" onclick="handleLogout()">Log Out</button>
-            </div>
-        </form>
+    <!-- <div class="menu">
+    </div> -->
+
+    <div class="main_container">
+        
+        <div class="deco_container">
+            <img src="img/deco_1.png" alt="Decoration" class="deco_image">
+        </div>
+
+        <div class="contents_container">
+            <h1>User Information</h1>
+
+            <form id="settingsForm">
+                <div class="input-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" disabled>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" disabled>
+                </div>
+                <div class="input-group">
+                    <label for="userId">ID:</label>
+                    <input type="text" id="userId" name="userId" disabled>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" disabled>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" id="editButton">Edit</button>
+                    <button type="submit" id="saveButton" disabled>Save</button>
+                    <button type="button" onclick="handleLogout()">Log Out</button>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="user.js"></script>
 </body>
