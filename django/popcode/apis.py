@@ -24,13 +24,13 @@ def login(req:HttpRequest):
     username = req.POST["username"]
     password = req.POST["password"]
     if not username or not password:
-        return views.login(req, error="missingFields")
+        return views.login(req, {"error":"missingFields"})
     password = md5(password.encode("utf-8")).hexdigest()
     user = DB.users.find_one({"username":username})
     if not user:
-        return views.login(req, error="userNotFound")
+        return views.login(req,{"error":"userNotFound"})
     if user["password"] != password:
-        return views.login(req, error="wrongPassword")
+        return views.login(req, {"error":"wrongPassword"})
     DB.users.update_one({"token":user["token"]},{"$set":{"lastLogin":time.time(), "token":md5(str(random.random()).encode("utf-8")).hexdigest()}})
     req.session["token"] = user["token"]
     req.session["username"] = user["username"]
@@ -47,8 +47,13 @@ def signup(req:HttpRequest):
     username = req.POST["username"]
     password = req.POST["password"]
     email = req.POST["email"]
+    
     if not username or not password or not email:
-        return views.signup(req, error="missingFields")
+        return views.signup(req, {"error":"missingFields"})
+    
+    if DB.users.find_one({"$or":[{"username":username},{"email":email}]}):
+        return views.signup(req, {"error":"usernameOrEmailExists"})
+    
     password = md5(password.encode("utf-8")).hexdigest()
     token = md5(str(random.random()).encode("utf-8")).hexdigest()
     DB.users.insert_one({

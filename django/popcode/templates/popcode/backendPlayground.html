@@ -8,6 +8,8 @@
 </head>
 
 <body>
+	Username : {{ request.session.username }} <br>
+	Token : {{ request.session.token }} <br>
 	<textarea id="codeInput"></textarea>
 	<button id="codeSubmit"></button>
 	<script>
@@ -48,6 +50,8 @@
 			return cookieValue;
 		}
 	</script>
+
+	<h1>Login</h1>
 	<form action="/login" method="post">
 		{% csrf_token %}
 		<input type="text" name="username" placeholder="Username">
@@ -55,12 +59,14 @@
 		<button type="submit">Login</button>
 	</form>
 
+	<h1>Signup</h1>
 	<form action="/signup" method="post">
 		{% csrf_token %}
 		<input type="text" name="username" placeholder="Username">
 		<input type="text" name="email" id="email" placeholder="Email">
 		<input type="password" name="password" placeholder="Password">
 		<button type="submit">Register</button>
+	</form>
 </body>
 
 </html>
