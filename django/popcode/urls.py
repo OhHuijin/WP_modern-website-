@@ -26,5 +26,5 @@ urlpatterns = [
     path('user',views.signup,name="user"),
     path('login',views.login,name="login"),
 	path('api/run',apis.apiRun,name="apiRun"),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls)
 ]
