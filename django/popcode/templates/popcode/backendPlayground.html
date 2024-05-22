@@ -8,8 +8,12 @@
 </head>
 
 <body>
-	Username : {{ request.session.username }} <br>
-	Token : {{ request.session.token }} <br>
+	{% if error %}
+		<markee>{{ error }}</markee>
+	{% endif %}
+	<h1>Backend Playground</h1>
+	<hr>
+	<h1>Run Code</h1>
 	<textarea id="codeInput"></textarea>
 	<button id="codeSubmit"></button>
 	<script>
@@ -67,6 +71,22 @@
 		<input type="password" name="password" placeholder="Password">
 		<button type="submit">Register</button>
 	</form>
+
+	<h1>Edit profile</h1>
+	{% if request.session.username and request.session.token %}
+		<p>	Username : {{ request.session.username }} <br>
+			Token : {{ request.session.token }}</p>
+		<form action="/profile" method="post">
+			{% csrf_token %}
+			<input type="text" name="username" placeholder="Username" value={{request.session.username}}>
+			<input type="text" name="email" id="email" placeholder="Email" value={{request.session.email}}>
+			<input type="password" name="password" placeholder="Current Password">
+			<input type="password" name="newPassword" placeholder="New Password (keep empty to don't edit)">
+			<button type="submit">Edit</button><br>
+			<a href="/logout">Logout</a>
+	{% else %}
+		<p>You need to login to edit your profile</p>
+	{% endif %}
 </body>
 
 </html>

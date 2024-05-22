@@ -24,7 +24,7 @@ def login(req:HttpRequest):
     username = req.POST["username"]
     password = req.POST["password"]
     if not username or not password:
-        return views.login(req, {"error":"missingFields"})
+        return views.login(req)
     password = md5(password.encode("utf-8")).hexdigest()
     user = DB.users.find_one({"username":username})
     if not user:
@@ -34,13 +34,13 @@ def login(req:HttpRequest):
     DB.users.update_one({"token":user["token"]},{"$set":{"lastLogin":time.time(), "token":md5(str(random.random()).encode("utf-8")).hexdigest()}})
     req.session["token"] = user["token"]
     req.session["username"] = user["username"]
+    req.session["email"] = user["email"]
     return redirect("/")
     
 """
     Tries to signup the user using given username, password and email.
     Redirects to / if successful
     Else redirects to /signup with error message :
-    - missingFields : If username, password or email is missing
     - usernameOrEmailExists : If username or email is already taken
 """
 def signup(req:HttpRequest):
@@ -49,7 +49,7 @@ def signup(req:HttpRequest):
     email = req.POST["email"]
     
     if not username or not password or not email:
-        return views.signup(req, {"error":"missingFields"})
+        return views.signup(req)
     
     if DB.users.find_one({"$or":[{"username":username},{"email":email}]}):
         return views.signup(req, {"error":"usernameOrEmailExists"})
@@ -70,9 +70,49 @@ def signup(req:HttpRequest):
     })
     req.session["token"] = token
     req.session["username"] = username
+    req.session["email"] = email
     return redirect("/")
     
+"""
+    Edit the user information, with given username, password, newPassword and email.
+    Redirects to /profile if successful
+    Else redirects to /profile with error message :
+    - wrongPasswordOrToken : If password is wrong, or token is invalid
+"""
+def editUser(req:HttpRequest):
+    username = req.POST["username"]
+    password = req.POST["password"]
+    newPassword = req.POST["newPassword"]
+    email = req.POST["email"]
     
+    if not username or not password or not email:
+        return views.profile(req)
+    
+    token = req.session.get("token")
+    if not token:
+        return views.profile(req, {"error":"tokenNotFound"})
+    
+    password = md5(password.encode("utf-8")).hexdigest()
+    print("password is ",password)
+    print("token is ",token)
+    user = DB.users.find_one({"token":token,"password":password})
+    if not user:
+        return views.profile(req, {"error":"wrongPasswordOrToken"})
+    
+    if newPassword:
+        newPassword = md5(newPassword.encode("utf-8")).hexdigest()
+        DB.users.update_one({"token":token},{"$set":{"username":username,"password":newPassword,"email":email}})
+    else:
+        DB.users.update_one({"token":token},{"$set":{"username":username,"email":email}})
+    
+    req.session["username"] = username
+    req.session["email"] = email
+    return views.profile(req)
+
+def logout(req:HttpRequest):
+    req.session.pop("token")
+    req.session.pop("username")
+    return redirect("/")
 
 def apiRun(req:HttpRequest):
     post = json.loads(req.body.decode("utf-8"))
