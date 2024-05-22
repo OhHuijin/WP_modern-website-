@@ -9,7 +9,7 @@ class CodeRunner:
 		if self.lang == "python3":
 			f = open("temp.py","w")
 			f.write(self.code)
-			status = subprocess.call(["python3","temp.py"])
 			f.close()
+			status = subprocess.call(["python3","temp.py"])
 			return status
 		return -1

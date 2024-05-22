@@ -21,15 +21,13 @@
 				fetch("api/run", {
 					method: "POST",
 					headers: {
-						"Content-Type": "application/json",
 						"X-CSRFToken": getCookie("csrftoken"),
 					},
-					body: JSON.stringify({ code, lang }),
+					body: JSON.stringify({ code: code, lang: lang }),
 				})
 					.then((res) => res.ok ? res.json() : console.error(res))
 					.then((data) => {
 						console.log(data);
-						alert("Open devtools with f12")
 					})
 					.catch(console.error)
 			}
@@ -50,6 +48,19 @@
 			return cookieValue;
 		}
 	</script>
+	<form action="/login" method="post">
+		{% csrf_token %}
+		<input type="text" name="username" placeholder="Username">
+		<input type="password" name="password" placeholder="Password">
+		<button type="submit">Login</button>
+	</form>
+
+	<form action="/signup" method="post">
+		{% csrf_token %}
+		<input type="text" name="username" placeholder="Username">
+		<input type="text" name="email" id="email" placeholder="Email">
+		<input type="password" name="password" placeholder="Password">
+		<button type="submit">Register</button>
 </body>
 
 </html>

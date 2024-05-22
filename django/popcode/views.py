@@ -14,5 +14,5 @@ def quiz(req: HttpRequest):
 def signup(req: HttpRequest):
 	return render(req,"popcode/signup.html")
 
-def login(req: HttpRequest):
-	return render(req,"popcode/login.html")
+def login(req: HttpRequest,context={}):
+	return render(req,"popcode/login.html",context=context)
