@@ -16,9 +16,19 @@
 	<h1>Run Code</h1>
 	<textarea id="codeInput"></textarea>
 	<button id="codeSubmit"></button>
+	<div style="border:5px black dotted">
+		The last code ran with output code : <span id="returnCode"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br>
+		Output:<br>
+		<code id="stdout"></code> <br>
+		Error:<br>
+		<code id="stderr"></code>
+	</div>
 	<script>
 		const codeSubmit = document.querySelector("#codeSubmit");
 		const codeInput = document.querySelector("#codeInput");
+		const returnCode = document.querySelector("#returnCode");
+		const stdout = document.querySelector("#stdout");
+		const stderr = document.querySelector("#stderr");
 
 		codeSubmit.addEventListener("click", () => {
 			const code = codeInput.value;
@@ -33,7 +43,10 @@
 				})
 					.then((res) => res.ok ? res.json() : console.error(res))
 					.then((data) => {
-						console.log(data);
+						console.log(data)
+						returnCode.textContent = data.returnCode;
+						stdout.textContent = data.stdout;
+						stderr.textContent = data.stderr;
 					})
 					.catch(console.error)
 			}
@@ -84,6 +97,7 @@
 			<input type="password" name="newPassword" placeholder="New Password (keep empty to don't edit)">
 			<button type="submit">Edit</button><br>
 			<a href="/logout">Logout</a>
+		</form>
 	{% else %}
 		<p>You need to login to edit your profile</p>
 	{% endif %}
