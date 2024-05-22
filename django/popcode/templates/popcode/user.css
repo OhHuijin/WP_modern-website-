@@ -1,10 +1,35 @@
-.logo {
-    position: fixed; /* 고정 위치 */
-    top: 0px; /* 상단에서 10px 떨어진 곳에 위치 */
-    left: 0px; /* 좌측에서 10px 떨어진 곳에 위치 */
-    width: 200px; /* 로고 이미지의 너비를 100px로 설정 */
-    /* height: auto; 너비에 맞춰 높이 자동 조정 */
-    padding: 10px; /* 로고 주변에 패딩 추가 */
+.menu_container {
+    position: fixed; /* 메뉴바를 상단에 고정 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 화면 전체 너비 */
+    background-color:#ffecb4;
+    display: flex;
+    justify-content: start; /* 메뉴 항목을 왼쪽 정렬 */
+    padding: 5px 20px; /* 상하 10px, 좌우 20px 패딩 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    z-index: 1000; /* 다른 요소 위에 위치 */
+}
+
+.menu_container a {
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none; /* 밑줄 제거 */
+    font-size: 16px; 
+    margin-right: 10px; /* 항목 간 간격 */
+}
+
+.menu_container a:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.menu_container img {
+    margin-top: -50px;
+    margin-bottom: -50px;
+    width: 200px;
+    height: auto;
+    margin-right: 100px;
 }
 
 .main_container {
@@ -14,10 +39,11 @@
     align-items: start; /* 상단 정렬 */
     width: 100%;
     max-width: 1200px; /* 컨테이너 최대 너비 설정 */
+    margin-top: 200px; /* 메뉴바와 겹치지 않도록 상단 마진 추가 (메뉴바 높이 + 여유 공간) */
 }
 
 .deco_container {
-    margin-top: 200px;
+    margin-top: 300px;
     margin-right: 150px;
 
     flex: 0 0 auto; /* 크기 고정 */
@@ -28,8 +54,17 @@
 }
 
 .deco_image {
+    margin-top: 100px;
     width: 300px; /* 이미지의 너비를 300px로 설정 */
     height: auto; /* 너비에 맞춰 높이 자동 조정 */
+}
+
+.contents_container {
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 300px;
+    margin-right: 50px;
 }
 
 body {
@@ -45,15 +80,7 @@ body {
 }
 
 h1 {
-    margin-top: 200px;
     text-align: center;
-}
-
-.contents_container {
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-top: 20px; /* h1과의 간격 */
 }
 
 .input-group {
