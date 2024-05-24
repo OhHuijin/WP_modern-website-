@@ -65,7 +65,7 @@
 
 .deco_container {
     margin-top: 300px;
-    margin-right: 150px;
+    margin-right: 50px;
 
     flex: 0 0 auto; /* 크기 고정 */
     display: flex;
