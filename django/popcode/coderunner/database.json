@@ -1,0 +1,41 @@
+{
+	"users":[{
+		"name":"str",
+		"token":"str",
+		"email":"str",
+		"password":"str",
+		"exp":"int",
+		"lastConnection":"date",
+		"streak":"int",
+		"progress":[{
+			"course":"foreignKey course / objectid course",
+			"lessonNumber":"int"
+		}]
+	}],
+	"courses":[{
+		"name":"str",
+		"category":"str",
+		"iconUrl":"str",
+		"backgroundUrl":"str",
+		"lessons":[{
+			"title":"str",
+			"contents":[{
+				"type":"EXPLAINATION",
+				"html":"str (html)"
+			},{
+				"type":"QUESTION",
+				"html":"str (html)",
+				"answers":[{
+					"html":"str (html)",
+					"correct":"bool"
+				}]
+			},{
+				"type":"CODE",
+				"html":"str (html)",
+				"language":"str",
+				"startCode":"str",
+				"testcaseCode":"str"
+			}]
+		}]
+	}]
+}

@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 
 def index(req: HttpRequest):
-	return render(req,"popcode/index.html")
+	return render(req,"popcode/backendPlayground.html")
 
 def homepage(req: HttpRequest):
 	return render(req,"popcode/homepage.html")
@@ -11,8 +11,11 @@ def homepage(req: HttpRequest):
 def quiz(req: HttpRequest):
 	return render(req,"popcode/quiz.html")
 
-def signup(req: HttpRequest):
+def signup(req: HttpRequest,context={}):
 	return render(req,"popcode/signup.html")
 
-def login(req: HttpRequest):
-	return render(req,"popcode/login.html")
+def login(req: HttpRequest,context={}):
+	return render(req,"popcode/login.html",context=context)
+
+def profile(req: HttpRequest,context={}):
+	return render(req,"popcode/backendPlayground.html",context=context)
