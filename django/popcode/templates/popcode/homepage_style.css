@@ -70,7 +70,7 @@
   left: 346px;
 }
 
-.element-home .alarm-clock-copy {
+.element-home .small_popcorn {
   position: absolute;
   width: 162px;
   height: 179px;
@@ -78,6 +78,7 @@
   left: 0;
   object-fit: cover;
 }
+
 
 .element-home .CLIPBOARD-VERIFIED {
   position: absolute;
@@ -287,11 +288,12 @@
   white-space: nowrap;
 }
 
+/*popcode 맨 위 로고 */
 .element-home .logo {
   position: absolute;
-  width: 200px;
+  width: 300px;
   /* height: 40px; */
-  top: -20px;
+  top: -50px;
   left: 175px;
 }
 
