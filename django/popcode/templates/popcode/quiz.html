@@ -1,16 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+<!--     
     <script src="quiz.js"></script>
-    <link rel="stylesheet" href="quiz.css">
-    <title>Quiz</title>
+    <link rel="stylesheet" href="quiz.css"> -->
+
+    <link href="{% static 'popcode/css/quiz.css' %}" rel="stylesheet">
+    <script src="{% static 'popcode/js/quiz.js' %}"></script>
+<!-- 
+    <title>Quiz</title> -->
 </head>
 <body onload="NextQuestion(0)">
 
     <div class="container">
-        <img class="corn" src="img/corn.png" alt="">
+        <img class="CLIPBOARD-VERIFIED" src="{% static 'popcode/images/corn.png' %}"/>
         <h3 class="day">Day 2</h3>
         </div>
 
