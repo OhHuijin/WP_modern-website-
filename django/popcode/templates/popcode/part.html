@@ -1,0 +1,53 @@
+{% extends "./layout.html" %}
+{%block nav%}
+<br><br><br><br>
+<h1>{{lesson.title}} - {{part.title}} ({{partIndex}})</h1>
+<i>By {{lesson.author}}</i>
+<p>{{part.description}}</p>
+<h2>Sections</h2>
+<ul>
+	{% for level in part.levels %}
+		<li>{{level.content}}</li>
+	{% empty %}
+		<p>No sections in this part</p>
+	{% endfor %}
+</ul>
+{% if request.session.admin %}
+	<h1>Add explaination to this level ?</h1>
+	<form action="/addLevel" method="post">
+		{% csrf_token %}
+		<textarea name="content" placeholder="Explaination"></textarea>
+		<input type="hidden" name="type" value="EXPL">
+		<input type="hidden" name="lessonId" value={{lesson.title}}>
+		<input type="hidden" name="partId" value={{partIndex}}>
+		<button type="submit">Create</button>
+	</form>
+	<h1>Add question to this level ?</h1>
+	<form action="/addLevel" method="post">
+		{% csrf_token %}
+		<textarea name="content" placeholder="Question (html)"></textarea>
+		<ul>
+			<li><input type="checkbox" name="c1" id="1"><label for="1"><input type="text" name="v1" placeholder="Answer 1"></label></li>
+			<li><input type="checkbox" name="c2" id="2"><label for="2"><input type="text" name="v2" placeholder="Answer 2"></label></li>
+			<li><input type="checkbox" name="c3" id="3"><label for="3"><input type="text" name="v3" placeholder="Answer 3"></label></li>
+			<li><input type="checkbox" name="c4" id="4"><label for="4"><input type="text" name="v4" placeholder="Answer 4"></label></li>
+		</ul>
+		<input type="hidden" name="type" value="QUIZ">
+		<input type="hidden" name="lessonId" value={{lesson.title}}>
+		<input type="hidden" name="partId" value={{partIndex}}>
+		<button type="submit">Create</button>
+	</form>
+	<h1>Add code challenge to this level ?</h1>
+	<form action="/addLevel" method="post">
+		{% csrf_token %}
+		<select name="lang"><option value="python3">python3</option></select><br>
+		<textarea name="content" placeholder="Challenge"></textarea><br>
+		<textarea name="testcase" placeholder="Testcase file (0 exit code = code is good)"></textarea><br>
+		<textarea name="startcode" placeholder="Startcode"></textarea><br>
+		<input type="hidden" name="type" value="CODE">
+		<input type="hidden" name="lessonId" value={{lesson.title}}>
+		<input type="hidden" name="partId" value={{partIndex}}>
+		<button type="submit">Create</button>
+	</form>
+{% endif %}
+{% endblock nav %}
