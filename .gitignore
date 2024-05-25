@@ -2,3 +2,4 @@ __pycache__
 .idea
 django/temp.py
 node_modules/
+django/db.sqlite3
