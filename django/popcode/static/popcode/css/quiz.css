@@ -19,7 +19,7 @@ body{
     align-items: center;
 
     background-color: rgb(255, 206, 206);
-    background: url('../assets/background_image.jpg');
+    /* background: url('../assets/background_image.jpg'); */
     background-color : rgb(255, 206, 206);
 
     background-repeat: no-repeat;
@@ -43,7 +43,7 @@ body{
     border-radius: 30px;
 }
 
-/* Score : 0 / 10 Question : 1 / 10 크기 */
+/* Score : 0 / 5 Question : 1 / 10 크기 */
 .game-details-container{
     width: 80%;
     height: 4rem;
@@ -58,13 +58,12 @@ body{
 
 /* 문제 크기 */
 .game-question-container{
-    width: 80%;
+    width: 90%;
     height: 20rem;
     display: flex;
     align-items: center;
     justify-content: center;
-
-
+    padding: 30px;
     border: 2px solid darkgray;
     background-color: beige;
 
@@ -80,7 +79,7 @@ body{
 }
 
 .game-options-container{
-    width: 80%;
+    width: 90%;
     height: 12rem;
     display: flex;
     flex-wrap: wrap;

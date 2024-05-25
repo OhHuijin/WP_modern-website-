@@ -1,16 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+<!--     
     <script src="quiz.js"></script>
-    <link rel="stylesheet" href="quiz.css">
-    <title>Quiz</title>
+    <link rel="stylesheet" href="quiz.css"> -->
+
+    <link href="{% static 'popcode/css/quiz.css' %}" rel="stylesheet">
+    <script src="{% static 'popcode/js/quiz.js' %}"></script>
+<!-- 
+    <title>Quiz</title> -->
 </head>
 <body onload="NextQuestion(0)">
 
     <div class="container">
-        <img class="corn" src="img/corn.png" alt="">
+        <img class="corn" src="{% static 'popcode/images/corn.png' %}"/>
         <h3 class="day">Day 2</h3>
         </div>
 
@@ -46,21 +53,6 @@
         </div>
 
 
-<!-- 
-                <div class="grade-details">
-                    <p>Attempts : 10</p>
-                    <p>Wrong Answers : <span id="wrong-answers"></span></p>
-                    <p>Right Answers : <span id="right-answers"></span></p>
-                    <p>Grade : <span id="grade-percentage"></span>%</p>
-                    <p ><span id="remarks"></span></p>
-                </div> -->
-<!-- 
-                <div class="modal-button-container">
-                    <button onclick="closeScoreModal()">Continue</button>
-                </div>
-
-            </div>
-        </div> -->
 
         <!-- 문제 끝났을때 모달 -->
 
@@ -91,8 +83,8 @@
         <div class="game-quiz-container">
 
             <div class="game-details-container">
-                <h1>Score : <span id="player-score"></span> / 10</h1>
-                <h1> Question : <span id="question-number"></span> / 10</h1>
+                <h1>Score : <span id="player-score"></span> / 5</h1>
+                <h1> Question : <span id="question-number"></span> / 5</h1>
             </div>
 
             <div class="game-question-container">

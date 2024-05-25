@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link  href="{% static 'popcode/style.css' %}" rel="stylesheet">
+    <link  href="{% static 'popcode/css/style.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="templates/popcode/style.css">
 </head>
 <body>
     <div class="menu_container">
-        <img src="img/popcode.svg" alt="Logo" class="logo">
+        <img src="{% static 'popcode/images/popcode.svg' %}">
         <a href="readypage.html">Home</a>
         <a href="settings.html">Settings</a>
         <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
