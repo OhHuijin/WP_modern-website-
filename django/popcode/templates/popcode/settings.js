@@ -24,5 +24,6 @@ document.getElementById('settingsForm').addEventListener('submit', function(even
 function handleLogout() {
     // need logout logic
     alert('logout complete!');
+    window.location.href = "homepage.html";
     // need to redirect to main page
 }

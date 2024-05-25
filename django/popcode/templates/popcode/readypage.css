@@ -4,37 +4,62 @@ body {
     text-align: center;
     background-color: rgba(255, 254, 186, 0.986);
   }
+  
 
+  
   .container {
     margin: 0 auto;
     max-width: 1200px;
     padding: 20px;
   }
-    .accordion {
+  
+  
+  .accordion {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
+  
   .accordion-item {
     flex: 0 1 calc(33.33% - 20px); 
     background-color: rgb(247, 148, 148);
     margin: 10px;
     padding: 10px;
   }
-  
-  .title {
+/*   
+.title {
     text-align: center;
-    margin-top: 150px;
+    margin-top: -150px;
     margin-bottom: 80px;
-    
-  }
-  title img{
-    width: 500px;
-  }
+    height: 700px;
+    position: relative;
+} */
+
+.title img {
+    width: 1000px;
+    margin-bottom: -200px;
+    /* margin-top: -260px;
+    margin-bottom: -200px; */
+}
+
+.title h1 {
+    position: absolute;
+    top: 520px;
+    left: 50%;
+    margin-bottom: 40px;
+    transform: translate(-50%, -50%);
+    color: white; /* 글자 색상 */
+    font-size: 60px; /* 글자 크기 */
+    font-weight: bold; /* 글자 두께 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 */
+    z-index: 1; 
+}
+  
   .topbar {
     /* display: flex; */
     flex-wrap: wrap;
     overflow: hidden;
+    height: 60px;
     background-color: #ffffff;
     display: flex;
     justify-content: space-between;
@@ -44,6 +69,7 @@ body {
 
   .topbar a {
     display: flex;
+    top: -10px;
     align-items: center; 
     text-decoration: none; 
     display: flex;
@@ -53,7 +79,7 @@ body {
 }
   
 
-  .navigation{
+  .user{
     float: right;
     display: flex;
     justify-content: flex-end;
@@ -68,7 +94,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    margin: 10px;
+    margin-bottom: -100px;
+    margin-top: -110px;
     width: 250px;
 
 
@@ -113,5 +140,12 @@ button {
     height: 120px; 
 }
 .link-container p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 120px;
+    margin-bottom: 200px;
+}
+.day-container{
+  position: relative;
+  display: inline-block;
+
 }
