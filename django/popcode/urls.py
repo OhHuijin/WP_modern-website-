@@ -30,5 +30,9 @@ urlpatterns = [
     path("profile",apis.editUser,name="profile"),
     path("logout",apis.logout,name="logout"),
     path("createLesson",apis.createLesson,name="createLesson"),
-    path("deleteLesson",apis.deleteLesson,name="deleteLesson")
+    path("deleteLesson",apis.deleteLesson,name="deleteLesson"),
+    path("createPart",apis.createPart,name="createPart"),
+    path("addLevel",apis.addLevel,name="addLevel"),
+    path("lesson/<str:title>",apis.viewLesson,name="lesson"),
+    path("lesson/<str:title>/<int:part>",apis.viewPart,name="part")
 ]

@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link  href="{% static 'popcode/style.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="templates/popcode/style.css">
+    <link href="{% static 'popcode/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
     <div class="menu_container">
@@ -17,7 +16,14 @@
         <a href="">link</a>
         <a href="contact.html">Contact</a>
         <div class="logout_container">
-            <button type="button" onclick="handleLogout()" class="logout">Log Out</button>
+
+            {% if request.session.username %}
+            <p class="username">{{request.session.username}}</p>
+            {% if request.session.admin %}<pre>(ADMIN)</pre>{% endif %}
+            <a href="/logout">Log Out</a>
+            {% else %}
+            login or register
+            {% endif %}
         </div>
     </div>
     <script src="settings.js"></script>

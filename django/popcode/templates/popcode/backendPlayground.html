@@ -108,7 +108,7 @@
 
 	<h1>Lessons</h1>
 	{% for lesson in lessons %}
-		<h2>{{ lesson.title }}</h2>
+		<a href="lesson/{{lesson.title}}"><h2>{{ lesson.title }}</h2></a>
 		<p>{{ lesson.description }}</p>
 		{% if request.session.admin %}
 			<form action="/deleteLesson" method="post">
