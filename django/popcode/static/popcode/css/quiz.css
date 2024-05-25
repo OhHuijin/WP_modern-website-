@@ -19,7 +19,7 @@ body{
     align-items: center;
 
     background-color: rgb(255, 206, 206);
-    background: url('../assets/background_image.jpg');
+    /* background: url('../assets/background_image.jpg'); */
     background-color : rgb(255, 206, 206);
 
     background-repeat: no-repeat;
