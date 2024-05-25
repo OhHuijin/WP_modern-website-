@@ -143,6 +143,8 @@ def editUser(req: HttpRequest):
 def logout(req: HttpRequest):
     req.session.pop("token")
     req.session.pop("username")
+    req.session.pop("email")
+    req.session.pop("admin")
     return redirect("/")
 
 
@@ -217,6 +219,8 @@ def viewLesson(req: HttpRequest, title: str):
 def createPart(req: HttpRequest):
     if not req.POST:
         return redirect("/")
+    if not getAdminUser(req):
+        return redirect("/?error=notAdmin")
     user = getAdminUser(req)
     if not user:
         return redirect("/?error=notAdmin")
@@ -243,6 +247,8 @@ def createPart(req: HttpRequest):
 
 
 def addLevel(req: HttpRequest):
+    if getAdminUser(req) is None:
+        return redirect("/?error=notAdmin")
     if not req.POST:
         return redirect("/?error=missingFields")
     type = req.POST.get("type")
