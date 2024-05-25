@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PopCode</title>
-</head>
-
-<body>
+{% extends "./layout.html" %}
+{% block nav %}
 	{% if error %}
 		<markee>{{ error }}</markee>
 	{% endif %}
@@ -101,6 +93,4 @@
 	{% else %}
 		<p>You need to login to edit your profile</p>
 	{% endif %}
-</body>
-
-</html>
+{% endblock nav %}

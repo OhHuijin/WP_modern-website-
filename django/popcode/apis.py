@@ -5,12 +5,10 @@ import time
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 
+from .utils import getAdminUser
+
 from . import views
 from .coderunner.CodeRunner import CodeRunner
-import pymongo
-
-DB = pymongo.MongoClient("mongodb://popcode:popcode@194.87.217.205:27017/")["popcode"]
-
 
 """
     Tries to login the user using given username and password.
@@ -62,6 +60,7 @@ def signup(req:HttpRequest):
         "email":email,
         "created":time.time(),
         "lastLogin":time.time(),
+        "role":0,
         "exp":0,
         "coins":0,
         "streak":0,
@@ -109,10 +108,24 @@ def editUser(req:HttpRequest):
     req.session["email"] = email
     return views.profile(req)
 
+"""
+    Logout the user
+    Redirects to /
+"""
 def logout(req:HttpRequest):
     req.session.pop("token")
     req.session.pop("username")
     return redirect("/")
+
+"""
+    Add a question to the database
+    Requires admin access
+    TODO: Implement this
+"""
+def addQuestion(req:HttpRequest):
+    if not getAdminUser(req):
+        return redirect("/")
+    return HttpResponse("addQuestion")
 
 def apiRun(req:HttpRequest):
     post = json.loads(req.body.decode("utf-8"))
