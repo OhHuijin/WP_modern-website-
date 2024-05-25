@@ -21,12 +21,42 @@ const questions = [
 
 
     {
-        question: "다음 중 사용자에게 직접적으로 보여지지 않는 html의 요소로 가장 적절한 것은 무엇인가요?",
+        question: "Which of the following is the most appropriate HTML element that is <u>not</u> directly visible to the user?",
         optionA: "title",
         optionB: "h1",
         optionC: "ol",
         optionD: "img",
         correctOption: "optionA"
+    },
+
+    
+    {
+        question: "What keyword(s) are used to declare variables in JavaScript?",
+        optionA: "var, let, const",
+        optionB: " int, float, string",
+        optionC: " public, private, protected",
+        optionD: "class, object, function",
+        correctOption: "optionA"
+    },
+
+
+
+    {
+        question: "What is the Document Object Model (DOM) in JavaScript?",
+        optionA: "The object model of the web server",
+        optionB: "The object model of the web browser",
+        optionC: "The object model of the HTML document",
+        optionD: "The object model of the web application",
+        correctOption: "optionA"
+    },
+
+    {
+        question: "What is the role of event handlers in JavaScript?",
+        optionA: "They change the style of a web page",
+        optionB: "They allow user input to trigger specific actions.",
+        optionC: "They modify the structure of a web page.",
+        optionD: "They generate content for a web page.",
+        correctOption: "optionB"
     }
 
 
