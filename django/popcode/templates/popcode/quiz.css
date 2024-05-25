@@ -63,8 +63,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-
-
+    padding: 30px;
     border: 2px solid darkgray;
     background-color: beige;
 

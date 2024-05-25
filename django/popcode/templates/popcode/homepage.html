@@ -7,8 +7,8 @@
     <title>{% block title %}{% endblock %}</title>
     <!-- <link rel="stylesheet" href="homepage_globals.css" />
     <link rel="stylesheet" href="homepage_style.css" /> -->
-    <link href="{% static 'popcode/hompage_style.css' %}" rel="stylesheet">
-    <link href="{% static 'popcode/hompage_globals.css' %}" rel="stylesheet">
+    <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet">
+    <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet">
   </head>
   <body>
     <div class="element-home">
@@ -18,13 +18,13 @@
             <div class="base"></div>
             <div class="objects">
               <div class="overlap-group">
-                <img class="elements" src="img/popcode.svg" />
+                <img class="elements" src="{% static 'popcode/images/popcode.svg' %}" />
                 <div class="image">
-                  <img class="small_popcorn" src="img/popcorn.png" />
-                  <img class="CLIPBOARD-VERIFIED" src="img/corn.png" />
+                  <img class="small_popcorn" src="{% static 'popcode/images/popcorn.png' %}" />
+                  <img class="CLIPBOARD-VERIFIED" src="{% static 'popcode/images/corn.png' %}"/>
                 </div>
-                <img class="mobile-screen" src="img/1.png" />
-                <img class="img" src="img/1.png" />
+                <img class="mobile-screen" src="{% static 'popcode/images/1.png' %}" />
+                <img class="img" src="{% static 'popcode/images/1.png' %}" />
               </div>
             </div>
             <div class="content">
@@ -49,7 +49,7 @@
                 <div class="text-wrapper-6">Contact</div>
               </div>
             </div>
-            <img class="logo" src="img/popcode.svg" />
+            <img class="logo" src= "{% static 'popcode/images/popcode.svg' %}" />
           </div>
         </header>
         
