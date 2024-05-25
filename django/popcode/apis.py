@@ -56,9 +56,9 @@ def login(req: HttpRequest):
 
 
 def signup(req: HttpRequest):
-    username = req.POST["username"]
-    password = req.POST["password"]
-    email = req.POST["email"]
+    username = req.POST.get("username")
+    password = req.POST.get("password")
+    email = req.POST.get("email")
 
     if not username or not password or not email:
         return views.signup(req)
