@@ -17,8 +17,10 @@ document.getElementById('settingsForm').addEventListener('submit', function(even
 });
 
 function handleLogout() {
+
     // need logout logic
+    
     alert('logout complete!');
+    // redirect to main page
     window.location.href = "homepage.html";
-    // need to redirect to main page
 }
