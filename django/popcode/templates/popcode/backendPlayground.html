@@ -93,4 +93,31 @@
 	{% else %}
 		<p>You need to login to edit your profile</p>
 	{% endif %}
+
+	<h1>Create Lesson</h1>
+	{% if request.session.admin %}
+		<form action="/createLesson" method="post">
+			{% csrf_token %}
+			<input type="text" name="title" placeholder="Title">
+			<input type="text" name="description" placeholder="Description">
+			<button type="submit">Create</button>
+		</form>
+	{% else %}
+		<p>You need to be an admin to create a lesson</p>
+	{% endif %}
+
+	<h1>Lessons</h1>
+	{% for lesson in lessons %}
+		<h2>{{ lesson.title }}</h2>
+		<p>{{ lesson.description }}</p>
+		{% if request.session.admin %}
+			<form action="/deleteLesson" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="id" value={{ lesson.id }}>
+				<button type="submit">Delete</button>
+			</form>
+		{% endif %}
+	{% empty %}
+		<p>No lessons</p>
+	{% endfor %}
 {% endblock nav %}

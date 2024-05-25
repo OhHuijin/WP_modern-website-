@@ -2,10 +2,12 @@ from hashlib import md5
 import json
 import random
 import time
+from bson import ObjectId
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 
 from .utils import getAdminUser
+from .DB import DB
 
 from . import views
 from .coderunner.CodeRunner import CodeRunner
@@ -29,10 +31,12 @@ def login(req:HttpRequest):
         return views.login(req,{"error":"userNotFound"})
     if user["password"] != password:
         return views.login(req, {"error":"wrongPassword"})
-    DB.users.update_one({"token":user["token"]},{"$set":{"lastLogin":time.time(), "token":md5(str(random.random()).encode("utf-8")).hexdigest()}})
-    req.session["token"] = user["token"]
+    newToken = md5(str(random.random()).encode("utf-8")).hexdigest()
+    DB.users.update_one({"token":user["token"]},{"$set":{"lastLogin":time.time(), "token":newToken}})
+    req.session["token"] = newToken
     req.session["username"] = user["username"]
     req.session["email"] = user["email"]
+    req.session["admin"] = user["role"] == 1
     return redirect("/")
     
 """
@@ -70,6 +74,7 @@ def signup(req:HttpRequest):
     req.session["token"] = token
     req.session["username"] = username
     req.session["email"] = email
+    req.session["admin"] = False
     return redirect("/")
     
 """
@@ -118,14 +123,46 @@ def logout(req:HttpRequest):
     return redirect("/")
 
 """
-    Add a question to the database
-    Requires admin access
-    TODO: Implement this
+    Create a new lesson with given title and description
+    Redirects to / with success message lessonCreated
+    Else redirects to / with error message :
+    - notAdmin : If user is not admin
+    - missingFields : If title or description is missing
 """
-def addQuestion(req:HttpRequest):
-    if not getAdminUser(req):
-        return redirect("/")
-    return HttpResponse("addQuestion")
+def createLesson(req:HttpRequest):
+    user = getAdminUser(req)
+    if not user:
+        return redirect("/?error=notAdmin")
+    title = req.POST["title"]
+    description = req.POST["description"]
+    if not title or not description:
+        return redirect("/?error=missingFields")
+    DB.lessons.insert_one({
+        "title":title,
+        "description":description,
+        "author":user["username"],
+        "chapters":[]
+    })
+    return redirect("/?success=lessonCreated")
+
+"""
+    Delete a lesson with given lessonId
+    Redirects to / with success message lessonDeleted
+    Else redirects to / with error message :
+    - notAdmin : If user is not admin
+    - missingFields : If lessonId is missing
+"""
+def deleteLesson(req:HttpRequest):
+    user = getAdminUser(req)
+    if not user:
+        return redirect("/?error=notAdmin")
+    lessonId = req.POST["id"]
+    if not lessonId:
+        return redirect("/?error=missingFields")
+    DB.lessons.delete_one({"_id":ObjectId(lessonId)})
+    return redirect("/?success=lessonDeleted")
+    
+    
 
 def apiRun(req:HttpRequest):
     post = json.loads(req.body.decode("utf-8"))
