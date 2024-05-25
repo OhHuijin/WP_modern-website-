@@ -10,11 +10,7 @@ html, body{
 
 
 body{
-    font-family: 'Montserrat', serif;
-
-/* }
-
-main{ */
+    
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -32,10 +28,10 @@ main{ */
 }
 
 
-
+/* 전체 퀴즈 크기 */
 .game-quiz-container{
-    width: 40rem;
-    height: 30rem;
+    width: 60rem;
+    height: 50rem;
 
     background-color: rgb(255, 255, 245);
 
@@ -47,6 +43,7 @@ main{ */
     border-radius: 30px;
 }
 
+/* Score : 0 / 10 Question : 1 / 10 크기 */
 .game-details-container{
     width: 80%;
     height: 4rem;
@@ -59,9 +56,10 @@ main{ */
     font-size: 1.2rem;
 }
 
+/* 문제 크기 */
 .game-question-container{
     width: 80%;
-    height: 8rem;
+    height: 20rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,9 +71,11 @@ main{ */
     border-radius: 25px;
 }
 
+
 .game-question-container h1{
     font-size: 1.1rem;
-    text-align: center;
+    text-align: left; /* 문제텍스트를 왼쪽 정렬 */
+    line-height: 1.6; /* 원하는 줄 간격 값으로 설정 */
     padding: 3px;
 }
 
