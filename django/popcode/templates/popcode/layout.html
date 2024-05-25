@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link  href="{% static 'popcode/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="templates/popcode/style.css">
+</head>
+<body>
+    <div class="menu_container">
+        <img src="img/popcode.svg" alt="Logo" class="logo">
+        <a href="readypage.html">Home</a>
+        <a href="settings.html">Settings</a>
+        <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
+        <a href="">link</a>
+        <a href="contact.html">Contact</a>
+        <div class="logout_container">
+            <button type="button" onclick="handleLogout()" class="logout">Log Out</button>
+        </div>
+    </div>
+    <script src="settings.js"></script>
+    {% block nav %}
+    {% endblock %}
+    
+</body>
+</html>
