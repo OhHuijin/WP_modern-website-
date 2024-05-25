@@ -15,12 +15,3 @@ document.getElementById('settingsForm').addEventListener('submit', function(even
     document.getElementById('password').disabled = true;
     document.getElementById('saveButton').disabled = true;
 });
-
-function handleLogout() {
-
-    // need logout logic
-    
-    alert('logout complete!');
-    // redirect to main page
-    window.location.href = "homepage.html";
-}

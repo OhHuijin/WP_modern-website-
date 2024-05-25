@@ -4,7 +4,7 @@ import random
 import time
 from bson import ObjectId
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 
 from .utils import getAdminUser
 from .DB import DB
@@ -21,6 +21,8 @@ from .coderunner.CodeRunner import CodeRunner
     - wrongPassword : If password is wrong
 """
 def login(req:HttpRequest):
+    if "username" not in req.POST or "password" not in req.POST:
+        return views.login(req, {})
     username = req.POST["username"]
     password = req.POST["password"]
     if not username or not password:
@@ -141,7 +143,7 @@ def createLesson(req:HttpRequest):
         "title":title,
         "description":description,
         "author":user["username"],
-        "chapters":[]
+        "parts":[]
     })
     return redirect("/?success=lessonCreated")
 
@@ -162,7 +164,12 @@ def deleteLesson(req:HttpRequest):
     DB.lessons.delete_one({"_id":ObjectId(lessonId)})
     return redirect("/?success=lessonDeleted")
     
-    
+def viewLesson(req:HttpRequest,title:str):
+    lesson = DB.lessons.find_one({"title":title})
+    if not lesson:
+        return redirect("/")
+    print(lesson)
+    return render(req,"popcode/lesson.html",context={"lesson":lesson})
 
 def apiRun(req:HttpRequest):
     post = json.loads(req.body.decode("utf-8"))

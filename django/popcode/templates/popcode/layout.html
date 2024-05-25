@@ -17,7 +17,14 @@
         <a href="">link</a>
         <a href="contact.html">Contact</a>
         <div class="logout_container">
-            <button type="button" onclick="handleLogout()" class="logout">Log Out</button>
+
+            {% if request.session.username %}
+            <p class="username">{{request.session.username}}</p>
+            {% if request.session.admin %}<pre>(ADMIN)</pre>{% endif %}
+            <a href="/logout">Log Out</a>
+            {% else %}
+            login or register
+            {% endif %}
         </div>
     </div>
     <script src="settings.js"></script>
