@@ -5,7 +5,7 @@
 <i>By {{lesson.author}}</i>
 <p>{{lesson.description}}</p>
 {% for part in lesson.parts %}
-	<li>{{part.title}} - <i>{{part.description}}</i></li>
+	<li><a href="./{{lesson.title}}/{{forloop.counter0}}">{{part.title}}</a> - <i>{{part.description}}</i></li>
 {% empty %}
 	<p>No chapters in this lesson</p>
 {% endfor %}

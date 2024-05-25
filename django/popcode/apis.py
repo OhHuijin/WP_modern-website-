@@ -20,7 +20,9 @@ from .coderunner.CodeRunner import CodeRunner
     - userNotFound : If user with given username is not found
     - wrongPassword : If password is wrong
 """
-def login(req:HttpRequest):
+
+
+def login(req: HttpRequest):
     if "username" not in req.POST or "password" not in req.POST:
         return views.login(req, {})
     username = req.POST["username"]
@@ -28,101 +30,121 @@ def login(req:HttpRequest):
     if not username or not password:
         return views.login(req)
     password = md5(password.encode("utf-8")).hexdigest()
-    user = DB.users.find_one({"username":username})
+    user = DB.users.find_one({"username": username})
     if not user:
-        return views.login(req,{"error":"userNotFound"})
+        return views.login(req, {"error": "userNotFound"})
     if user["password"] != password:
-        return views.login(req, {"error":"wrongPassword"})
+        return views.login(req, {"error": "wrongPassword"})
     newToken = md5(str(random.random()).encode("utf-8")).hexdigest()
-    DB.users.update_one({"token":user["token"]},{"$set":{"lastLogin":time.time(), "token":newToken}})
+    DB.users.update_one(
+        {"token": user["token"]},
+        {"$set": {"lastLogin": time.time(), "token": newToken}},
+    )
     req.session["token"] = newToken
     req.session["username"] = user["username"]
     req.session["email"] = user["email"]
     req.session["admin"] = user["role"] == 1
     return redirect("/")
-    
+
+
 """
     Tries to signup the user using given username, password and email.
     Redirects to / if successful
     Else redirects to /signup with error message :
     - usernameOrEmailExists : If username or email is already taken
 """
-def signup(req:HttpRequest):
+
+
+def signup(req: HttpRequest):
     username = req.POST["username"]
     password = req.POST["password"]
     email = req.POST["email"]
-    
+
     if not username or not password or not email:
         return views.signup(req)
-    
-    if DB.users.find_one({"$or":[{"username":username},{"email":email}]}):
-        return views.signup(req, {"error":"usernameOrEmailExists"})
-    
+
+    if DB.users.find_one({"$or": [{"username": username}, {"email": email}]}):
+        return views.signup(req, {"error": "usernameOrEmailExists"})
+
     password = md5(password.encode("utf-8")).hexdigest()
     token = md5(str(random.random()).encode("utf-8")).hexdigest()
-    DB.users.insert_one({
-        "username":username,
-        "password":password,
-        "email":email,
-        "created":time.time(),
-        "lastLogin":time.time(),
-        "role":0,
-        "exp":0,
-        "coins":0,
-        "streak":0,
-        "progress":[],
-        "token":token
-    })
+    DB.users.insert_one(
+        {
+            "username": username,
+            "password": password,
+            "email": email,
+            "created": time.time(),
+            "lastLogin": time.time(),
+            "role": 0,
+            "exp": 0,
+            "coins": 0,
+            "streak": 0,
+            "progress": [],
+            "token": token,
+        }
+    )
     req.session["token"] = token
     req.session["username"] = username
     req.session["email"] = email
     req.session["admin"] = False
     return redirect("/")
-    
+
+
 """
     Edit the user information, with given username, password, newPassword and email.
     Redirects to /profile if successful
     Else redirects to /profile with error message :
     - wrongPasswordOrToken : If password is wrong, or token is invalid
 """
-def editUser(req:HttpRequest):
+
+
+def editUser(req: HttpRequest):
     username = req.POST["username"]
     password = req.POST["password"]
     newPassword = req.POST["newPassword"]
     email = req.POST["email"]
-    
+
     if not username or not password or not email:
         return views.profile(req)
-    
+
     token = req.session.get("token")
     if not token:
-        return views.profile(req, {"error":"tokenNotFound"})
-    
+        return views.profile(req, {"error": "tokenNotFound"})
+
     password = md5(password.encode("utf-8")).hexdigest()
-    print("password is ",password)
-    print("token is ",token)
-    user = DB.users.find_one({"token":token,"password":password})
+    print("password is ", password)
+    print("token is ", token)
+    user = DB.users.find_one({"token": token, "password": password})
     if not user:
-        return views.profile(req, {"error":"wrongPasswordOrToken"})
-    
+        return views.profile(req, {"error": "wrongPasswordOrToken"})
+
     if newPassword:
         newPassword = md5(newPassword.encode("utf-8")).hexdigest()
-        DB.users.update_one({"token":token},{"$set":{"username":username,"password":newPassword,"email":email}})
+        DB.users.update_one(
+            {"token": token},
+            {"$set": {"username": username, "password": newPassword, "email": email}},
+        )
     else:
-        DB.users.update_one({"token":token},{"$set":{"username":username,"email":email}})
-    
+        DB.users.update_one(
+            {"token": token}, {"$set": {"username": username, "email": email}}
+        )
+
     req.session["username"] = username
     req.session["email"] = email
     return views.profile(req)
+
 
 """
     Logout the user
     Redirects to /
 """
-def logout(req:HttpRequest):
+
+
+def logout(req: HttpRequest):
     req.session.pop("token")
     req.session.pop("username")
     return redirect("/")
+
 
 """
     Create a new lesson with given title and description
@@ -131,7 +153,9 @@ def logout(req:HttpRequest):
     - notAdmin : If user is not admin
     - missingFields : If title or description is missing
 """
-def createLesson(req:HttpRequest):
+
+
+def createLesson(req: HttpRequest):
     user = getAdminUser(req)
     if not user:
         return redirect("/?error=notAdmin")
@@ -139,13 +163,16 @@ def createLesson(req:HttpRequest):
     description = req.POST["description"]
     if not title or not description:
         return redirect("/?error=missingFields")
-    DB.lessons.insert_one({
-        "title":title,
-        "description":description,
-        "author":user["username"],
-        "parts":[]
-    })
+    DB.lessons.insert_one(
+        {
+            "title": title,
+            "description": description,
+            "author": user["username"],
+            "parts": [],
+        }
+    )
     return redirect("/?success=lessonCreated")
+
 
 """
     Delete a lesson with given lessonId
@@ -154,32 +181,40 @@ def createLesson(req:HttpRequest):
     - notAdmin : If user is not admin
     - missingFields : If lessonId is missing
 """
-def deleteLesson(req:HttpRequest):
+
+
+def deleteLesson(req: HttpRequest):
     user = getAdminUser(req)
     if not user:
         return redirect("/?error=notAdmin")
     lessonId = req.POST["id"]
     if not lessonId:
         return redirect("/?error=missingFields")
-    DB.lessons.delete_one({"_id":ObjectId(lessonId)})
+    DB.lessons.delete_one({"_id": ObjectId(lessonId)})
     return redirect("/?success=lessonDeleted")
+
 
 """
     View a lesson with given title
     Renders the lesson.html with lesson information
     Or redirects to / if lesson not found
-"""   
-def viewLesson(req:HttpRequest,title:str):
-    lesson = DB.lessons.find_one({"title":title})
+"""
+
+
+def viewLesson(req: HttpRequest, title: str):
+    lesson = DB.lessons.find_one({"title": title})
     if not lesson:
         return redirect("/")
     print(lesson)
-    return render(req,"popcode/lesson.html",context={"lesson":lesson})
+    return render(req, "popcode/lesson.html", context={"lesson": lesson})
+
 
 """
     Create a new part with given lessonId, title and content
 """
-def createPart(req:HttpRequest):
+
+
+def createPart(req: HttpRequest):
     if not req.POST:
         return redirect("/")
     user = getAdminUser(req)
@@ -188,26 +223,111 @@ def createPart(req:HttpRequest):
     lessonId = req.POST.get("lessonId")
     title = req.POST.get("title")
     description = req.POST.get("description")
-    print(lessonId,title,description)
+    print(lessonId, title, description)
     if not lessonId or not title or not description:
         return redirect("/?error=missingFields")
-    DB.lessons.update_one({"title":lessonId},{"$push":{"parts":{"title":title,"description":description,"levels":[]}}})
+    DB.lessons.update_one(
+        {"title": lessonId},
+        {
+            "$push": {
+                "parts": {"title": title, "description": description, "levels": []}
+            }
+        },
+    )
     return redirect(f"/lesson/{lessonId}?success=partCreated")
 
-def viewPart(req:HttpRequest,title:str,part:int):
-    lesson = DB.lessons.find_one({"title":title})
+
+"""
+    Add a new level to a part with given lessonId, partIndex, title and content    
+"""
+
+
+def addLevel(req: HttpRequest):
+    if not req.POST:
+        return redirect("/?error=missingFields")
+    type = req.POST.get("type")
+    lessonId = req.POST.get("lessonId")
+    partId = req.POST.get("partId")
+    content = req.POST.get("content")
+    if not type or not lessonId or not content:
+        return redirect("/?error=missingFields")
+
+    if type == "EXPL":
+        DB.lessons.update_one(
+            {"title": lessonId},
+            {"$push": {f"parts.{partId}.levels": {"type": type, "content": content}}},
+        )
+    elif type == "CODE":
+        lang, testcase, startcode = (
+            req.POST.get("lang"),
+            req.POST.get("testcase"),
+            req.POST.get("startcode"),
+        )
+        DB.lessons.update_one(
+            {"title": lessonId},
+            {
+                "$push": {
+                    f"parts.{partId}.levels": {
+                        "type": type,
+                        "content": content,
+                        "lang": lang,
+                        "testcase": testcase,
+                        "startcode": startcode,
+                    }
+                }
+            },
+        )
+    elif type == "QUIZ":
+        c1, c2, c3, c4, v1, v2, v3, v4 = (
+            req.POST.get("c1"),
+            req.POST.get("c2"),
+            req.POST.get("c3"),
+            req.POST.get("c4"),
+            req.POST.get("v1"),
+            req.POST.get("v2"),
+            req.POST.get("v3"),
+            req.POST.get("v4"),
+        )
+        answers = [
+            {"content": v1, "valid": c1 is not None},
+            {"content": v2, "valid": c2 is not None},
+            {"content": v3, "valid": c3 is not None},
+            {"content": v4, "valid": c4 is not None},
+        ]
+        DB.lessons.update_one(
+            {"title": lessonId},
+            {
+                "$push": {
+                    f"parts.{partId}.levels": {
+                        "type": type,
+                        "content": content,
+                        "answers": answers,
+                    }
+                }
+            },
+        )
+    return redirect(f"/lesson/{lessonId}/{partId}?success=levelAdded")
+
+
+def viewPart(req: HttpRequest, title: str, part: int):
+    lesson = DB.lessons.find_one({"title": title})
     if not lesson:
         return redirect("/")
     if part < 0 or part >= len(lesson["parts"]):
         return redirect(f"/lesson/{title}?error=partNotFound")
     p = lesson["parts"][part]
-    return render(req,"popcode/part.html",context={"part":p,"lesson":lesson,"partIndex":part})
+    return render(
+        req,
+        "popcode/part.html",
+        context={"part": p, "lesson": lesson, "partIndex": part},
+    )
 
-def apiRun(req:HttpRequest):
+
+def apiRun(req: HttpRequest):
     post = json.loads(req.body.decode("utf-8"))
     code = post["code"]
     lang = post["lang"]
-    cr = CodeRunner(lang=lang,code=code)
+    cr = CodeRunner(lang=lang, code=code)
     cr.run()
-    return HttpResponse(json.dumps(cr.outputDict()),content_type="application/json")
-    #return HttpResponse(json.dumps({"returnValue":"waffle > croffle"}),content_type="application/json")
+    return HttpResponse(json.dumps(cr.outputDict()), content_type="application/json")
+    # return HttpResponse(json.dumps({"returnValue":"waffle > croffle"}),content_type="application/json")
