@@ -1,0 +1,24 @@
+{% extends "./layout.html" %}
+{%block nav%}
+<br><br>
+<h1>{{lesson.title}}</h1>
+<i>By {{lesson.author}}</i>
+<p>{{lesson.description}}</p>
+{% for part in parts %}
+	<li>chapter</li>
+{% empty %}
+	<p>No chapters in this lesson</p>
+{% endfor %}
+
+{% if request.session.admin %}
+	<h1>Add part to this section ?</h1>
+	<form action="/createPart" method="post">
+		{% csrf_token %}
+		<input type="text" name="title" placeholder="Title">
+		<input type="text" name="description" placeholder="Description">
+		<input type="hidden" name="lessonid" value={{lessonid}}>
+		<button type="submit">Create</button>
+	</form>
+
+{% endif %}
+{% endblock nav %}
