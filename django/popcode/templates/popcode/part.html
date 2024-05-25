@@ -1,0 +1,17 @@
+{% extends "./layout.html" %}
+{%block nav%}
+<br><br><br><br>
+<h1>{{lesson.title}} - {{part.title}}</h1>
+<i>By {{lesson.author}}</i>
+<p>{{part.description}}</p>
+<h1></h1>
+
+{% if request.session.admin %}
+	<h1>Add explaination to this level ?</h1>
+	<form action="/addLevel" method="post">
+		<textarea name="content"></textarea>
+		<input type="hidden" name="lessonId" value={{lesson.title}}>
+		<input type="hidden" name="partId" value={{partIndex}}>
+	</form>
+{% endif %}
+{% endblock nav %}

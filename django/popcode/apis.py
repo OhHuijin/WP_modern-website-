@@ -163,13 +163,45 @@ def deleteLesson(req:HttpRequest):
         return redirect("/?error=missingFields")
     DB.lessons.delete_one({"_id":ObjectId(lessonId)})
     return redirect("/?success=lessonDeleted")
-    
+
+"""
+    View a lesson with given title
+    Renders the lesson.html with lesson information
+    Or redirects to / if lesson not found
+"""   
 def viewLesson(req:HttpRequest,title:str):
     lesson = DB.lessons.find_one({"title":title})
     if not lesson:
         return redirect("/")
     print(lesson)
     return render(req,"popcode/lesson.html",context={"lesson":lesson})
+
+"""
+    Create a new part with given lessonId, title and content
+"""
+def createPart(req:HttpRequest):
+    if not req.POST:
+        return redirect("/")
+    user = getAdminUser(req)
+    if not user:
+        return redirect("/?error=notAdmin")
+    lessonId = req.POST.get("lessonId")
+    title = req.POST.get("title")
+    description = req.POST.get("description")
+    print(lessonId,title,description)
+    if not lessonId or not title or not description:
+        return redirect("/?error=missingFields")
+    DB.lessons.update_one({"title":lessonId},{"$push":{"parts":{"title":title,"description":description,"levels":[]}}})
+    return redirect(f"/lesson/{lessonId}?success=partCreated")
+
+def viewPart(req:HttpRequest,title:str,part:int):
+    lesson = DB.lessons.find_one({"title":title})
+    if not lesson:
+        return redirect("/")
+    if part < 0 or part >= len(lesson["parts"]):
+        return redirect(f"/lesson/{title}?error=partNotFound")
+    p = lesson["parts"][part]
+    return render(req,"popcode/part.html",context={"part":p,"lesson":lesson,"partIndex":part})
 
 def apiRun(req:HttpRequest):
     post = json.loads(req.body.decode("utf-8"))

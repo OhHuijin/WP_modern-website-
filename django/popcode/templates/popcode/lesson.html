@@ -1,11 +1,11 @@
 {% extends "./layout.html" %}
 {%block nav%}
-<br><br>
+<br><br><br><br>
 <h1>{{lesson.title}}</h1>
 <i>By {{lesson.author}}</i>
 <p>{{lesson.description}}</p>
-{% for part in parts %}
-	<li>chapter</li>
+{% for part in lesson.parts %}
+	<li>{{part.title}} - <i>{{part.description}}</i></li>
 {% empty %}
 	<p>No chapters in this lesson</p>
 {% endfor %}
@@ -16,7 +16,7 @@
 		{% csrf_token %}
 		<input type="text" name="title" placeholder="Title">
 		<input type="text" name="description" placeholder="Description">
-		<input type="hidden" name="lessonid" value={{lessonid}}>
+		<input type="hidden" name="lessonId" value={{lesson.title}}>
 		<button type="submit">Create</button>
 	</form>
 
