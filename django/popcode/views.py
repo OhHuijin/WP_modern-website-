@@ -21,5 +21,8 @@ def signup(req: HttpRequest,context={}):
 def login(req: HttpRequest,context={}):
     return render(req,"popcode/login.html",context=context)
 
+def readypage(req: HttpRequest,context={}):
+    return render(req,"popcode/readypage.html",context=context)
+
 def profile(req: HttpRequest,context={}):
     return render(req,"popcode/backendPlayground.html",context=context)

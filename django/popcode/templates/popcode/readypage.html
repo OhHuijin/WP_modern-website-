@@ -1,25 +1,32 @@
+{% extends "./layout.html" %}
+
+{% load static %}
+
+{% block title %}readypage{% endblock %}
+
+{% block nav %}
 <!DOCTYPE html>
 <html>
 
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="readypage.css">
-    <title>Ready</title>
-  </head>
-  
-<body>
+    {% comment %} <link rel="stylesheet" href="readypage.css"> {% endcomment %}
+    <link href="{% static 'popcode/css/readypage.css' %}" rel="stylesheet">
+
+
+
  
 <div class = "topbar">
 
     <a>
         <img class="logo" src="img/popcode.svg" alt=""> 
-        <a href="settings.html" href="#user"><img class="user" src="img/menu.png" alt="">
+        <a href="settings.html" href="#user"><img class="user" src="{% static 'popcode/images/menu.png' %}">
     </a>
 </div>
 
 <div class="title">
-    <img src="img/popcode.svg" alt="">
+    <img src="{% static 'popcode/images/popcode.svg' %}">
     <h1>
      For You
     </h1>
@@ -40,19 +47,19 @@
 <div class="daycontainer">
 <div class="link-container">
     <a href="page1.html">
-        <img src="img/popcorn.png" alt="Button 1">
+        <img src="{% static 'popcode/images/popcorn.png' %}">
     </a>
     <a href="page2.html">
-        <img src="img/corn.png" alt="Button 2">
+        <img src="{% static 'popcode/images/corn.png' %}">
     </a>
     <a href="page3.html">
-        <img src="img/corn.png" alt="Button 2">
+        <img src="{% static 'popcode/images/corn.png' %}">
     </a>
     <a href="page4.html">
-        <img src="img/corn.png" alt="Button 2">
+        <img src="{% static 'popcode/images/corn.png' %}">
     </a>
     <a href="page5.html">
-        <img src="img/corn.png" alt="Button 2">
+        <img src="{% static 'popcode/images/corn.png' %}">
     </a>
 </div>
 <div class="link-container">
@@ -67,5 +74,5 @@
 </div>
 
    
-    </body>
-</html>
+
+{% endblock %}
