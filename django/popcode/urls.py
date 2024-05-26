@@ -27,7 +27,6 @@ urlpatterns = [
     path("login", apis.login, name="login"),
     path("readypage", views.readypage, name="readypage"),
     path("contact", views.readypage, name="contact"),
-    path("api/run", apis.apiRun, name="apiRun"),
     path("admin/", admin.site.urls),
     path("profile", views.profile, name="profile"),
     path("profile/<str:username>", views.profile, name="profile"),
@@ -38,10 +37,19 @@ urlpatterns = [
     path("addLevel", apis.addLevel, name="addLevel"),
     path("lesson/<str:title>", apis.viewLesson, name="lesson"),
     path("lesson/<str:title>/<int:part>", views.quiz, name="part"),
-    # backend tests
+    # Backend Playground
     path("bp", views.index, name="bp"),
     path("bp/<str:title>", apis.viewLesson, name="bpLesson"),
     path("bp/<str:title>/<int:part>", apis.viewPart, name="bpPart"),
+    # POST & API
+    path("api/login", apis.login, name="apiLogin"),
+    path("api/signup", apis.signup, name="apiSignup"),
+    path("api/logout", apis.logout, name="apiLogout"),
+    path("api/createLesson", apis.createLesson, name="apiCreateLesson"),
+    path("api/deleteLesson", apis.deleteLesson, name="apiDeleteLesson"),
+    path("api/createPart", apis.createPart, name="apiCreatePart"),
+    path("api/addLevel", apis.addLevel, name="apiAddLevel"),
+    path("api/run", apis.apiRun, name="apiRun"),
 ]
 
 # urlpatterns = [
