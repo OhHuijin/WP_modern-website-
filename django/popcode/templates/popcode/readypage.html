@@ -1,77 +1,40 @@
-{% extends "./layout.html" %}
+{% extends './layout.html' %}
 
 {% load static %}
 
-{% block title %}readypage{% endblock %}
+{% block title %}
+  readypage
+{% endblock %}
+
+{% block head %}
+  <link href="{% static 'popcode/css/readypage.css' %}" rel="stylesheet" />
+{% endblock %}
 
 {% block nav %}
-<!DOCTYPE html>
-<html>
+  <div class="title">
+    <img src="{% static 'popcode/images/popcode.svg' %}" />
+    <h1>For You</h1>
+  </div>
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% comment %} <link rel="stylesheet" href="readypage.css"> {% endcomment %}
-    <link href="{% static 'popcode/css/readypage.css' %}" rel="stylesheet">
+  {% comment %} <a href="quiz.html"><button class="button">Get Started</button></a> {% endcomment %}
 
+  {% comment %} <div style="margin: 3% auto; width: 600px; height: 70px; background-color: rgba(185, 109, 23, 0.219);">
+    <div style="text-align: center; font-size: 50px; width: 150px; height: 70px; background-color: rgba(226, 118, 17, 0.596);">25%</div> {% endcomment %}
 
-
- 
-<div class = "topbar">
-
-    <a>
-        {% comment %} <img class="logo" src="img/popcode.svg" alt=""> 
-        <a href="settings.html" href="#user"><img class="user" src="{% static 'popcode/images/menu.png' %}"> {% endcomment %}
-    </a>
-</div>
-<div class="title">
-    <img src="{% static 'popcode/images/popcode.svg' %}">
-    <h1>
-     For You
-    </h1>
-</div>
-    
-
-   
-
-    <!-- <div class="accordion-item"> -->
-<a href="{% url 'quiz' %}"><button class="button">Get Started</button></a>
-      <!-- <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body"> -->
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <div style= "margin: 3% auto; width: 600px; height: 70px; background-color: rgba(185, 109, 23, 0.219);">
-    <div style="text-align: center; font-size: 50px; width: 150px; height: 70px; background-color: rgba(226, 118, 17, 0.596);">25%</div>
-
-<div class="daycontainer">
-<div class="link-container">
-    <a href="{% url 'login' %}">
-        <img src="{% static 'popcode/images/corn.png' %}">
-    </a>
-    <a href="{% url 'login' %}">
-        <img src="{% static 'popcode/images/corn.png' %}">
-    </a>
-    <a href="{% url 'login' %}">
-        <img src="{% static 'popcode/images/corn.png' %}">
-    </a>
-    <a href="{% url 'login' %}">
-        <img src="{% static 'popcode/images/corn.png' %}">
-    </a>
-    <a href="{% url 'login' %}">
-        <img src="{% static 'popcode/images/corn.png' %}">
-    </a>
-</div>
-<div class="link-container">
-    <p>Day 1</p>
-    <p>Day 2</p>
-    <p>Day 3</p>
-    <p>Day 4</p>
-    <p>Day 5</p>
-
-    
-</div>
-</div>
-
-   
-
-{% endblock %}
+    {% for lesson in lessons %}
+        <h1>{{lesson.title}}</h1>
+        <p>{{lesson.description}}</p>
+    <div class="daycontainer">
+      <div class="link-container">
+        {% for part in lesson.parts %}
+        <a href="{% url 'part' lesson.title forloop.counter0 %}"><img src="{% static 'popcode/images/popcorn.png' %}" /></a>
+        {% endfor %}
+      </div>
+      <div class="link-container">
+        {% for part in lesson.parts %}
+        <p>{{part.title}}</p>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+{% endblock nav %}

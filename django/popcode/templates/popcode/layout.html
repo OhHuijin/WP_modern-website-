@@ -24,12 +24,13 @@
       <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
       <a href="">link</a>
       <a href="{% url 'contact' %}">Contact</a>
-      <div class="logout_container">
+    
         {% if request.session.username %}
-          <p class="username">{{ request.session.username }}</p>
+          <p class="username">Welcome {{ request.session.username }}</p>
           {% if request.session.admin %}
             <pre>(ADMIN)</pre>
           {% endif %}
+          <div class="logout_container">
           <a href="{% url 'apiLogout' %}">Log Out</a>
         {% else %}
           login or register
