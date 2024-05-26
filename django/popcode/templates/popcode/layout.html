@@ -24,7 +24,7 @@
       <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
       <a href="">link</a>
       <a href="{% url 'contact' %}">Contact</a>
-      <div class="logout_container">
+    
         {% if request.session.username %}
           <b class="username">{{ request.session.username }}</b>
           {% if request.session.admin %}
