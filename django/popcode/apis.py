@@ -60,10 +60,10 @@ def signup(req: HttpRequest):
     email = req.POST.get("email")
 
     if not username or not password or not email:
-        return views.signup(req)
-
+        return redirect("/signup")
+    print(username, password, email)
     if DB.users.find_one({"$or": [{"username": username}, {"email": email}]}):
-        return views.signup(req, {"error": "usernameOrEmailExists"})
+        return redirect("/signup?error=usernameOrEmailExists")
 
     password = md5(password.encode("utf-8")).hexdigest()
     token = md5(str(random.random()).encode("utf-8")).hexdigest()
