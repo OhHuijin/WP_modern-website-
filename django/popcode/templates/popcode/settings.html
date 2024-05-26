@@ -17,16 +17,17 @@
         <div class="contents_container">
             <h1>User Information</h1>
             {% if request.session.username and request.session.token %}
-            <p>
-              Username : {{ request.session.username }} <br />
-              Token : {{ request.session.token }}
-            </p>
-            <form action="/profile" method="post">
+
+            <form action="{% url 'apiEditUser' %}" method="post">
               {% csrf_token %}
+              <p>Username:</p>
               <input type="text" name="username" placeholder="Username" value="{{ request.session.username }}" />
+              <p>Email:</p>
               <input type="text" name="email" id="email" placeholder="Email" value="{{ request.session.email }}" />
+              <p>Password:<p/>
               <input type="password" name="password" placeholder="Current Password" />
-              <input type="password" name="newPassword" placeholder="New Password (keep empty to don't edit)" />
+              <p>New Password:<p/>
+             <input type="password" name="newPassword" placeholder="New Password (keep empty to don't edit)" />
               <button type="submit">Edit</button><br />
               <a href="{% url 'apiLogout' %}">Logout</a>
             </form>
