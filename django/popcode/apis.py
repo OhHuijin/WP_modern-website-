@@ -318,10 +318,10 @@ def addLevel(req: HttpRequest):
             req.POST.get("v4"),
         )
         answers = [
-            {"content": v1, "valid": c1 is not None},
-            {"content": v2, "valid": c2 is not None},
-            {"content": v3, "valid": c3 is not None},
-            {"content": v4, "valid": c4 is not None},
+            {"content": v1, "valid": 1 if c1 is not None else 0},
+            {"content": v2, "valid": 1 if c2 is not None else 0},
+            {"content": v3, "valid": 1 if c3 is not None else 0},
+            {"content": v4, "valid": 1 if c4 is not None else 0},
         ]
         DB.lessons.update_one(
             {"title": lessonId},
