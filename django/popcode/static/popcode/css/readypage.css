@@ -26,14 +26,14 @@ body {
     margin: 10px;
     padding: 10px;
   }
-/*   
+  
 .title {
     text-align: center;
     margin-top: -150px;
-    margin-bottom: 80px;
+    margin-bottom: -120px;
     height: 700px;
     position: relative;
-} */
+}
 
 .title img {
     width: 1000px;
@@ -44,7 +44,7 @@ body {
 
 .title h1 {
     position: absolute;
-    top: 520px;
+    top: 65%;
     left: 50%;
     margin-bottom: 40px;
     transform: translate(-50%, -50%);
@@ -59,12 +59,12 @@ body {
     /* display: flex; */
     flex-wrap: wrap;
     overflow: hidden;
-    /* height: 60px; */
-    background-color: #ffffff;
+    height: 60px;
+    background-color: rgba(255, 254, 186, 0.986);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 10px;
+
   }
 
   .topbar a {

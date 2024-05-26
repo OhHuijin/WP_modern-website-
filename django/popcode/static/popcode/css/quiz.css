@@ -34,8 +34,7 @@ body{
     height: 50rem;
 
     background-color: rgb(255, 255, 245);
-
-
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +45,7 @@ body{
 /* Score : 0 / 5 Question : 1 / 10 크기 */
 .game-details-container{
     width: 80%;
-    height: 4rem;
+    height: 6rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -59,7 +58,7 @@ body{
 /* 문제 크기 */
 .game-question-container{
     width: 90%;
-    height: 20rem;
+    height: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,14 +174,7 @@ input[type=radio]:checked ~ .option {
     border-radius: 25px;
 }
 
-/* 디스크립션  */
-#intro-modal-content{
-    height: 60rem;
-    width: 50rem;
-    
-    
 
-}
 
 /* 모달 글씨 */
 .modal-content-container h1, p{
@@ -303,7 +295,7 @@ input[type=radio]:checked ~ .option {
 
 
 .container {
-    margin-bottom: 3%;
+    margin-bottom: 0.1%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -313,9 +305,10 @@ input[type=radio]:checked ~ .option {
 }
 
 .corn {
+    margin-top: 160px;
     width: 110px;
     text-align: center;
-    position: relative;
+    /* position: relative; */
     z-index: 1;
 }
 
