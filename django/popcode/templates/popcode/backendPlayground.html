@@ -1,123 +1,125 @@
-{% extends "./layout.html" %}
+{% extends './layout.html' %}
 {% block nav %}
-	{% if error %}
-		<markee>{{ error }}</markee>
-	{% endif %}
-	<h1>Backend Playground</h1>
-	<hr>
-	<h1>Run Code</h1>
-	<textarea id="codeInput"></textarea>
-	<button id="codeSubmit"></button>
-	<div style="border:5px black dotted">
-		The last code ran with output code : <span id="returnCode"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br>
-		Output:<br>
-		<code id="stdout"></code> <br>
-		Error:<br>
-		<code id="stderr"></code>
-	</div>
-	<script>
-		const codeSubmit = document.querySelector("#codeSubmit");
-		const codeInput = document.querySelector("#codeInput");
-		const returnCode = document.querySelector("#returnCode");
-		const stdout = document.querySelector("#stdout");
-		const stderr = document.querySelector("#stderr");
+  {% if error %}
+    <markee>{{ error }}</markee>
+  {% endif %}
+  <h1>Backend Playground</h1>
+  <hr />
+  <h1>Run Code</h1>
+  <textarea id="codeInput"></textarea>
+  <button id="codeSubmit"></button>
+  <div style="border:5px black dotted">
+    The last code ran with output code : <span id="returnCode"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br />
+    Output:<br />
+    <code id="stdout"></code> <br />
+    Error:<br />
+    <code id="stderr"></code>
+  </div>
+  <script>
+    const codeSubmit = document.querySelector('#codeSubmit')
+    const codeInput = document.querySelector('#codeInput')
+    const returnCode = document.querySelector('#returnCode')
+    const stdout = document.querySelector('#stdout')
+    const stderr = document.querySelector('#stderr')
+    
+    codeSubmit.addEventListener('click', () => {
+      const code = codeInput.value
+      const lang = 'python3'
+      if (code) {
+        fetch('api/run', {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+          },
+          body: JSON.stringify({ code: code, lang: lang })
+        })
+          .then((res) => (res.ok ? res.json() : console.error(res)))
+          .then((data) => {
+            console.log(data)
+            returnCode.textContent = data.returnCode
+            stdout.textContent = data.stdout
+            stderr.textContent = data.stderr
+          })
+          .catch(console.error)
+      }
+    })
+    
+    function getCookie(name) {
+      let cookieValue = null
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim()
+          if (cookie.substring(0, name.length + 1) === name + '=') {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+            break
+          }
+        }
+      }
+      return cookieValue
+    }
+  </script>
 
-		codeSubmit.addEventListener("click", () => {
-			const code = codeInput.value;
-			const lang = "python3";
-			if (code) {
-				fetch("api/run", {
-					method: "POST",
-					headers: {
-						"X-CSRFToken": getCookie("csrftoken"),
-					},
-					body: JSON.stringify({ code: code, lang: lang }),
-				})
-					.then((res) => res.ok ? res.json() : console.error(res))
-					.then((data) => {
-						console.log(data)
-						returnCode.textContent = data.returnCode;
-						stdout.textContent = data.stdout;
-						stderr.textContent = data.stderr;
-					})
-					.catch(console.error)
-			}
-		})
+  <h1>Login</h1>
+  <form action="/login" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" />
+    <input type="password" name="password" placeholder="Password" />
+    <button type="submit">Login</button>
+  </form>
 
-		function getCookie(name) {
-			let cookieValue = null;
-			if (document.cookie && document.cookie !== '') {
-				const cookies = document.cookie.split(';');
-				for (let i = 0; i < cookies.length; i++) {
-					const cookie = cookies[i].trim();
-					if (cookie.substring(0, name.length + 1) === (name + '=')) {
-						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-						break;
-					}
-				}
-			}
-			return cookieValue;
-		}
-	</script>
+  <h1>Signup</h1>
+  <form action="/signup" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" />
+    <input type="text" name="email" id="email" placeholder="Email" />
+    <input type="password" name="password" placeholder="Password" />
+    <button type="submit">Register</button>
+  </form>
 
-	<h1>Login</h1>
-	<form action="/login" method="post">
-		{% csrf_token %}
-		<input type="text" name="username" placeholder="Username">
-		<input type="password" name="password" placeholder="Password">
-		<button type="submit">Login</button>
-	</form>
+  <h1>Edit profile</h1>
+  {% if request.session.username and request.session.token %}
+    <p>
+      Username : {{ request.session.username }} <br />
+      Token : {{ request.session.token }}
+    </p>
+    <form action="/profile" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" value="{{ request.session.username }}" />
+      <input type="text" name="email" id="email" placeholder="Email" value="{{ request.session.email }}" />
+      <input type="password" name="password" placeholder="Current Password" />
+      <input type="password" name="newPassword" placeholder="New Password (keep empty to don't edit)" />
+      <button type="submit">Edit</button><br />
+      <a href="/logout">Logout</a>
+    </form>
+  {% else %}
+    <p>You need to login to edit your profile</p>
+  {% endif %}
 
-	<h1>Signup</h1>
-	<form action="/signup" method="post">
-		{% csrf_token %}
-		<input type="text" name="username" placeholder="Username">
-		<input type="text" name="email" id="email" placeholder="Email">
-		<input type="password" name="password" placeholder="Password">
-		<button type="submit">Register</button>
-	</form>
+  <h1>Create Lesson</h1>
+  {% if request.session.admin %}
+    <form action="{% url 'apiCreateLesson' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="title" placeholder="Title" />
+      <input type="text" name="description" placeholder="Description" />
+      <button type="submit">Create</button>
+    </form>
+  {% else %}
+    <p>You need to be an admin to create a lesson</p>
+  {% endif %}
 
-	<h1>Edit profile</h1>
-	{% if request.session.username and request.session.token %}
-		<p>	Username : {{ request.session.username }} <br>
-			Token : {{ request.session.token }}</p>
-		<form action="/profile" method="post">
-			{% csrf_token %}
-			<input type="text" name="username" placeholder="Username" value={{request.session.username}}>
-			<input type="text" name="email" id="email" placeholder="Email" value={{request.session.email}}>
-			<input type="password" name="password" placeholder="Current Password">
-			<input type="password" name="newPassword" placeholder="New Password (keep empty to don't edit)">
-			<button type="submit">Edit</button><br>
-			<a href="/logout">Logout</a>
-		</form>
-	{% else %}
-		<p>You need to login to edit your profile</p>
-	{% endif %}
-
-	<h1>Create Lesson</h1>
-	{% if request.session.admin %}
-		<form action="/createLesson" method="post">
-			{% csrf_token %}
-			<input type="text" name="title" placeholder="Title">
-			<input type="text" name="description" placeholder="Description">
-			<button type="submit">Create</button>
-		</form>
-	{% else %}
-		<p>You need to be an admin to create a lesson</p>
-	{% endif %}
-
-	<h1>Lessons</h1>
-	{% for lesson in lessons %}
-		<a href="lesson/{{lesson.title}}"><h2>{{ lesson.title }}</h2></a>
-		<p>{{ lesson.description }}</p>
-		{% if request.session.admin %}
-			<form action="/deleteLesson" method="post">
-				{% csrf_token %}
-				<input type="hidden" name="title" value={{ lesson.title }}>
-				<button type="submit">Delete</button>
-			</form>
-		{% endif %}
-	{% empty %}
-		<p>No lessons</p>
-	{% endfor %}
-{% endblock nav %}
+  <h1>Lessons</h1>
+  {% for lesson in lessons %}
+    <a href="lesson/{{ lesson.title }}"><h2>{{ lesson.title }}</h2></a>
+    <p>{{ lesson.description }}</p>
+    {% if request.session.admin %}
+      <form action="{% url 'apiDeleteLesson' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="title" value="{{ lesson.title }}" />
+        <button type="submit">Delete</button>
+      </form>
+    {% endif %}
+  {% empty %}
+    <p>No lessons</p>
+  {% endfor %}
+{% endblock %}

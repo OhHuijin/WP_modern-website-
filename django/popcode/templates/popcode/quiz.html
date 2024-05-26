@@ -1,121 +1,139 @@
-{% extends "./layout.html" %}
+{% extends './layout.html' %}
 {% load static %}
-{% block title %}quiz{% endblock title%}
+{% block title %}
+  quiz
+{% endblock %}
 
 {% block head %}
-    <link href="{% static 'popcode/css/quiz.css' %}" rel="stylesheet">
-{% endblock head %}
+  <link href="{% static 'popcode/css/quiz.css' %}" rel="stylesheet" />
+{% endblock %}
 
 {% block nav %}
-<script>let parts = {{part|safe}};</script>
-    <script src="{% static 'popcode/js/quiz.js' %}"></script>
-    <script>document.addEventListener("DOMContentLoaded",()=>{
-        NextQuestion(0)
-    })
-</script>
-
-<div>
+  <script>
+    // Get the CSRF token
+    function getCookie(name) {
+      let cookieValue = null
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim()
+          if (cookie.substring(0, name.length + 1) === name + '=') {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+            break
+          }
+        }
+      }
+      return cookieValue
+    }
+  </script>
+  <div>
     <div class="container">
-        <img class="corn" src="{% static 'popcode/images/corn.png' %}"/>
-        <h3 class="day">Day 2</h3>
+      <img class="corn" src="{% static 'popcode/images/corn.png' %}" />
+      <h3 class="day">Day 2</h3>
+    </div>
+
+    <main>
+      <!-- 문제 끝났을때 모달 -->
+
+      <div class="modal-container" id="score-modal">
+        <div class="modal-content-container">
+          <h1>Congratulations, Quiz Completed.</h1>
+
+          <div class="grade-details">
+            <p>Attempts : 5</p>
+            <p>
+              Wrong Answers : <span id="wrong-answers"></span>
+            </p>
+            <p>
+              Right Answers : <span id="right-answers"></span>
+            </p>
+            <p>
+              Grade : <span id="grade-percentage"></span>%
+            </p>
+            <p>
+              <span id="remarks"></span>
+            </p>
+          </div>
+
+          <div class="modal-button-container">
+            <button onclick="closeScoreModal()">Continue</button>
+          </div>
+        </div>
+      </div>
+      <!-- end of modal of quiz details -->
+
+      <div class="game-quiz-container">
+        <div class="game-details-container">
+          <h1>Slide <span id="actual-slide-indicator">1</span>/{{ part.levels|length }}</h1>
+          <progress id="actual-slide-progress" max="{{ part.levels|length }}" min="1"></progress>
         </div>
 
-        <main>
-            <!-- 문제 끝났을때 모달 -->
-    
-            <div class="modal-container" id="score-modal">
-    
-                <div class="modal-content-container">
-    
-                    <h1>Congratulations, Quiz Completed.</h1>
-    
-    
-    
-                    <div class="grade-details">
-                        <p>Attempts : 5</p>
-                        <p>Wrong Answers : <span id="wrong-answers"></span></p>
-                        <p>Right Answers : <span id="right-answers"></span></p>
-                        <p>Grade : <span id="grade-percentage"></span>%</p>
-                        <p ><span id="remarks"></span></p>
-                    </div>
-    
-                    <div class="modal-button-container">
-                        <button onclick="closeScoreModal()">Continue</button>
-                    </div>
-    
+        <div class="game-question-container">
+          {% for level in part.levels %}
+            <section id="lvl-{{ forloop.counter0 }}" class="level">
+              <h3>{{ level.type }} ----> {{ forloop.counter0 }}</h3>
+              {{ level.content|safe }}
+              {% if level.type == 'CODE' %}
+                <pre>
+                  <code class="language-{{ level.lang }}" contenteditable="true" id="code-{{ forloop.counter0 }}">{{ level.startcode }}</code>
+                </pre>
+                <button id="codeSubmit-{{ forloop.counter0 }}">RUN</button>
+                <div style="border:5px black dotted">
+                  The last code ran with output code : <span id="returnCode-{{ forloop.counter0 }}"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br />
+                  Output:<br />
+                  <pre class="language-bash">
+                    <code id="stdout-{{ forloop.counter0 }}"></code>
+                  </pre> <br />
+                  Error:<br />
+                  <pre class="language-bash">
+                    <code id="stderr-{{ forloop.counter0 }}"></code>
+                  </pre>
                 </div>
-            </div>
-    <!-- end of modal of quiz details-->
-    
-            <div class="game-quiz-container">
-    
-                <div class="game-details-container">
-                    <h1>Score : <span id="player-score"></span> / 5</h1>
-                    <h1> Question : <span id="question-number"></span> / 5</h1>
+                <script>
+                  document.querySelector('#codeSubmit-{{forloop.counter0}}').addEventListener('click', () => {
+                    if (document.querySelector('#code-{{forloop.counter0}}').innerText) {
+                      fetch("{% url 'apiRun' %}", {
+                        method: 'POST',
+                        headers: {
+                          'X-CSRFToken': getCookie('csrftoken')
+                        },
+                        body: JSON.stringify({ code: document.querySelector('#code-{{forloop.counter0}}').innerText + '\n{{level.testcase}}', lang: 'python3' })
+                      })
+                        .then((res) => (res.ok ? res.json() : console.error(res)))
+                        .then((data) => {
+                          console.log(data)
+                          document.querySelector('#returnCode-{{forloop.counter0}}').textContent = data.returnCode
+                          document.querySelector('#stdout-{{forloop.counter0}}').textContent = data.stdout
+                          document.querySelector('#stderr-{{forloop.counter0}}').textContent = data.stderr
+                          canGoNext = data.returnCode === 0
+                          nextBtn.disabled = !canGoNext
+                          nextBtn.innerText = canGoNext ? 'Next' : 'Solve the code challenge !'
+                        })
+                        .catch(console.error)
+                    }
+                  })
+                </script>
+              {% elif level.type == 'QUIZ' %}
+                <br />
+                <div style="display:flex;flex-direction: column;">
+                  {% for ans in level.answers %}
+                    <span class="check" data-index="{{ forloop.counter0 }}"><input type="checkbox" />{{ ans.content }}<br /></span>
+                  {% endfor %}
                 </div>
-    
-                <div class="game-question-container">
-                    <h1 id="display-question"></h1>
-                </div>
-    
-                <div class="game-options-container">
-    
-     
-    
-                    <span>
-                        <input type="radio" id="option-one" name="option" class="radio" value="optionA" />
-                        <label for="option-one" class="option" id="option-one-label"></label>
-                    </span>
-    
-    
-                    <span>
-                        <input type="radio" id="option-two" name="option" class="radio" value="optionB" />
-                        <label for="option-two" class="option" id="option-two-label"></label>
-                    </span>
-    
-    
-                    <span>
-                        <input type="radio" id="option-three" name="option" class="radio" value="optionC" />
-                        <label for="option-three" class="option" id="option-three-label"></label>
-                    </span>
-    
-    
-                    <span>
-                        <input type="radio" id="option-four" name="option" class="radio" value="optionD" />
-                        <label for="option-four" class="option" id="option-four-label"></label>
-                    </span>
-    
-    
-                </div>
-    
-                <div class="next-button-container">
-                    <!-- 문제 아래 Next Question 버튼 -->
-                    <button onclick="handleNextQuestion()">Next Question</button>
-                    
-                </div>
-    
-            </div>
-                {% for level in part.levels %}
-                    <section id="lvl-{{forloop.counter0}}" class="level">
-                        <h3>{{level.type}}</h3>
-                        {{level.content|safe}}
-                        {% if level.type == "CODE" %}
-                            <pre><code class="language-{{level.lang}}" contenteditable="true">{{level.startcode}}</code></pre>
-                        {% elif level.type == "QUIZ" %}<br>
-                            {% for ans in level.answers %}
-                                {% if ans.valid %}
-                                    <input type="checkbox" disabled checked>{{ans.content}}<br>
-                                {% else %}
-                                    <input type="checkbox" disabled>{{ans.content}}<br>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-            
-                    </section>
-                {% empty %}
-                    <p>No sections in this part</p>
-                {% endfor %}
-        </main>
-    
-    </div>
-    {% endblock %}
+              {% endif %}
+            </section>
+          {% empty %}
+            <p>No sections in this part</p>
+          {% endfor %}
+        </div>
+
+        <div class="next-button-container">
+          <button id="prev-btn">Previous</button>
+          <button id="next-btn">Next Question</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>let parts = {{part|safe}};</script>
+  <script src="{% static 'popcode/js/quiz.js' %}"></script>
+{% endblock %}
