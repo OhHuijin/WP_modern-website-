@@ -18,11 +18,16 @@ def homepage(req: HttpRequest):
 
 
 def quiz(req: HttpRequest, title: str, part: int):
-    part = DB.lessons.find_one({"title": title})["parts"][part]
-    if not part:
+    l = DB.lessons.find_one({"title": title})
+    if not l:
         return redirect("/")
-    print("part is", part)
-    return render(req, "popcode/quiz.html", context={"part": part})
+    pls = l["parts"]
+    if part > len(pls):
+        return redirect("/")
+    p = pls[part]
+    if not p:
+        return redirect("/")
+    return render(req, "popcode/quiz.html", context={"part": p})
 
 
 def signup(req: HttpRequest, context={}):
