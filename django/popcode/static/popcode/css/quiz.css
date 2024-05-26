@@ -10,7 +10,6 @@ html, body{
 
 
 body{
-    
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -20,7 +19,7 @@ body{
 
     background-color: rgb(255, 206, 206);
     /* background: url('../assets/background_image.jpg'); */
-    background-color : rgb(255, 206, 206);
+    /* background-color : rgb(255, 206, 206); */
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -30,8 +29,10 @@ body{
 
 /* 전체 퀴즈 크기 */
 .game-quiz-container{
-    width: 60rem;
-    height: 50rem;
+    width: 80vw; /* 뷰포트 너비의 80% */
+    height: 60vh; /* 뷰포트 높이의 60% */
+    max-width: 60rem; /* 최대 너비 제한 */
+    max-height: 50rem; /* 최대 높이 제한 */
 
     background-color: rgb(255, 255, 245);
     margin-bottom: 20px;
@@ -65,10 +66,8 @@ body{
     padding: 30px;
     border: 2px solid darkgray;
     background-color: beige;
-
     border-radius: 25px;
 }
-
 
 .game-question-container h1{
     font-size: 1.1rem;
@@ -130,6 +129,8 @@ input[type=radio]:checked ~ .option {
 }
 .next-button-container button{
     width: 8rem;
+    margin-left: 30px;
+    margin-right: 30px;
     height: 2rem;
     border-radius: 10px;
     background: none;

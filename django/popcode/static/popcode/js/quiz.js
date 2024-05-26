@@ -73,7 +73,10 @@ nextBtn.addEventListener('click', ()=>{
                 e.style.color = levels[currentSlide].answers[i].valid ? "green" : "red";
                 canGoNext &= levels[currentSlide].answers[i].valid == e.querySelector("input").checked;
             });
-            nextBtn.textContent = canGoNext ? "Next" : "Okay got it! Let's try again";
+            if(canGoNext != true) {
+                alert('Not correct! Press the button to try again');
+            }
+            nextBtn.textContent = canGoNext ? "Next" : "Okay got it!";
         }
     }
 });

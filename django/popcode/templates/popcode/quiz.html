@@ -26,7 +26,9 @@
       return cookieValue
     }
   </script>
+
   <div>
+
     <div class="container">
       <img class="corn" src="{% static 'popcode/images/corn.png' %}" />
       <h3 class="day">Day1</h3>
@@ -71,15 +73,17 @@
         <div class="game-question-container">
           {% for level in part.levels %}
             <section id="lvl-{{ forloop.counter0 }}" class="level">
-              <h3>{{ level.type }} ----> {{ forloop.counter0 }}</h3>
+              <h3>{{ level.type }} ----> {{ forloop.counter0 }}</h3> <br/><br/>
               {{ level.content|safe }}
+
               {% if level.type == 'CODE' %}
                 <pre>
                   <code class="language-{{ level.lang }}" contenteditable="true" id="code-{{ forloop.counter0 }}">{{ level.startcode }}</code>
                 </pre>
                 <button class="run" id="codeSubmit-{{ forloop.counter0 }}">RUN</button>
                 <div style="border:5px black dotted; width=200px; height=60px">
-                  The last code ran with output code : <span id="returnCode-{{ forloop.counter0 }}"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br />
+                  The last code ran with output code : <span id="returnCode-{{ forloop.counter0 }}"></span> 
+                  <h6>(0=success, 1=error, 2=timeout, 3=unknown error)<h6> <br />
                   Output:<br />
                   <pre class="language-bash">
                     <code id="stdout-{{ forloop.counter0 }}"></code>
@@ -89,6 +93,7 @@
                     <code id="stderr-{{ forloop.counter0 }}"></code>
                   </pre>
                 </div>
+
                 <script>
                   document.querySelector('#codeSubmit-{{forloop.counter0}}').addEventListener('click', () => {
                     if (document.querySelector('#code-{{forloop.counter0}}').innerText) {
@@ -113,6 +118,7 @@
                     }
                   })
                 </script>
+
               {% elif level.type == 'QUIZ' %}
                 <br />
                 <div style="display:flex;flex-direction: column;font-size:27px;">
@@ -131,9 +137,12 @@
           <button id="prev-btn">Previous</button>
           <button id="next-btn">Next Question</button>
         </div>
+
       </div>
     </main>
   </div>
+
   <script>let parts = {{part|safe}};</script>
   <script src="{% static 'popcode/js/quiz.js' %}"></script>
+
 {% endblock %}
