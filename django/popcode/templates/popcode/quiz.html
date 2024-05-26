@@ -13,6 +13,7 @@
         NextQuestion(0)
     })
 </script>
+
 <div>
     <div class="container">
         <img class="corn" src="{% static 'popcode/images/corn.png' %}"/>
@@ -94,6 +95,26 @@
                 </div>
     
             </div>
+                {% for level in part.levels %}
+                    <section id="lvl-{{forloop.counter0}}" class="level">
+                        <h3>{{level.type}}</h3>
+                        {{level.content|safe}}
+                        {% if level.type == "CODE" %}
+                            <pre><code class="language-{{level.lang}}" contenteditable="true">{{level.startcode}}</code></pre>
+                        {% elif level.type == "QUIZ" %}<br>
+                            {% for ans in level.answers %}
+                                {% if ans.valid %}
+                                    <input type="checkbox" disabled checked>{{ans.content}}<br>
+                                {% else %}
+                                    <input type="checkbox" disabled>{{ans.content}}<br>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+            
+                    </section>
+                {% empty %}
+                    <p>No sections in this part</p>
+                {% endfor %}
         </main>
     
     </div>
