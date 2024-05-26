@@ -4,7 +4,7 @@
     left: 0;
     width: 100%; /* 화면 전체 너비 */
     background-color:#ffecb4;
-    display: flex;
+    display:inherit;
     justify-content: start; /* 메뉴 항목을 왼쪽 정렬 */
     padding: 5px 20px; /* 상하 10px, 좌우 20px 패딩 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
@@ -34,6 +34,8 @@
 
 .logout_container {
     margin-left: auto;
+    white-space: nowrap;
+    height: 40px;
 }
 
 .logout {
@@ -64,8 +66,8 @@
 }
 
 .deco_container {
-    margin-top: 300px;
-    margin-right: 50px;
+    margin-top: 350px;
+    margin-right: 250px;
 
     flex: 0 0 auto; /* 크기 고정 */
     display: flex;
@@ -75,7 +77,7 @@
 }
 
 .deco_image {
-    margin-top: 100px;
+    margin-top: 30%;
     width: 300px; /* 이미지의 너비를 300px로 설정 */
     height: auto; /* 너비에 맞춰 높이 자동 조정 */
 }
@@ -84,8 +86,22 @@
     width: 300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-top: 300px;
+    margin-top: 370px;
     margin-right: 50px;
+    margin-left: -100px;
+}
+
+.contents_container p{
+    font-size: 14px;
+    margin-bottom: -0.3px;
+    margin-top: -0.02px;
+    margin-left: 2px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.contents_container a{
+    color: rgb(192, 164, 4);
+
 }
 
 body {
@@ -109,8 +125,11 @@ h1 {
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
-    width: 90%;
+    width: 92%;
     padding: 10px;
+
+    margin-right: 20px;
+    margin-bottom: 9px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -119,7 +138,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 button {
     width: 100%;
     padding: 10px;
-    margin-left: 20px;
+
     margin-right: 20px;
     border: 1px solid black;
     background-color: #ffc107;

@@ -39,6 +39,7 @@ urlpatterns = [
     path("api/login", apis.login, name="apiLogin"),
     path("api/signup", apis.signup, name="apiSignup"),
     path("api/logout", apis.logout, name="apiLogout"),
+    path("api/editUser",apis.editUser,name='apiEditUser'),
     path("api/createLesson", apis.createLesson, name="apiCreateLesson"),
     path("api/deleteLesson", apis.deleteLesson, name="apiDeleteLesson"),
     path("api/createPart", apis.createPart, name="apiCreatePart"),

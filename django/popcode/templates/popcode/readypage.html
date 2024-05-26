@@ -35,7 +35,7 @@
    
 
     <!-- <div class="accordion-item"> -->
-<a href="quiz.html"><button class="button">Get Started</button></a>
+<a href="{% url 'quiz' %}"><button class="button">Get Started</button></a>
       <!-- <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
         <div class="accordion-body"> -->
           <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,19 +45,19 @@
 
 <div class="daycontainer">
 <div class="link-container">
-    <a href="page1.html">
-        <img src="{% static 'popcode/images/popcorn.png' %}">
-    </a>
-    <a href="page2.html">
+    <a href="{% url 'login' %}">
         <img src="{% static 'popcode/images/corn.png' %}">
     </a>
-    <a href="page3.html">
+    <a href="{% url 'login' %}">
         <img src="{% static 'popcode/images/corn.png' %}">
     </a>
-    <a href="page4.html">
+    <a href="{% url 'login' %}">
         <img src="{% static 'popcode/images/corn.png' %}">
     </a>
-    <a href="page5.html">
+    <a href="{% url 'login' %}">
+        <img src="{% static 'popcode/images/corn.png' %}">
+    </a>
+    <a href="{% url 'login' %}">
         <img src="{% static 'popcode/images/corn.png' %}">
     </a>
 </div>

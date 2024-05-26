@@ -17,6 +17,7 @@
   </head>
   <body>
     <div class="menu_container">
+      {{ error }}
       <img src="{% static 'popcode/images/popcode.svg' %}" />
       <a href="{% url 'homepage' %}">Home</a>
       <a href="{% url 'settings' %}">Settings</a>
