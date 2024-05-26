@@ -1,0 +1,14 @@
+{% extends './layout.html' %}
+
+{% block title %}
+  Profile - {{ user.username }} {{ requestedname }}
+{% endblock %}
+
+{% block nav %}
+  {% if user %}
+    <h1>{{ user.username }}</h1>
+    <i>Last login : {{ user.lastLogin }}</i>
+  {% else %}
+    <i>No user were found with {{ requestedname }}</i>
+  {% endif %}
+{% endblock %}

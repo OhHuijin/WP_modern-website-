@@ -1,8 +1,9 @@
+from email.policy import HTTP
 import json
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from .utils import getLessons
+from .utils import getLessons, getUser
 
 from .DB import DB
 
@@ -30,6 +31,10 @@ def quiz(req: HttpRequest, title: str, part: int):
     return render(req, "popcode/quiz.html", context={"part": p})
 
 
+def login(req: HttpRequest, context={}):
+    return render(req, "popcode/login.html")
+
+
 def signup(req: HttpRequest, context={}):
     return render(req, "popcode/signup.html")
 
@@ -42,13 +47,17 @@ def contact(req: HttpRequest, context={}):
     return render(req, "popcode/contact.html")
 
 
-def login(req: HttpRequest, context={}):
-    return render(req, "popcode/login.html", context=context)
+def profile(req: HttpRequest, username=""):
+    if not username:
+        user = getUser(req)
+        if not user:
+            return redirect("/")
+        return render(req, "popcode/profile.html", context={"user": user})
+    user = DB.users.find_one({"username": username})
+    return render(
+        req, "popcode/profile.html", context={"requestedname": username, "user": user}
+    )
 
 
-def readypage(req: HttpRequest, context={}):
-    return render(req, "popcode/readypage.html", context=context)
-
-
-def profile(req: HttpRequest, context={}):
-    return render(req, "popcode/backendPlayground.html", context=context)
+def readypage(req: HttpRequest):
+    return render(req, "popcode/readypage.html")
