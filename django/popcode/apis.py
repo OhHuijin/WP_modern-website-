@@ -5,7 +5,6 @@ import time
 from bson import ObjectId
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-
 from .utils import getAdminUser
 from .DB import DB
 
@@ -31,11 +30,18 @@ def login(req: HttpRequest):
         return views.login(req)
     password = md5(password.encode("utf-8")).hexdigest()
     user = DB.users.find_one({"username": username})
+    user = DB.users.find_one({"username": username})
     if not user:
+        return views.login(req, {"error": "userNotFound"})
         return views.login(req, {"error": "userNotFound"})
     if user["password"] != password:
         return views.login(req, {"error": "wrongPassword"})
+        return views.login(req, {"error": "wrongPassword"})
     newToken = md5(str(random.random()).encode("utf-8")).hexdigest()
+    DB.users.update_one(
+        {"token": user["token"]},
+        {"$set": {"lastLogin": time.time(), "token": newToken}},
+    )
     DB.users.update_one(
         {"token": user["token"]},
         {"$set": {"lastLogin": time.time(), "token": newToken}},
@@ -56,9 +62,9 @@ def login(req: HttpRequest):
 
 
 def signup(req: HttpRequest):
-    username = req.POST["username"]
-    password = req.POST["password"]
-    email = req.POST["email"]
+    username = req.POST.get("username")
+    password = req.POST.get("password")
+    email = req.POST.get("email")
 
     if not username or not password or not email:
         return views.signup(req)
@@ -66,8 +72,26 @@ def signup(req: HttpRequest):
     if DB.users.find_one({"$or": [{"username": username}, {"email": email}]}):
         return views.signup(req, {"error": "usernameOrEmailExists"})
 
+    if DB.users.find_one({"$or": [{"username": username}, {"email": email}]}):
+        return views.signup(req, {"error": "usernameOrEmailExists"})
+
     password = md5(password.encode("utf-8")).hexdigest()
     token = md5(str(random.random()).encode("utf-8")).hexdigest()
+    DB.users.insert_one(
+        {
+            "username": username,
+            "password": password,
+            "email": email,
+            "created": time.time(),
+            "lastLogin": time.time(),
+            "role": 0,
+            "exp": 0,
+            "coins": 0,
+            "streak": 0,
+            "progress": [],
+            "token": token,
+        }
+    )
     DB.users.insert_one(
         {
             "username": username,
@@ -99,10 +123,10 @@ def signup(req: HttpRequest):
 
 
 def editUser(req: HttpRequest):
-    username = req.POST["username"]
-    password = req.POST["password"]
-    newPassword = req.POST["newPassword"]
-    email = req.POST["email"]
+    username = req.POST.get("username")
+    password = req.POST.get("password")
+    newPassword = req.POST.get("newPassword")
+    email = req.POST.get("email")
 
     if not username or not password or not email:
         return views.profile(req)
@@ -112,6 +136,9 @@ def editUser(req: HttpRequest):
         return views.profile(req, {"error": "tokenNotFound"})
 
     password = md5(password.encode("utf-8")).hexdigest()
+    print("password is ", password)
+    print("token is ", token)
+    user = DB.users.find_one({"token": token, "password": password})
     print("password is ", password)
     print("token is ", token)
     user = DB.users.find_one({"token": token, "password": password})
@@ -143,6 +170,8 @@ def editUser(req: HttpRequest):
 def logout(req: HttpRequest):
     req.session.pop("token")
     req.session.pop("username")
+    req.session.pop("email")
+    req.session.pop("admin")
     return redirect("/")
 
 
@@ -159,8 +188,8 @@ def createLesson(req: HttpRequest):
     user = getAdminUser(req)
     if not user:
         return redirect("/?error=notAdmin")
-    title = req.POST["title"]
-    description = req.POST["description"]
+    title = req.POST.get("title")
+    description = req.POST.get("description")
     if not title or not description:
         return redirect("/?error=missingFields")
     DB.lessons.insert_one(
@@ -187,10 +216,10 @@ def deleteLesson(req: HttpRequest):
     user = getAdminUser(req)
     if not user:
         return redirect("/?error=notAdmin")
-    lessonId = req.POST["id"]
-    if not lessonId:
+    title = req.POST.get("title")
+    if not title:
         return redirect("/?error=missingFields")
-    DB.lessons.delete_one({"_id": ObjectId(lessonId)})
+    DB.lessons.delete_one({"title": title})
     return redirect("/?success=lessonDeleted")
 
 
@@ -289,10 +318,10 @@ def addLevel(req: HttpRequest):
             req.POST.get("v4"),
         )
         answers = [
-            {"content": v1, "valid": c1 is not None},
-            {"content": v2, "valid": c2 is not None},
-            {"content": v3, "valid": c3 is not None},
-            {"content": v4, "valid": c4 is not None},
+            {"content": v1, "valid": 1 if c1 is not None else 0},
+            {"content": v2, "valid": 1 if c2 is not None else 0},
+            {"content": v3, "valid": 1 if c3 is not None else 0},
+            {"content": v4, "valid": 1 if c4 is not None else 0},
         ]
         DB.lessons.update_one(
             {"title": lessonId},

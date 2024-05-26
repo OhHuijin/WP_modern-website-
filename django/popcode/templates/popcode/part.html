@@ -7,7 +7,67 @@
 <h2>Sections</h2>
 <ul>
 	{% for level in part.levels %}
-		<li>{{level.content}}</li>
+		<li>
+			<h3>{{level.type}}</h3>
+			{{level.content|safe}}
+			{% if level.type == "CODE" %}
+				<pre><code class="language-{{level.lang}}" contenteditable="true" id="code-{{forloop.counter0}}">{{level.startcode}}</code></pre>
+				<button id="codeSubmit-{{forloop.counter0}}">RUN</button>
+				<div style="border:5px black dotted">
+					The last code ran with output code : <span id="returnCode-{{forloop.counter0}}"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br>
+					Output:<br>
+					<code id="stdout-{{forloop.counter0}}"></code> <br>
+					Error:<br>
+					<code id="stderr-{{forloop.counter0}}"></code>
+				</div>
+				<script>			
+					document.querySelector("#codeSubmit-{{forloop.counter0}}").addEventListener("click", () => {
+						if (document.querySelector("#code-{{forloop.counter0}}").innerText) {
+							fetch("{% url 'apiRun' %}", {
+								method: "POST",
+								headers: {
+									"X-CSRFToken": getCookie("csrftoken"),
+								},
+								body: JSON.stringify({ code: document.querySelector("#code-{{forloop.counter0}}").innerText+"\n{{level.testcase}}", lang: "python3" }),
+							})
+								.then((res) => res.ok ? res.json() : console.error(res))
+								.then((data) => {
+									console.log(data)
+									document.querySelector("#returnCode-{{forloop.counter0}}").textContent = data.returnCode;
+									document.querySelector("#stdout-{{forloop.counter0}}").textContent = data.stdout;
+									document.querySelector("#stderr-{{forloop.counter0}}").textContent = data.stderr;
+								})
+								.catch(console.error)
+						}
+					})
+			
+					// Get the CSRF token
+					function getCookie(name) {
+						let cookieValue = null;
+						if (document.cookie && document.cookie !== '') {
+							const cookies = document.cookie.split(';');
+							for (let i = 0; i < cookies.length; i++) {
+								const cookie = cookies[i].trim();
+								if (cookie.substring(0, name.length + 1) === (name + '=')) {
+									cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+									break;
+								}
+							}
+						}
+						return cookieValue;
+					}
+				</script>
+			{% elif level.type == "QUIZ" %}<br>
+				{% for ans in level.answers %}
+					{% if ans.valid %}
+						<input type="checkbox" disabled checked>{{ans.content}}<br>
+					{% else %}
+						<input type="checkbox" disabled>{{ans.content}}<br>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
+		</li>
 	{% empty %}
 		<p>No sections in this part</p>
 	{% endfor %}
@@ -40,7 +100,7 @@
 	<h1>Add code challenge to this level ?</h1>
 	<form action="/addLevel" method="post">
 		{% csrf_token %}
-		<select name="lang"><option value="python3">python3</option></select><br>
+		<select name="lang"><option value="python">python</option></select><br>
 		<textarea name="content" placeholder="Challenge"></textarea><br>
 		<textarea name="testcase" placeholder="Testcase file (0 exit code = code is good)"></textarea><br>
 		<textarea name="startcode" placeholder="Startcode"></textarea><br>

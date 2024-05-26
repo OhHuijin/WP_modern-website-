@@ -181,3 +181,23 @@ function closeScoreModal() {
 function closeOptionModal() {
     document.getElementById('option-modal').style.display = "none";
 }
+
+
+
+
+
+
+
+    // Function to add input box
+    let inputBox; // Declare as global variable for access across functions
+    function addKeyboardInput() {
+        // Add input box if not already present
+        if (!inputBox) {
+            inputBox = document.createElement("input");
+            inputBox.type = "text";
+            inputBox.id = "guessInput";
+            inputBox.placeholder = " Type a letter and press Enter";
+            inputBox.addEventListener("keypress", handleKeyPress);
+            document.body.appendChild(inputBox);
+        }
+    }

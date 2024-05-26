@@ -1,145 +1,121 @@
+{% extends "./layout.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-<!--     
-    <script src="quiz.js"></script>
-    <link rel="stylesheet" href="quiz.css"> -->
+{% block title %}quiz{% endblock title%}
 
+{% block head %}
     <link href="{% static 'popcode/css/quiz.css' %}" rel="stylesheet">
-    <script src="{% static 'popcode/js/quiz.js' %}"></script>
-<!-- 
-    <title>Quiz</title> -->
-</head>
-<body onload="NextQuestion(0)">
+{% endblock head %}
 
+{% block nav %}
+<script>let parts = {{part|safe}};</script>
+    <script src="{% static 'popcode/js/quiz.js' %}"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>{
+        NextQuestion(0)
+    })
+</script>
+
+<div>
     <div class="container">
         <img class="corn" src="{% static 'popcode/images/corn.png' %}"/>
         <h3 class="day">Day 2</h3>
         </div>
 
-    <main>
-
-
-        <!-- 문제 설명 모달, css, js 내용 아직 안만듬 -->
-        <div class="modal-container" id="intro-modal">
-
-            <div class="modal-content-container">
-
-                <h1 id="Quiz">the description : Say Hello to HTML Elements</h1>
-                <h1>The description : <span id="problem's topic"></span></h1>
-
-                <div class="description-details">
-                    <p>Welcome to popcode's HTML coding challenges. These will walk you through web development step-by-step. </p>
-                    <p>First, you'll start by building a simple web page using HTML. </p>
-                    <!-- ds1 = h1 ds2= header
-                    opening_tag = <h1> closing_tag =</h1> -->
-                    <!-- requirement=hello world! -->
-                    <p><span id="ds1"></span> is one of the html elements to show the <span id="ds2"></span>.</p>
-                    <p>Most HTML elements have an opening tag and a closing tag.</p>
-                    <p>Opening tags look like this: <span id="opening_tag"></span></p>
-                    <p>Closing tags look like this: <span id="closing_tag"></span></p>
-                    <p>Choose the right one to show the <span id="requirement"></span> in webpage using <span id="ds1"></span> . </p>
-                </div>
-
-                <div class="modal-button-container">
-                    <button onclick="closeScoreModal()">Continue</button>
-                </div>
-
-            </div>
-        </div>
-
-
-
-        <!-- 문제 끝났을때 모달 -->
-
-        <div class="modal-container" id="score-modal">
-
-            <div class="modal-content-container">
-
-                <h1>Congratulations, Quiz Completed.</h1>
-
-
-
-                <div class="grade-details">
-                    <p>Attempts : 5</p>
-                    <p>Wrong Answers : <span id="wrong-answers"></span></p>
-                    <p>Right Answers : <span id="right-answers"></span></p>
-                    <p>Grade : <span id="grade-percentage"></span>%</p>
-                    <p ><span id="remarks"></span></p>
-                </div>
-
-                <div class="modal-button-container">
-                    <button onclick="closeScoreModal()">Continue</button>
-                </div>
-
-            </div>
-        </div>
-<!-- end of modal of quiz details-->
-
-        <div class="game-quiz-container">
-
-            <div class="game-details-container">
-                <h1>Score : <span id="player-score"></span> / 5</h1>
-                <h1> Question : <span id="question-number"></span> / 5</h1>
-            </div>
-
-            <div class="game-question-container">
-                <h1 id="display-question"></h1>
-            </div>
-
-            <div class="game-options-container">
-
-               <div class="modal-container" id="option-modal">
-
-                    <div class="modal-content-container">
-                         <h1>Please Pick An Option</h1>
-
-                         <div class="modal-button-container">
-                            <button onclick="closeOptionModal()">Continue</button>
-                        </div>
-
+        <main>
+            <!-- 문제 끝났을때 모달 -->
+    
+            <div class="modal-container" id="score-modal">
+    
+                <div class="modal-content-container">
+    
+                    <h1>Congratulations, Quiz Completed.</h1>
+    
+    
+    
+                    <div class="grade-details">
+                        <p>Attempts : 5</p>
+                        <p>Wrong Answers : <span id="wrong-answers"></span></p>
+                        <p>Right Answers : <span id="right-answers"></span></p>
+                        <p>Grade : <span id="grade-percentage"></span>%</p>
+                        <p ><span id="remarks"></span></p>
                     </div>
-
-               </div>
-
-                <span>
-                    <input type="radio" id="option-one" name="option" class="radio" value="optionA" />
-                    <label for="option-one" class="option" id="option-one-label"></label>
-                </span>
-
-
-                <span>
-                    <input type="radio" id="option-two" name="option" class="radio" value="optionB" />
-                    <label for="option-two" class="option" id="option-two-label"></label>
-                </span>
-
-
-                <span>
-                    <input type="radio" id="option-three" name="option" class="radio" value="optionC" />
-                    <label for="option-three" class="option" id="option-three-label"></label>
-                </span>
-
-
-                <span>
-                    <input type="radio" id="option-four" name="option" class="radio" value="optionD" />
-                    <label for="option-four" class="option" id="option-four-label"></label>
-                </span>
-
-
+    
+                    <div class="modal-button-container">
+                        <button onclick="closeScoreModal()">Continue</button>
+                    </div>
+    
+                </div>
             </div>
-
-            <div class="next-button-container">
-                <!-- 문제 아래 Next Question 버튼 -->
-                <button onclick="handleNextQuestion()">Next Question</button>
-                
+    <!-- end of modal of quiz details-->
+    
+            <div class="game-quiz-container">
+    
+                <div class="game-details-container">
+                    <h1>Score : <span id="player-score"></span> / 5</h1>
+                    <h1> Question : <span id="question-number"></span> / 5</h1>
+                </div>
+    
+                <div class="game-question-container">
+                    <h1 id="display-question"></h1>
+                </div>
+    
+                <div class="game-options-container">
+    
+     
+    
+                    <span>
+                        <input type="radio" id="option-one" name="option" class="radio" value="optionA" />
+                        <label for="option-one" class="option" id="option-one-label"></label>
+                    </span>
+    
+    
+                    <span>
+                        <input type="radio" id="option-two" name="option" class="radio" value="optionB" />
+                        <label for="option-two" class="option" id="option-two-label"></label>
+                    </span>
+    
+    
+                    <span>
+                        <input type="radio" id="option-three" name="option" class="radio" value="optionC" />
+                        <label for="option-three" class="option" id="option-three-label"></label>
+                    </span>
+    
+    
+                    <span>
+                        <input type="radio" id="option-four" name="option" class="radio" value="optionD" />
+                        <label for="option-four" class="option" id="option-four-label"></label>
+                    </span>
+    
+    
+                </div>
+    
+                <div class="next-button-container">
+                    <!-- 문제 아래 Next Question 버튼 -->
+                    <button onclick="handleNextQuestion()">Next Question</button>
+                    
+                </div>
+    
             </div>
-
-        </div>
-    </main>
-    <script src="index.js"></script>
-</body>
-</html>
+                {% for level in part.levels %}
+                    <section id="lvl-{{forloop.counter0}}" class="level">
+                        <h3>{{level.type}}</h3>
+                        {{level.content|safe}}
+                        {% if level.type == "CODE" %}
+                            <pre><code class="language-{{level.lang}}" contenteditable="true">{{level.startcode}}</code></pre>
+                        {% elif level.type == "QUIZ" %}<br>
+                            {% for ans in level.answers %}
+                                {% if ans.valid %}
+                                    <input type="checkbox" disabled checked>{{ans.content}}<br>
+                                {% else %}
+                                    <input type="checkbox" disabled>{{ans.content}}<br>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+            
+                    </section>
+                {% empty %}
+                    <p>No sections in this part</p>
+                {% endfor %}
+        </main>
+    
+    </div>
+    {% endblock %}

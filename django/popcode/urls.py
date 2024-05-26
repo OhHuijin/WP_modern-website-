@@ -14,25 +14,50 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
-from . import views,apis
+from . import views, apis
 
 urlpatterns = [
-	path('',views.index,name="index"),
-    path('homepage',views.homepage,name="homepage"),
-    path('quiz',views.quiz,name="quiz"),
-    path('signup',apis.signup,name="signup"),
-    path('user',views.signup,name="user"),
-    path('login',apis.login,name="login"),
-	path('api/run',apis.apiRun,name="apiRun"),
-    path('admin/', admin.site.urls),
-    path("profile",apis.editUser,name="profile"),
-    path("logout",apis.logout,name="logout"),
-    path("createLesson",apis.createLesson,name="createLesson"),
-    path("deleteLesson",apis.deleteLesson,name="deleteLesson"),
-    path("createPart",apis.createPart,name="createPart"),
-    path("addLevel",apis.addLevel,name="addLevel"),
-    path("lesson/<str:title>",apis.viewLesson,name="lesson"),
-    path("lesson/<str:title>/<int:part>",apis.viewPart,name="part")
+    path("", views.homepage, name="homepage"),
+    path("quiz", views.quiz, name="quiz"),
+    path("signup", views.signup, name="signup"),
+    path("settings", views.settings, name="settings"),
+    path("login", apis.login, name="login"),
+    path("readypage", views.readypage, name="readypage"),
+    path("contact", views.readypage, name="contact"),
+    path("api/run", apis.apiRun, name="apiRun"),
+    path("admin/", admin.site.urls),
+    path("profile", apis.editUser, name="profile"),
+    path("logout", apis.logout, name="logout"),
+    path("createLesson", apis.createLesson, name="createLesson"),
+    path("deleteLesson", apis.deleteLesson, name="deleteLesson"),
+    path("createPart", apis.createPart, name="createPart"),
+    path("addLevel", apis.addLevel, name="addLevel"),
+    path("lesson/<str:title>", apis.viewLesson, name="lesson"),
+    path("lesson/<str:title>/<int:part>", views.quiz, name="part"),
+    # backend tests
+    path("bp", views.index, name="bp"),
+    path("bp/<str:title>", apis.viewLesson, name="bpLesson"),
+    path("bp/<str:title>/<int:part>", apis.viewPart, name="bpPart"),
 ]
+
+# urlpatterns = [
+# 	path('',views.index,name="index"),
+#     path('homepage',views.homepage,name="homepage"),
+#     path('quiz',views.quiz,name="quiz"),
+#     path('signup',apis.signup,name="signup"),
+#     path('user',views.signup,name="user"),
+#     path('login',apis.login,name="login"),
+
+# 	path('api/run',apis.apiRun,name="apiRun"),
+#     path('admin/', admin.site.urls),
+#     path("profile",apis.editUser,name="profile"),
+#     path("logout",apis.logout,name="logout"),
+#     path("createLesson",apis.createLesson,name="createLesson"),
+#     path("deleteLesson",apis.deleteLesson,name="deleteLesson"),
+#     path("createPart",apis.createPart,name="createPart"),
+#     path("lesson/<str:title>",apis.viewLesson,name="lesson"),
+#     path("lesson/<str:title>/<int:part>",apis.viewPart,name="part")
+# ]

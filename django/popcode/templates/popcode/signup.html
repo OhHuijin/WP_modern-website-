@@ -1,13 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SignUp</title>
+    <title>{% block title %}signup{% endblock %}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
-    <link rel="stylesheet" href="signup&login_style.css" />
-  </head>
-  <body>
+
+    <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet">
+
+
     <div class="main-container">
       <div class="popcode">
         <div class="logo-group">
@@ -62,11 +64,13 @@
           <div class="group-1d">
             <div class="terms-policy">
               <span class="agree-terms-policy">I agree to the </span
-              ><span class="agree-terms-policy-1e">terms & policy</span>
+              ><span class="agree-terms-policy-1e">information collecting</span>
             </div>
-            <div class="rectangle"></div>
+          
+            <input type="checkbox" id="checkbox1">
+            <label for="checkbox1" class="agree-terms-policy-1e"></label>
           </div>
-          <a href="login.html"><button class="frame-1f">
+          <a href="{% url 'login' %}"><button class="frame-1f">
             <div class="frame-20">
               <div class="frame-21"><div class="frame-22"></div></div>
             </div>
@@ -80,7 +84,7 @@
             <div class="group-26">
               <div class="sign">
                 <span class="account">Have an account? </span
-                ><span class="sign-in-27">Sign In</span>
+                ><a href="{% url 'login' %}"> <span class="sign-in-27">Sign In</span></a>
               </div>
             </div>
           </div>
@@ -99,5 +103,5 @@
       </div>
       <div class="chris-lee-image"></div>
     </div>
-  </body>
+
 </html>
