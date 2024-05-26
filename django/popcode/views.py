@@ -24,6 +24,7 @@ def homepage(req: HttpRequest):
     Redirects to dashboard if user is logged in, else to homepage
     """
     user = getUser(req)
+    print(user)
     if user:
         return render(
             req,
