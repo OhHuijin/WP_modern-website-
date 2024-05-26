@@ -546,10 +546,10 @@ button {
 
 .terms-policy {
   position: absolute;
-  width: 328px;
+  width: 28px;
   height: 15.321px;
-  top: 0;
-  left: 15px;
+  top: 70%;
+  left: 30px;
   font-family: Poppins, var(--default-font-family);
   font-size: 9px;
   font-weight: 500;
