@@ -113,7 +113,7 @@
 		{% if request.session.admin %}
 			<form action="/deleteLesson" method="post">
 				{% csrf_token %}
-				<input type="hidden" name="id" value={{ lesson.id }}>
+				<input type="hidden" name="title" value={{ lesson.title }}>
 				<button type="submit">Delete</button>
 			</form>
 		{% endif %}
