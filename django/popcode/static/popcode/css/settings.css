@@ -1,22 +1,30 @@
 .menu_container {
-    position: fixed; /* 메뉴바를 상단에 고정 */
+    position: fixed;
+    /* 메뉴바를 상단에 고정 */
     top: 0;
     left: 0;
-    width: 100%; /* 화면 전체 너비 */
-    background-color:#ffecb4;
-    display:inherit;
-    justify-content: start; /* 메뉴 항목을 왼쪽 정렬 */
-    padding: 5px 20px; /* 상하 10px, 좌우 20px 패딩 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-    z-index: 1000; /* 다른 요소 위에 위치 */
+    width: 100%;
+    /* 화면 전체 너비 */
+    background-color: #ffecb4;
+    display: inherit;
+    justify-content: start;
+    /* 메뉴 항목을 왼쪽 정렬 */
+    padding: 5px 20px;
+    /* 상하 10px, 좌우 20px 패딩 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* 그림자 효과 */
+    z-index: 1000;
+    /* 다른 요소 위에 위치 */
 }
 
 .menu_container a {
     color: black;
     padding: 10px 15px;
-    text-decoration: none; /* 밑줄 제거 */
-    font-size: 16px; 
-    margin-right: 10px; /* 항목 간 간격 */
+    text-decoration: none;
+    /* 밑줄 제거 */
+    font-size: 16px;
+    margin-right: 10px;
+    /* 항목 간 간격 */
 }
 
 .menu_container a:hover {
@@ -36,6 +44,8 @@
     margin-left: auto;
     white-space: nowrap;
     height: 40px;
+    display: flex;
+    gap: 10px;
 }
 
 .logout {
@@ -47,39 +57,49 @@
     color: black;
     font-weight: bolder;
     cursor: pointer;
-    border-radius: 5px; /* 버튼 모서리 둥글둥글 */
+    border-radius: 5px;
+    /* 버튼 모서리 둥글둥글 */
 }
 
 .logout:hover {
-    background-color:rgb(213, 80, 106);
+    background-color: rgb(213, 80, 106);
     color: white;
 }
 
 .main_container {
     display: flex;
-    flex-direction: row; /* 요소들을 가로로 배치 */
-    justify-content: center; /* 중앙 정렬 */
-    align-items: start; /* 상단 정렬 */
+    flex-direction: row;
+    /* 요소들을 가로로 배치 */
+    justify-content: center;
+    /* 중앙 정렬 */
+    align-items: start;
+    /* 상단 정렬 */
     width: 100%;
-    max-width: 1200px; /* 컨테이너 최대 너비 설정 */
-    margin-top: 200px; /* 메뉴바와 겹치지 않도록 상단 마진 추가 (메뉴바 높이 + 여유 공간) */
+    max-width: 1200px;
+    /* 컨테이너 최대 너비 설정 */
+    margin-top: 200px;
+    /* 메뉴바와 겹치지 않도록 상단 마진 추가 (메뉴바 높이 + 여유 공간) */
 }
 
 .deco_container {
     margin-top: 350px;
     margin-right: 250px;
 
-    flex: 0 0 auto; /* 크기 고정 */
+    flex: 0 0 auto;
+    /* 크기 고정 */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px; /* 패딩 추가 */
+    padding: 10px;
+    /* 패딩 추가 */
 }
 
 .deco_image {
     margin-top: 30%;
-    width: 300px; /* 이미지의 너비를 300px로 설정 */
-    height: auto; /* 너비에 맞춰 높이 자동 조정 */
+    width: 300px;
+    /* 이미지의 너비를 300px로 설정 */
+    height: auto;
+    /* 너비에 맞춰 높이 자동 조정 */
 }
 
 .contents_container {
@@ -91,7 +111,7 @@
     margin-left: -100px;
 }
 
-.contents_container p{
+.contents_container p {
     font-size: 14px;
     margin-bottom: -0.3px;
     margin-top: -0.02px;
@@ -99,7 +119,7 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.contents_container a{
+.contents_container a {
     color: rgb(192, 164, 4);
 
 }
@@ -124,7 +144,9 @@ h1 {
     margin-bottom: 20px;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="text"],
+input[type="email"],
+input[type="password"] {
     width: 92%;
     padding: 10px;
 
@@ -145,8 +167,10 @@ button {
     color: white;
     font-weight: bolder;
     cursor: pointer;
-    margin-top: 10px; /* 버튼 간격 */
-    border-radius: 5px; /* 버튼 모서리 둥글둥글 */
+    margin-top: 10px;
+    /* 버튼 간격 */
+    border-radius: 5px;
+    /* 버튼 모서리 둥글둥글 */
 }
 
 button:hover {
@@ -161,5 +185,6 @@ button:hover {
 }
 
 button:not(:last-child) {
-    margin-right: 10px; /* 마지막 버튼을 제외한 모든 버튼에 오른쪽 마진 추가 */
+    margin-right: 10px;
+    /* 마지막 버튼을 제외한 모든 버튼에 오른쪽 마진 추가 */
 }

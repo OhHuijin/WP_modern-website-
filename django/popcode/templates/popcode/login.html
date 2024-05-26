@@ -1,4 +1,5 @@
 {% load static %}
+{% include './components/alert.html' %}
 <!DOCTYPE html>
 
 <meta charset="UTF-8" />
@@ -12,30 +13,31 @@
 <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
 <link href="{% static 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap' %}" rel="stylesheet" />
 {% comment %} <link rel="stylesheet" href="signup&login_style.css" /> {% endcomment %}
-
 <div class="main-container">
   <div class="popcode">
     <div class="logo-group">
       <div class="logo-center">
         <div class="icon"></div>
-        <a href="{% url 'homepage' %}"><div class="title">
-          <div class="path"></div>
-          <div class="path-1">
-            <div class="vector"></div>
+        <a href="{% url 'homepage' %}">
+          <div class="title">
+            <div class="path"></div>
+            <div class="path-1">
+              <div class="vector"></div>
+            </div>
+            <div class="path-2">
+              <div class="vector-3"></div>
+            </div>
+            <div class="path-4">
+              <div class="vector-5"></div>
+            </div>
+            <div class="path-6">
+              <div class="vector-7"></div>
+            </div>
+            <div class="path-8">
+              <div class="vector-9"></div>
+            </div>
           </div>
-          <div class="path-2">
-            <div class="vector-3"></div>
-          </div>
-          <div class="path-4">
-            <div class="vector-5"></div>
-          </div>
-          <div class="path-6">
-            <div class="vector-7"></div>
-          </div>
-          <div class="path-8">
-            <div class="vector-9"></div>
-          </div>
-        </div></a>
+        </a>
       </div>
     </div>
   </div>
