@@ -11,7 +11,52 @@
 			<h3>{{level.type}}</h3>
 			{{level.content|safe}}
 			{% if level.type == "CODE" %}
-				<pre><code class="language-{{level.lang}}" contenteditable="true">{{level.startcode}}</code></pre>
+				<pre><code class="language-{{level.lang}}" contenteditable="true" id="code-{{forloop.counter0}}">{{level.startcode}}</code></pre>
+				<button id="codeSubmit-{{forloop.counter0}}">RUN</button>
+				<div style="border:5px black dotted">
+					The last code ran with output code : <span id="returnCode-{{forloop.counter0}}"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br>
+					Output:<br>
+					<code id="stdout-{{forloop.counter0}}"></code> <br>
+					Error:<br>
+					<code id="stderr-{{forloop.counter0}}"></code>
+				</div>
+				<script>			
+					document.querySelector("#codeSubmit-{{forloop.counter0}}").addEventListener("click", () => {
+						if (document.querySelector("#code-{{forloop.counter0}}").innerText) {
+							fetch("{% url 'apiRun' %}", {
+								method: "POST",
+								headers: {
+									"X-CSRFToken": getCookie("csrftoken"),
+								},
+								body: JSON.stringify({ code: document.querySelector("#code-{{forloop.counter0}}").innerText+"\n{{level.testcase}}", lang: "python3" }),
+							})
+								.then((res) => res.ok ? res.json() : console.error(res))
+								.then((data) => {
+									console.log(data)
+									document.querySelector("#returnCode-{{forloop.counter0}}").textContent = data.returnCode;
+									document.querySelector("#stdout-{{forloop.counter0}}").textContent = data.stdout;
+									document.querySelector("#stderr-{{forloop.counter0}}").textContent = data.stderr;
+								})
+								.catch(console.error)
+						}
+					})
+			
+					// Get the CSRF token
+					function getCookie(name) {
+						let cookieValue = null;
+						if (document.cookie && document.cookie !== '') {
+							const cookies = document.cookie.split(';');
+							for (let i = 0; i < cookies.length; i++) {
+								const cookie = cookies[i].trim();
+								if (cookie.substring(0, name.length + 1) === (name + '=')) {
+									cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+									break;
+								}
+							}
+						}
+						return cookieValue;
+					}
+				</script>
 			{% elif level.type == "QUIZ" %}<br>
 				{% for ans in level.answers %}
 					{% if ans.valid %}
