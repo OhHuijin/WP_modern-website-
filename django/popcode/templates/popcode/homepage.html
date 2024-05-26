@@ -22,6 +22,7 @@
             <div class="base"></div>
             <div class="objects">
               <div class="overlap-group">
+                {% comment %} <img class="elements" src="{% static 'popcode/images/popcode.svg' %}" /> {% endcomment %}
                 <img class="elements" src="{% static 'popcode/images/popcode.svg' %}" />
                 <div class="image">
                   {% comment %} <img class="small_popcorn" src="{% static 'popcode/images/popcorn.png' %}" /> {% endcomment %}
@@ -51,7 +52,7 @@
                 <div class="text-wrapper-6">Contact</div>
               </div>
             </div>
-            <img class="logo" src="{% static 'popcode/images/popcode.svg' %}" />
+            <a href="{% url 'homepage' %}"><img class="logo" src="{% static 'popcode/images/popcode.svg' %}" /></a>
           </div>
         </header>
 
