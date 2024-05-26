@@ -1,30 +1,13 @@
-{% comment %} {% extends "./layout.html" %} {% endcomment %}
+{% extends "./layout.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}settings{% endblock %}s</title>
-    {% block nav %}
-
-    <link rel="stylesheet" href="settings.css">
-    <link href="{% static 'popcode/css/settings.css' %}" rel="stylesheet">
-</head>
+{% block title %}settings{% endblock %}
 
 
-    <div class="menu_container">
-        <img src="{% static 'popcode/images/popcode.svg' %}" >
-        <a href="readypage.html">Home</a>
-        <a href="settings.html">Settings</a>
-        <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
-        <a href="">link</a>
-        <a href="contact.html">Contact</a>
-        <div class="logout_container">
-            <button type="button" onclick="handleLogout()" class="logout">Log Out</button>
-        </div>
-    </div>
+{% block head %}
+<link href="{% static 'popcode/css/settings.css' %}" rel="stylesheet">
+{% endblock head %}
 
+{% block nav %}
     <div class="main_container">
 
         <div class="deco_container">
@@ -33,27 +16,24 @@
 
         <div class="contents_container">
             <h1>User Information</h1>
-
-            <form id="settingsForm">
-                <div class="input-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" disabled>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" disabled>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" disabled>
-                </div>
-                <div class="form-buttons">
-                    <button type="button" id="editButton">Edit</button>
-                    <button type="submit" id="saveButton" disabled>Save</button>
-                </div>
+            {% if request.session.username and request.session.token %}
+            <p>
+              Username : {{ request.session.username }} <br />
+              Token : {{ request.session.token }}
+            </p>
+            <form action="/profile" method="post">
+              {% csrf_token %}
+              <input type="text" name="username" placeholder="Username" value="{{ request.session.username }}" />
+              <input type="text" name="email" id="email" placeholder="Email" value="{{ request.session.email }}" />
+              <input type="password" name="password" placeholder="Current Password" />
+              <input type="password" name="newPassword" placeholder="New Password (keep empty to don't edit)" />
+              <button type="submit">Edit</button><br />
+              <a href="{% url 'apiLogout' %}">Logout</a>
             </form>
+          {% else %}
+            <p>You need to login to edit your profile</p>
+          {% endif %}
         </div>
     </div>
     <script src="settings.js"></script>
-{% endblock %}
-</html>
+    {% endblock nav %}
