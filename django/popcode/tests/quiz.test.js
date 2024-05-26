@@ -11,6 +11,7 @@ global.window = dom.window;
 
 // quiz.js 파일을 가져와서 필요한 함수들을 선언
 // require('../static/popcode/js/quiz.js');
+// something with jest.fn();
 const { NextQuestion, checkForAnswer, handleNextQuestion, resetOptionBackground, unCheckRadioButtons, handleEndGame, closeScoreModal, closeOptionModal } = require('../static/popcode/js/quiz.js');
 
 // questions 변수를 직접 가져오기 위해 quiz.js 파일을 다시 불러옴
