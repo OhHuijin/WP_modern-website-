@@ -297,36 +297,6 @@
   left: 175px;
 }
 
-.element-home .fun-fact {
-  position: absolute;
-  width: 1920px;
-  height: 970px;
-  top: 922px;
-  left: 0;
-}
-
-.element-home .expertises-wrapper {
-  height: 335px;
-  background-image: url(./img/vector.svg);
-  background-size: 100% 100%;
-}
-
-.element-home .expertises {
-  position: relative;
-  width: 696px;
-  /* height: 92px; */
-  top: 94px;
-  left: 455px;
-}
-
-.element-home .cusomer {
-  position: absolute;
-  width: 87px;
-  height: 92px;
-  top: 0;
-  left: 613px;
-}
-
 .element-home .text-wrapper-7 {
   position: absolute;
   top: 74px;
