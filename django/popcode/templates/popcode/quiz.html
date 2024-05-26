@@ -9,6 +9,23 @@
 {% endblock %}
 
 {% block nav %}
+  <script>
+    // Get the CSRF token
+    function getCookie(name) {
+      let cookieValue = null
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim()
+          if (cookie.substring(0, name.length + 1) === name + '=') {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+            break
+          }
+        }
+      }
+      return cookieValue
+    }
+  </script>
   <div>
     <div class="container">
       <img class="corn" src="{% static 'popcode/images/corn.png' %}" />
@@ -58,8 +75,42 @@
               {{ level.content|safe }}
               {% if level.type == 'CODE' %}
                 <pre>
-                  <code class="language-{{ level.lang }}" contenteditable="true">{{ level.startcode }}</code>
+                  <code class="language-{{ level.lang }}" contenteditable="true" id="code-{{ forloop.counter0 }}">{{ level.startcode }}</code>
                 </pre>
+                <button id="codeSubmit-{{ forloop.counter0 }}">RUN</button>
+                <div style="border:5px black dotted">
+                  The last code ran with output code : <span id="returnCode-{{ forloop.counter0 }}"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br />
+                  Output:<br />
+                  <pre class="language-bash">
+                    <code id="stdout-{{ forloop.counter0 }}"></code>
+                  </pre> <br />
+                  Error:<br />
+                  <pre class="language-bash">
+                    <code id="stderr-{{ forloop.counter0 }}"></code>
+                  </pre>
+                </div>
+                <script>
+                  document.querySelector('#codeSubmit-{{forloop.counter0}}').addEventListener('click', () => {
+                    if (document.querySelector('#code-{{forloop.counter0}}').innerText) {
+                      fetch("{% url 'apiRun' %}", {
+                        method: 'POST',
+                        headers: {
+                          'X-CSRFToken': getCookie('csrftoken')
+                        },
+                        body: JSON.stringify({ code: document.querySelector('#code-{{forloop.counter0}}').innerText + '\n{{level.testcase}}', lang: 'python3' })
+                      })
+                        .then((res) => (res.ok ? res.json() : console.error(res)))
+                        .then((data) => {
+                          console.log(data)
+                          document.querySelector('#returnCode-{{forloop.counter0}}').textContent = data.returnCode
+                          document.querySelector('#stdout-{{forloop.counter0}}').textContent = data.stdout
+                          document.querySelector('#stderr-{{forloop.counter0}}').textContent = data.stderr
+                          canGoNext = data.returnCode === 0
+                        })
+                        .catch(console.error)
+                    }
+                  })
+                </script>
               {% elif level.type == 'QUIZ' %}
                 <br />
                 <div style="display:flex;flex-direction: column;">
