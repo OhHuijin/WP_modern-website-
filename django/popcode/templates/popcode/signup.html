@@ -135,24 +135,9 @@
       })
       
       document.getElementById('signupForm').addEventListener('submit', function (event) {
-        // Prevent the form from submitting
-        event.preventDefault()
+        const checkbox = document.getElementById('checkbox').checked
       
-        // Get form elements
-        const username = document.querySelector('input[name="username"]').value
-        const email = document.querySelector('input[name="email"]').value
-        const password = document.querySelector('input[name="password"]').value
-        const checkbox = document.getElementById('checkbox1').checked
-      
-        // Check if all fields are filled
-        if (username && email && password && checkbox) {
-          // Display alert
-          alert('Congratulations on signing up!')
-          // Optionally submit the form if needed
-          // event.target.submit();
-        } else {
-          alert('Please fill out all fields and agree to the terms.')
-        }
+        if (!checkbox) event.preventDefault()
       })
     </script>
   </body>

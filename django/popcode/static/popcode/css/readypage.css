@@ -50,9 +50,7 @@ body {
 
 .title {
   text-align: center;
-  margin-top: -150px;
-  margin-bottom: -120px;
-  height: 700px;
+  margin-top: 150px;
   position: relative;
 }
 
