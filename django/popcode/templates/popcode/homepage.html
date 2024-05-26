@@ -9,52 +9,25 @@
         homepage
       {% endblock %}
     </title>
-    <!--    <link rel="stylesheet" href="homepage_globals.css" />
-    <link rel="stylesheet" href="homepage_style.css" />    -->
+    <!--                           <link rel="stylesheet" href="homepage_globals.css" />
+    <link rel="stylesheet" href="homepage_style.css" />                           -->
     <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet" />
     <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet" />
   </head>
   <body>
-    <div class="element-home">
-      <div class="div">
-        <header class="header">
-          <div class="overlap">
-            <div class="base"></div>
-            <div class="objects">
-              <div class="overlap-group">
-                <img class="elements" src="{% static 'popcode/images/popcode.svg' %}" />
-                <div class="image">
-                  {% comment %} <img class="small_popcorn" src="{% static 'popcode/images/popcorn.png' %}" /> {% endcomment %}
-                  <img class="CLIPBOARD-VERIFIED" src="{% static 'popcode/images/corn.png' %}" />
-                </div>
-                <img class="mobile-screen" src="{% static 'popcode/images/1.png' %}" />
-                <img class="img" src="{% static 'popcode/images/1.png' %}" />
-              </div>
-            </div>
-            <div class="content">
-              <a href="{% url 'login' %}"><button class="button"><div class="text-wrapper">Log-in</div></button></a>
-              <a href="{% url 'signup' %}"><button class="button2"><div class="text-wrapper">Sign up</div></button></a>
-              <div class="texts">
-                <p class="an-enim-nullam">Your altimate programming boot buddy</p>
-                <p class="a-collaborative-time">Welcome to&nbsp;&nbsp;</p>
-              </div>
-            </div>
-            <div class="top">
-              <div class="sign-up">
-                <a href="{% url 'signup' %}"><div class="text-wrapper">Sign up</div></a>
-              </div>
-              <a href="{% url 'login' %}"><div class="text-wrapper-2">Login</div></a>
-              <div class="navbar">
-                <div class="text-wrapper-3">Demos</div>
-                <div class="text-wrapper-4">Features</div>
-                <div class="text-wrapper-5">Pricing</div>
-                <div class="text-wrapper-6">Contact</div>
-              </div>
-            </div>
-            <img class="logo" src="{% static 'popcode/images/popcode.svg' %}" />
-          </div>
-        </header>
-
+    <div class="home">
+      <nav>
+        <img src="{% static 'popcode/images/popcode.svg' %}" alt="" />
+        <div class="leftlinks">
+          <a class="btn whiteborder" href="{% url 'login' %}">Login</a>
+          <a class="btn redborder" href="{% url 'signup' %}">Sign up</a>
+        </div>
+      </nav>
+      <div class="centerContent">
+        <h1>Welcome to</h1>
+        <img src="{% static 'popcode/images/popcode.svg' %}" alt="" />
+        <p>Your ultimate coding boot buddy</p>
+        <a href="{% url 'signup' %}" class="btn redborder">Join the adventure !</a>
       </div>
     </div>
   </body>
