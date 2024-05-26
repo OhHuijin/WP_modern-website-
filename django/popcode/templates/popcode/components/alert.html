@@ -1,0 +1,41 @@
+<style>
+  aside.redAlert,
+  aside.greenAlert {
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    animation: alert 5s;
+    opacity: 0;
+  }
+  
+  .redAlert {
+    background-color: #ff4d4d;
+  }
+  
+  .greenAlert {
+    background-color: #4dff4d;
+  }
+  
+  @keyframes alert {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+    }
+  }
+</style>
+{% if error or request.GET.error %}
+  <aside class="redAlert">{{ error }}{{ request.GET.error }}</aside>
+{% endif %}
+{% if success or request.GET.success %}
+  <aside class="greenAlert">{{ success }}{{ request.GET.success }}</aside>
+{% endif %}

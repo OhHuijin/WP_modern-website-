@@ -1,128 +1,157 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    {% block title %}
-      signup
-    {% endblock %}
-  </title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
-
-  <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
-
-  <div class="main-container">
-    <div class="popcode">
-      <div class="logo-group">
-        <div class="logo-center">
-          <div class="icon"></div>
-          <a href="{% url 'homepage' %}"><div class="title">
-            <div class="path"></div>
-            <div class="path-1">
-              <div class="vector"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        signup
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
+    <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="popcode">
+        <div class="logo-group">
+          <div class="logo-center">
+            <div class="icon"></div>
+            <div class="title">
+              <div class="path"></div>
+              <div class="path-1">
+                <div class="vector"></div>
+              </div>
+              <div class="path-2">
+                <div class="vector-3"></div>
+              </div>
+              <div class="path-4">
+                <div class="vector-5"></div>
+              </div>
+              <div class="path-6">
+                <div class="vector-7"></div>
+              </div>
+              <div class="path-8">
+                <div class="vector-9"></div>
+              </div>
             </div>
-            <div class="path-2">
-              <div class="vector-3"></div>
-            </div>
-            <div class="path-4">
-              <div class="vector-5"></div>
-            </div>
-            <div class="path-6">
-              <div class="vector-7"></div>
-            </div>
-            <div class="path-8">
-              <div class="vector-9"></div>
-            </div>
-          </div></a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="pang-pang-pop"></div>
-    <div class="frame">
-      <div class="group">
-        <div class="frame-a">
-          <span class="message">Get Started Now</span>
-        </div>
-
-        <form action="{% url 'apiSignup' %}" method="post">
-          {% csrf_token %}
-          <div class="frame-b">
-            <div class="frame-c">
-              <span class="name">Username</span>
+      <div class="pang-pang-pop"></div>
+      <div class="frame">
+        <div class="group">
+          <div class="frame-a">
+            <span class="message">Get Started Now</span>
+          </div>
+          <form id="signupForm" action="{% url 'apiSignup' %}" method="post">
+            {% csrf_token %}
+            <div class="frame-b">
+              <div class="frame-c">
+                <span class="name">Username</span>
+              </div>
+              <div class="frame-d">
+                <input class="frame-input" id="username" name="username" />
+                <div class="frame-e">
+                  <span class="enter-your-name">Enter your username</span>
+                </div>
+              </div>
             </div>
-            <div class="frame-d">
-              <input class="frame-input" name="username" />
-              <div class="frame-e">
-                <span class="enter-your-name">Enter your username</span>
+            <div class="frame-f">
+              <div class="frame-10">
+                <span class="name-11">Email address</span>
+              </div>
+              <div class="frame-12">
+                <input class="frame-input-13" id="email" name="email" />
+                <div class="frame-14">
+                  <span class="name-15">Enter your email</span>
+                </div>
+              </div>
+            </div>
+            <div class="frame-16">
+              <div class="frame-17">
+                <span class="name-18">Password</span>
+              </div>
+              <div class="frame-19">
+                <input class="frame-input-1a" id="password" name="password" type="password" />
+                <div class="frame-1b">
+                  <span class="name-1c">Enter your password</span>
+                </div>
+              </div>
+            </div>
+            <div class="group-1d">
+              <div class="terms-policy">
+                <span class="agree-terms-policy">I agree to the</span>
+                <span class="agree-terms-policy-1e" id="policy">personal information collecting</span>
+              </div>
+              <input type="checkbox" id="checkbox" />
+              <label for="checkbox" class="agree-terms-policy-1e"></label>
+            </div>
+            <button class="frame-1f" type="submit">
+              <div class="frame-20">
+                <div class="frame-21">
+                  <div class="frame-22"></div>
+                </div>
+              </div>
+              <span class="login">Sign up</span>
+            </button>
+          </form>
+          <div class="frame-23">
+            <div class="frame-24">Or</div>
+            <div class="line"></div>
+          </div>
+          <div class="frame-25">
+            <div class="group-26">
+              <div class="sign">
+                <span class="account">Have an account?</span>
+                <a href="{% url 'login' %}"><span class="sign-in-27">Sign In</span></a>
               </div>
             </div>
           </div>
-          <div class="frame-f">
-            <div class="frame-10">
-              <span class="name-11">Email address</span>
-            </div>
-            <div class="frame-12">
-              <input class="frame-input-13" name="email" />
-              <div class="frame-14">
-                <span class="name-15">Enter your email</span>
+          <button class="frame-28">
+            <div class="frame-29">
+              <div class="apple-logo">
+                <div class="vector-2a"></div>
               </div>
+              <span class="sign-in-apple">Sign in with Apple</span>
             </div>
-          </div>
-          <div class="frame-16">
-            <div class="frame-17">
-              <span class="name-18">Password</span>
-            </div>
-            <div class="frame-19">
-              <input class="frame-input-1a" name="password" type="password" />
-              <div class="frame-1b">
-                <span class="name-1c">Name</span>
-              </div>
-            </div>
-          </div>
-          <div class="group-1d">
-            <div class="terms-policy">
-              <span class="agree-terms-policy">I agree to the</span><span class="agree-terms-policy-1e">information collecting</span>
-            </div>
-
-            <input type="checkbox" id="checkbox1" />
-            <label for="checkbox1" class="agree-terms-policy-1e"></label>
-          </div>
-          <button class="frame-1f" type="submit">
-            <div class="frame-20">
-              <div class="frame-21">
-                <div class="frame-22"></div>
-              </div>
-            </div>
-            <span class="login">Sign up</span>
           </button>
-        </form>
-        <div class="frame-23">
-          <div class="frame-24">Or</div>
-          <div class="line"></div>
-        </div>
-        <div class="frame-25">
-          <div class="group-26">
-            <div class="sign">
-              <span class="account">Have an account?</span><a href="{% url 'login' %}"><span class="sign-in-27">Sign In</span></a>
+          <button class="frame-2b">
+            <div class="frame-2c">
+              <div class="google"></div>
+              <span class="sign-in-google">Sign in with Google</span>
             </div>
-          </div>
+          </button>
         </div>
-        <button class="frame-28">
-          <div class="frame-29">
-            <div class="apple-logo">
-              <div class="vector-2a"></div>
-            </div>
-            <span class="sign-in-apple">Sign in with Apple</span>
-          </div>
-        </button><button class="frame-2b">
-          <div class="frame-2c">
-            <div class="google"></div>
-            <span class="sign-in-google">Sign in with Google</span>
-          </div>
-        </button>
       </div>
+      <div class="chris-lee-image"></div>
     </div>
-    <div class="chris-lee-image"></div>
-  </div>
+    <script>
+      document.getElementById('policy').addEventListener('click', function () {
+        alert('<Popcord Terms of Use> \n 1. Collection and Use of Personal Information\nWe collect and use your personal information for data analysis and marketing purposes.\n2. Retention Period\nYour personal information will be retained for one year after you unsubscribe.\n This concise version includes the key points about data collection, use, and retention.')
+      })
+      
+      document.getElementById('signupForm').addEventListener('submit', function (event) {
+        // Prevent the form from submitting
+        event.preventDefault()
+      
+        // Get form elements
+        const username = document.querySelector('input[name="username"]').value
+        const email = document.querySelector('input[name="email"]').value
+        const password = document.querySelector('input[name="password"]').value
+        const checkbox = document.getElementById('checkbox1').checked
+      
+        // Check if all fields are filled
+        if (username && email && password && checkbox) {
+          // Display alert
+          alert('Congratulations on signing up!')
+          // Optionally submit the form if needed
+          // event.target.submit();
+        } else {
+          alert('Please fill out all fields and agree to the terms.')
+        }
+      })
+    </script>
+  </body>
 </html>

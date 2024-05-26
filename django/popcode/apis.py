@@ -22,18 +22,16 @@ from .coderunner.CodeRunner import CodeRunner
 
 
 def login(req: HttpRequest):
-    if not req.POST:
-        return views.login(req)
     username = req.POST.get("username")
     password = req.POST.get("password")
     if not username or not password:
-        return views.login(req)
+        return redirect("/login?error=Missing username or password")
     password = md5(password.encode("utf-8")).hexdigest()
     user = DB.users.find_one({"username": username})
     if not user:
-        return views.login(req, {"error": "userNotFound"})
+        return redirect("/login?error=Username doesn't exist")
     if user["password"] != password:
-        return views.login(req, {"error": "wrongPassword"})
+        return redirect("/login?error=Wrong password")
     newToken = md5(str(random.random()).encode("utf-8")).hexdigest()
     DB.users.update_one(
         {"token": user["token"]},
@@ -43,7 +41,7 @@ def login(req: HttpRequest):
     req.session["username"] = user["username"]
     req.session["email"] = user["email"]
     req.session["admin"] = user["role"] == 1
-    return redirect("/")
+    return redirect(f"/?success=Welcome back {user['username']}!")
 
 
 """
@@ -60,10 +58,10 @@ def signup(req: HttpRequest):
     email = req.POST.get("email")
 
     if not username or not password or not email:
-        return redirect("/signup")
+        return redirect("/signup?error=Missing username, password or email")
     print(username, password, email)
     if DB.users.find_one({"$or": [{"username": username}, {"email": email}]}):
-        return redirect("/signup?error=usernameOrEmailExists")
+        return redirect("/signup?error=User with this username or email already exists")
 
     password = md5(password.encode("utf-8")).hexdigest()
     token = md5(str(random.random()).encode("utf-8")).hexdigest()
@@ -86,7 +84,7 @@ def signup(req: HttpRequest):
     req.session["username"] = username
     req.session["email"] = email
     req.session["admin"] = False
-    return redirect("/")
+    return redirect(f"/?success=Welcome to PopCode, {username}!")
 
 
 """
@@ -104,16 +102,16 @@ def editUser(req: HttpRequest):
     email = req.POST.get("email")
 
     if not username or not password or not email:
-        return views.settings(req)
+        return redirect("/settings?error=Missing username, actual password or email")
 
     token = req.session.get("token")
     if not token:
-        return views.settings(req, {"error": "tokenNotFound"})
+        return redirect("/settings?error=Token not found in session")
 
     password = md5(password.encode("utf-8")).hexdigest()
     user = DB.users.find_one({"token": token, "password": password})
     if not user:
-        return views.settings(req, {"error": "wrongPasswordOrToken"})
+        return redirect("/settings?error=Wrong password or invalid token")
 
     if newPassword:
         newPassword = md5(newPassword.encode("utf-8")).hexdigest()
@@ -128,7 +126,7 @@ def editUser(req: HttpRequest):
 
     req.session["username"] = username
     req.session["email"] = email
-    return views.settings(req)
+    return redirect("/profile?success=Profile updated!")
 
 
 """
@@ -142,7 +140,7 @@ def logout(req: HttpRequest):
     req.session.pop("username")
     req.session.pop("email")
     req.session.pop("admin")
-    return redirect("/")
+    return redirect("/?success=Logged out successfully!")
 
 
 """
@@ -157,11 +155,11 @@ def logout(req: HttpRequest):
 def createLesson(req: HttpRequest):
     user = getAdminUser(req)
     if not user:
-        return redirect("/?error=notAdmin")
+        return redirect("/?error=You are not an admin")
     title = req.POST.get("title")
     description = req.POST.get("description")
     if not title or not description:
-        return redirect("/?error=missingFields")
+        return redirect("/?error=Some fields are missing")
     DB.lessons.insert_one(
         {
             "title": title,
@@ -170,7 +168,7 @@ def createLesson(req: HttpRequest):
             "parts": [],
         }
     )
-    return redirect("/?success=lessonCreated")
+    return redirect("/?success=Lession created successfully!")
 
 
 """
@@ -185,12 +183,12 @@ def createLesson(req: HttpRequest):
 def deleteLesson(req: HttpRequest):
     user = getAdminUser(req)
     if not user:
-        return redirect("/?error=notAdmin")
+        return redirect("/?error=You are not an admin")
     title = req.POST.get("title")
     if not title:
-        return redirect("/?error=missingFields")
+        return redirect("/?error=Some fields are missing")
     DB.lessons.delete_one({"title": title})
-    return redirect("/?success=lessonDeleted")
+    return redirect("/?success=Lession deleted successfully!")
 
 
 """
@@ -203,13 +201,13 @@ def createPart(req: HttpRequest):
         return redirect("/")
     user = getAdminUser(req)
     if not user:
-        return redirect("/?error=notAdmin")
+        return redirect("/?error=You are not an admin")
     lessonId = req.POST.get("lessonId")
     title = req.POST.get("title")
     description = req.POST.get("description")
     print(lessonId, title, description)
     if not lessonId or not title or not description:
-        return redirect("/?error=missingFields")
+        return redirect("/?error=Some fields are missing")
     DB.lessons.update_one(
         {"title": lessonId},
         {
@@ -227,14 +225,12 @@ def createPart(req: HttpRequest):
 
 
 def addLevel(req: HttpRequest):
-    if not req.POST:
-        return redirect("/?error=missingFields")
     type = req.POST.get("type")
     lessonId = req.POST.get("lessonId")
     partId = req.POST.get("partId")
     content = req.POST.get("content")
     if not type or not lessonId or not content:
-        return redirect("/?error=missingFields")
+        return redirect("/?error=Some fields are missing")
 
     if type == "EXPL":
         DB.lessons.update_one(
@@ -290,7 +286,7 @@ def addLevel(req: HttpRequest):
                 }
             },
         )
-    return redirect(f"/lesson/{lessonId}/{partId}?success=levelAdded")
+    return redirect(f"/lesson/{lessonId}/{partId}?success=Level added !")
 
 
 def viewPart(req: HttpRequest, title: str, part: int):
@@ -298,7 +294,7 @@ def viewPart(req: HttpRequest, title: str, part: int):
     if not lesson:
         return redirect("/")
     if part < 0 or part >= len(lesson["parts"]):
-        return redirect(f"/lesson/{title}?error=partNotFound")
+        return redirect(f"/lesson/{title}?error=Invalid part index")
     p = lesson["parts"][part]
     return render(
         req,
