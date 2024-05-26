@@ -17,7 +17,7 @@
   <body>
     <div class="home">
       <nav>
-        <img src="{% static 'popcode/images/popcode.svg' %}" alt="" />
+        <a href="{% url 'homepage' %}"><img src="{% static 'popcode/images/popcode.svg' %}" alt="" /></a>
         <div class="leftlinks">
           <a class="btn whiteborder" href="{% url 'login' %}">Login</a>
           <a class="btn redborder" href="{% url 'signup' %}">Sign up</a>
