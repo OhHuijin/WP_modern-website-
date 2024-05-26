@@ -55,7 +55,7 @@
 	<h1>Add code challenge to this level ?</h1>
 	<form action="/addLevel" method="post">
 		{% csrf_token %}
-		<select name="lang"><option value="python3">python3</option></select><br>
+		<select name="lang"><option value="python">python</option></select><br>
 		<textarea name="content" placeholder="Challenge"></textarea><br>
 		<textarea name="testcase" placeholder="Testcase file (0 exit code = code is good)"></textarea><br>
 		<textarea name="startcode" placeholder="Startcode"></textarea><br>
