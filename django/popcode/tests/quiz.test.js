@@ -1,46 +1,142 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
+const fs = require('fs');
+const path = require('path');
 
-// quiz.js의 로직을 모의 DOM 환경에서 테스트하기 위한 HTML 구조를 설정합니다.
-const html = `
-<!DOCTYPE html>
-<html>
-<body>
-  <form id="quizForm">
-    <input id="question1" type="text" />
-    <input id="question2" type="text" />
-    <button id="submitButton" type="submit"></button>
-  </form>
-</body>
-</html>
-`;
-
-// jsdom을 사용하여 모의 DOM 환경을 생성합니다.
+// 모의 DOM 환경에서 테스트하기 위한 HTML 구조를 설정
+const html = fs.readFileSync(path.resolve(__dirname, '../templates/popcode/quiz.html'), 'utf8');
 const dom = new JSDOM(html);
 global.document = dom.window.document;
 global.window = dom.window;
 
-// quiz.js 파일의 로직을 불러옵니다.
-require('../templates/popcode/quiz.js');
+// quiz.js 파일을 가져와서 필요한 함수들을 선언
+require('../static/popcode/js/quiz.js');
 
-describe('quiz form interaction', () => {
-  test('initial state of the form', () => {
-    // 초기 상태 검증
-    expect(document.getElementById('question1').value).toBe('');
-    expect(document.getElementById('question2').value).toBe('');
-  });
+describe('Quiz App', () => {
+    beforeEach(() => {
+        jest.resetModules();
+        document.documentElement.innerHTML = html;
+        global.questionNumber = 1;
+        global.playerScore = 0;
+        global.wrongAttempt = 0;
+        global.indexNumber = 0;
+    });
 
-  test('form submission and response handling', () => {
-    // 질문에 대한 답변을 입력합니다.
-    document.getElementById('question1').value = 'Answer 1';
-    document.getElementById('question2').value = 'Answer 2';
+    test('initial state of the form', () => {
+        // 초기 상태 확인
+        expect(document.getElementById('question-number').innerHTML).toBe('');
+        expect(document.getElementById('player-score').innerHTML).toBe('');
+    });
 
-    // 퀴즈 폼 제출 이벤트 시뮬레이션
-    document.getElementById('quizForm').dispatchEvent(new window.Event('submit', { 'bubbles': true, 'cancelable': true }));
+    describe('NextQuestion function', () => {
+      test('should display the next question', () => {
+          global.questions = [{
+              question: 'Which of the following is the most appropriate HTML element that is <u>not</u> directly visible to the user?',
+              optionA: 'title',
+              optionB: 'h1',
+              optionC: 'ol',
+              optionD: 'img'
+          }];
+          global.NextQuestion(0);
+          expect(document.getElementById('question-number').innerHTML).toBe('1');
+          expect(document.getElementById('display-question').innerHTML).toBe(global.questions[0].question);
+          expect(document.getElementById('option-one-label').innerHTML).toBe(global.questions[0].optionA);
+          expect(document.getElementById('option-two-label').innerHTML).toBe(global.questions[0].optionB);
+          expect(document.getElementById('option-three-label').innerHTML).toBe(global.questions[0].optionC);
+          expect(document.getElementById('option-four-label').innerHTML).toBe(global.questions[0].optionD);
+      });
+    });
 
-    // 제출 이벤트 후의 상태 검증
-    // 예를 들어, 제출 후 입력 필드가 비워지는지 확인합니다.
-    expect(document.getElementById('question1').value).toBe('');
-    expect(document.getElementById('question2').value).toBe('');
-  });
+    describe('checkForAnswer function', () => {
+        test('should check the answer and update the score', () => {
+            global.NextQuestion(0);
+            document.querySelector('input[value="optionA"]').checked = true; // Simulate correct answer
+
+            global.checkForAnswer();
+
+            expect(document.getElementById('playerScore').innerHTML).toBe('1');
+            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
+        });
+
+        test('should update the UI for wrong answer', () => {
+            global.NextQuestion(0);
+            document.querySelector('input[value="optionB"]').checked = true; // Simulate wrong answer
+
+            global.checkForAnswer();
+
+            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
+            expect(document.getElementById('option-two-label').style.backgroundColor).toBe('red');
+        });
+    });
+
+    describe('handleNextQuestion function', () => {
+        test('should call checkForAnswer and unCheckRadioButtons', () => {
+            const checkForAnswerMock = jest.fn();
+            const unCheckRadioButtonsMock = jest.fn();
+            global.checkForAnswer = checkForAnswerMock;
+            global.unCheckRadioButtons = unCheckRadioButtonsMock;
+
+            global.handleNextQuestion();
+
+            expect(checkForAnswerMock).toHaveBeenCalled();
+            expect(unCheckRadioButtonsMock).toHaveBeenCalled();
+        });
+    });
+
+    describe('resetOptionBackground function', () => {
+        test('should reset the background color of options', () => {
+            document.getElementById('option-one-label').style.backgroundColor = 'red';
+            document.getElementById('option-two-label').style.backgroundColor = 'green';
+
+            global.resetOptionBackground();
+
+            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('');
+            expect(document.getElementById('option-two-label').style.backgroundColor).toBe('');
+        });
+    });
+
+    describe('unCheckRadioButtons function', () => {
+        test('should uncheck all radio buttons', () => {
+            document.querySelector('input[value="optionA"]').checked = true;
+
+            global.unCheckRadioButtons();
+
+            expect(document.querySelector('input[value="optionA"]').checked).toBe(false);
+        });
+    });
+
+    describe('handleEndGame function', () => {
+        test('should display end game modal with correct remarks', () => {
+            global.playerScore = 3;
+            global.wrongAttempt = 1;
+
+            global.handleEndGame();
+
+            expect(document.getElementById('remarks').innerHTML).toBe('Excellent, Keep the good work going.');
+            expect(document.getElementById('remarks').style.color).toBe('green');
+            expect(document.getElementById('score-modal').style.display).toBe('flex');
+        });
+    });
+
+    describe('closeScoreModal function', () => {
+        test('should reset game state and hide score modal', () => {
+            global.closeScoreModal();
+
+            expect(document.getElementById('score-modal').style.display).toBe('none');
+            expect(global.questionNumber).toBe(1);
+            expect(global.playerScore).toBe(0);
+            expect(global.wrongAttempt).toBe(0);
+            expect(global.indexNumber).toBe(0);
+        });
+    });
+
+    describe('closeOptionModal function', () => {
+        test('should hide option modal', () => {
+            document.getElementById('option-modal').style.display = 'flex';
+
+            global.closeOptionModal();
+
+            expect(document.getElementById('option-modal').style.display).toBe('none');
+        });
+    });
 });

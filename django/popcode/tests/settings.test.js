@@ -17,17 +17,17 @@ const html = `
 </html>
 `;
 
-// jsdom을 사용하여 모의 DOM 환경을 생성합니다.
+// jsdom을 사용하여 모의 DOM 환경을 생성
 const dom = new JSDOM(html);
 global.document = dom.window.document;
 global.window = dom.window;
 
-// settings.js 파일의 로직을 불러옵니다.
-require('../templates/popcode/settings.js');
+// settings.js
+require('../static/popcode/js/settings.js');
 
 describe('settings form interaction', () => {
   test('edit button enables input fields and save button', () => {
-    // 초기 상태 검증
+    // 초기 상태 확인
     expect(document.getElementById('name').disabled).toBeTruthy();
     expect(document.getElementById('email').disabled).toBeTruthy();
     expect(document.getElementById('password').disabled).toBeTruthy();
@@ -44,7 +44,7 @@ describe('settings form interaction', () => {
   });
 
   test('settingsForm submit disables input fields and save button', () => {
-    // settingsForm 제출 이벤트 시뮬레이션을 위해 먼저 모든 필드를 활성화합니다.
+    // settingsForm 제출 이벤트 시뮬레이션을 위해 먼저 모든 필드를 활성화
     document.getElementById('editButton').click();
 
     // settingsForm 제출 이벤트 시뮬레이션

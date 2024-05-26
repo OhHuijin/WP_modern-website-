@@ -1,6 +1,15 @@
 const questions = [
 
     {
+        question: "Which of the following is the most appropriate HTML element that is <u>not</u> directly visible to the user?",
+        optionA: "title",
+        optionB: "h1",
+        optionC: "ol",
+        optionD: "img",
+        correctOption: "optionA"
+    },
+
+    {
         question: `
         &lt;!DOCTYPE html&gt;<br>
         &lt;html&gt;<br>
@@ -19,17 +28,6 @@ const questions = [
         correctOption: "optionC"
     },
 
-
-    {
-        question: "Which of the following is the most appropriate HTML element that is <u>not</u> directly visible to the user?",
-        optionA: "title",
-        optionB: "h1",
-        optionC: "ol",
-        optionD: "img",
-        correctOption: "optionA"
-    },
-
-    
     {
         question: "What keyword(s) are used to declare variables in JavaScript?",
         optionA: "var, let, const",
@@ -38,8 +36,6 @@ const questions = [
         optionD: "class, object, function",
         correctOption: "optionA"
     },
-
-
 
     {
         question: "What is the Document Object Model (DOM) in JavaScript?",
@@ -58,7 +54,6 @@ const questions = [
         optionD: "They generate content for a web page.",
         correctOption: "optionB"
     }
-
 
 ];
 
