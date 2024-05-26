@@ -36,7 +36,11 @@ urlpatterns = [
     path("createPart", apis.createPart, name="createPart"),
     path("addLevel", apis.addLevel, name="addLevel"),
     path("lesson/<str:title>", apis.viewLesson, name="lesson"),
-    path("lesson/<str:title>/<int:part>", apis.viewPart, name="part"),
+    path("lesson/<str:title>/<int:part>", views.quiz, name="part"),
+    # backend tests
+    path("bp", views.index, name="bp"),
+    path("bp/<str:title>", apis.viewLesson, name="bpLesson"),
+    path("bp/<str:title>/<int:part>", apis.viewPart, name="bpPart"),
 ]
 
 # urlpatterns = [
