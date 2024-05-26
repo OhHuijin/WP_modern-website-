@@ -37,6 +37,7 @@ urlpatterns = [
     path("addLevel", apis.addLevel, name="addLevel"),
     path("lesson/<str:title>", apis.viewLesson, name="lesson"),
     path("lesson/<str:title>/<int:part>", apis.viewPart, name="part"),
+    path("backendPlayground", views.index, name="backendPlayground"),
 ]
 
 # urlpatterns = [

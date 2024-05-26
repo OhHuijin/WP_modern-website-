@@ -7,7 +7,22 @@
 <h2>Sections</h2>
 <ul>
 	{% for level in part.levels %}
-		<li>{{level.content}}</li>
+		<li>
+			<h3>{{level.type}}</h3>
+			{{level.content|safe}}
+			{% if level.type == "CODE" %}
+				<pre><code class="language-{{level.lang}}">{{level.startcode}}</code></pre>
+			{% elif level.type == "QUIZ" %}<br>
+				{% for ans in level.answers %}
+					{% if ans.valid %}
+						<input type="checkbox" disabled checked>{{ans.content}}<br>
+					{% else %}
+						<input type="checkbox" disabled>{{ans.content}}<br>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
+		</li>
 	{% empty %}
 		<p>No sections in this part</p>
 	{% endfor %}

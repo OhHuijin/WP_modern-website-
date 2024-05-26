@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link href="{% static 'popcode/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'popcode/css/hljs.css' %}" rel="stylesheet">
 </head>
 <body>
     <div class="menu_container">
@@ -29,6 +30,8 @@
     <script src="settings.js"></script>
     {% block nav %}
     {% endblock %}
-    
+    <script src="{% static 'popcode/js/hljs.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
