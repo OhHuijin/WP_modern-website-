@@ -1,4 +1,4 @@
-{% extends "./layout.html" %}
+{% comment %} {% extends "./layout.html" %} {% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,11 +9,12 @@
     {% block nav %}
 
     <link rel="stylesheet" href="settings.css">
+    <link href="{% static 'popcode/css/settings.css' %}" rel="stylesheet">
 </head>
 
 
     <div class="menu_container">
-        <img src="img/popcode.svg" alt="Logo" class="logo">
+        <img src="{% static 'popcode/images/popcode.svg' %}" >
         <a href="readypage.html">Home</a>
         <a href="settings.html">Settings</a>
         <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
@@ -27,7 +28,7 @@
     <div class="main_container">
 
         <div class="deco_container">
-            <img src="img/deco_1.png" alt="Decoration" class="deco_image">
+            <img src="{% static 'popcode/images/deco_1.png' %}">
         </div>
 
         <div class="contents_container">
