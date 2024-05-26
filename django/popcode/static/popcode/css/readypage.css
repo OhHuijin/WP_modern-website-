@@ -52,18 +52,17 @@ body {
   text-align: center;
   margin-top: 150px;
   position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .title img {
-  width: 1000px;
-  margin-bottom: -200px;
-  /* margin-top: -260px;
-  margin-bottom: -200px; */
+  width: 50vw;
 }
 
 .title h1 {
-  position: absolute;
-  top: 65%;
   left: 50%;
   margin-bottom: 40px;
   transform: translate(-50%, -50%);
