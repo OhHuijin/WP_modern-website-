@@ -22,26 +22,19 @@ from .coderunner.CodeRunner import CodeRunner
 
 
 def login(req: HttpRequest):
-    if "username" not in req.POST or "password" not in req.POST:
-        return views.login(req, {})
-    username = req.POST["username"]
-    password = req.POST["password"]
+    if not req.POST:
+        return views.login(req)
+    username = req.POST.get("username")
+    password = req.POST.get("password")
     if not username or not password:
         return views.login(req)
     password = md5(password.encode("utf-8")).hexdigest()
     user = DB.users.find_one({"username": username})
-    user = DB.users.find_one({"username": username})
     if not user:
-        return views.login(req, {"error": "userNotFound"})
         return views.login(req, {"error": "userNotFound"})
     if user["password"] != password:
         return views.login(req, {"error": "wrongPassword"})
-        return views.login(req, {"error": "wrongPassword"})
     newToken = md5(str(random.random()).encode("utf-8")).hexdigest()
-    DB.users.update_one(
-        {"token": user["token"]},
-        {"$set": {"lastLogin": time.time(), "token": newToken}},
-    )
     DB.users.update_one(
         {"token": user["token"]},
         {"$set": {"lastLogin": time.time(), "token": newToken}},
@@ -72,26 +65,8 @@ def signup(req: HttpRequest):
     if DB.users.find_one({"$or": [{"username": username}, {"email": email}]}):
         return views.signup(req, {"error": "usernameOrEmailExists"})
 
-    if DB.users.find_one({"$or": [{"username": username}, {"email": email}]}):
-        return views.signup(req, {"error": "usernameOrEmailExists"})
-
     password = md5(password.encode("utf-8")).hexdigest()
     token = md5(str(random.random()).encode("utf-8")).hexdigest()
-    DB.users.insert_one(
-        {
-            "username": username,
-            "password": password,
-            "email": email,
-            "created": time.time(),
-            "lastLogin": time.time(),
-            "role": 0,
-            "exp": 0,
-            "coins": 0,
-            "streak": 0,
-            "progress": [],
-            "token": token,
-        }
-    )
     DB.users.insert_one(
         {
             "username": username,
@@ -136,11 +111,6 @@ def editUser(req: HttpRequest):
         return views.profile(req, {"error": "tokenNotFound"})
 
     password = md5(password.encode("utf-8")).hexdigest()
-    print("password is ", password)
-    print("token is ", token)
-    user = DB.users.find_one({"token": token, "password": password})
-    print("password is ", password)
-    print("token is ", token)
     user = DB.users.find_one({"token": token, "password": password})
     if not user:
         return views.profile(req, {"error": "wrongPasswordOrToken"})
