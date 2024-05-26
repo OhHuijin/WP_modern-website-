@@ -52,13 +52,13 @@ body{
 }
 
 .game-details-container h1{
-    font-size: 1.2rem;
+    font-size: 30px;
 }
 
 /* 문제 크기 */
 .game-question-container{
     width: 90%;
-    height: 60%;
+    height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,6 +318,7 @@ input[type=radio]:checked ~ .option {
     position: relative;
     z-index: 2;
     transform: translateY(-60px);
+    white-space: nowrap;
 }
 
 @keyframes fadeIn {
@@ -325,5 +326,22 @@ input[type=radio]:checked ~ .option {
     to {opacity:1 ;}
   }
 
+.language{
+        font-size: 700px;
+        
+}
+
+.language-bash{
+        width: 500px;
+
+}
+pre {
+    height: 30%;
+    width: 60%;
 
 
+}
+.run{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #f18181;
+}
