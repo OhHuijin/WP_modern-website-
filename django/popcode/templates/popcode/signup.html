@@ -1,4 +1,4 @@
-{% load static %}
+{%load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,17 +7,17 @@
     <title>
       {% block title %}
       signup
-    {% endblock %}
-  </title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
-
-  <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
-  <div class="main-container">
-    <div class="popcode">
-      <div class="logo-group">
-        <div class="logo-center">
-          <div class="icon"></div>
-          <a href="{% url 'homepage' %}">
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
+    <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="popcode">
+        <div class="logo-group">
+          <div class="logo-center">
+            <div class="icon"></div>
             <div class="title">
               <div class="path"></div>
               <div class="path-1">
@@ -36,7 +36,7 @@
                 <div class="vector-9"></div>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       </div>
       <div class="pang-pang-pop"></div>
