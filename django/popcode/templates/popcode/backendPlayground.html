@@ -83,7 +83,7 @@
       Username : {{ request.session.username }} <br />
       Token : {{ request.session.token }}
     </p>
-    <form action="/profile" method="post">
+    <form action="{% url 'apiEditUser' %}" method="post">
       {% csrf_token %}
       <input type="text" name="username" placeholder="Username" value="{{ request.session.username }}" />
       <input type="text" name="email" id="email" placeholder="Email" value="{{ request.session.email }}" />
