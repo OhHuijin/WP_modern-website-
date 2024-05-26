@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       {% block title %}
-      signup
-    {% endblock %}
-  </title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
-
-  <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
-  <div class="main-container">
-    <div class="popcode">
-      <div class="logo-group">
-        <div class="logo-center">
-          <div class="icon"></div>
-          <a href="{% url 'homepage' %}">
+        signup
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
+    <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="popcode">
+        <div class="logo-group">
+          <div class="logo-center">
+            <div class="icon"></div>
             <div class="title">
               <div class="path"></div>
               <div class="path-1">
@@ -36,7 +36,7 @@
                 <div class="vector-9"></div>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       </div>
       <div class="pang-pang-pop"></div>
@@ -128,30 +128,30 @@
       <div class="chris-lee-image"></div>
     </div>
     <script>
-      document.getElementById('policy').addEventListener('click', function() {
-        alert('<Popcord Terms of Use> \n 1. Collection and Use of Personal Information\nWe collect and use your personal information for data analysis and marketing purposes.\n2. Retention Period\nYour personal information will be retained for one year after you unsubscribe.\n This concise version includes the key points about data collection, use, and retention.');
-        });
-
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-          // Prevent the form from submitting
-          event.preventDefault();
-          
-          // Get form elements
-          const username = document.querySelector('input[name="username"]').value;
-          const email = document.querySelector('input[name="email"]').value;
-          const password = document.querySelector('input[name="password"]').value;
-          const checkbox = document.getElementById('checkbox1').checked;
-          
-          // Check if all fields are filled
-          if (username && email && password && checkbox) {
-            // Display alert
-            alert('Congratulations on signing up!');
-            // Optionally submit the form if needed
-            // event.target.submit();
-          } else {
-            alert('Please fill out all fields and agree to the terms.');
-          }
-        });
+      document.getElementById('policy').addEventListener('click', function () {
+        alert('<Popcord Terms of Use> \n 1. Collection and Use of Personal Information\nWe collect and use your personal information for data analysis and marketing purposes.\n2. Retention Period\nYour personal information will be retained for one year after you unsubscribe.\n This concise version includes the key points about data collection, use, and retention.')
+      })
+      
+      document.getElementById('signupForm').addEventListener('submit', function (event) {
+        // Prevent the form from submitting
+        event.preventDefault()
+      
+        // Get form elements
+        const username = document.querySelector('input[name="username"]').value
+        const email = document.querySelector('input[name="email"]').value
+        const password = document.querySelector('input[name="password"]').value
+        const checkbox = document.getElementById('checkbox1').checked
+      
+        // Check if all fields are filled
+        if (username && email && password && checkbox) {
+          // Display alert
+          alert('Congratulations on signing up!')
+          // Optionally submit the form if needed
+          // event.target.submit();
+        } else {
+          alert('Please fill out all fields and agree to the terms.')
+        }
+      })
     </script>
   </body>
 </html>
