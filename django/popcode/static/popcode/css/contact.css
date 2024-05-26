@@ -1,12 +1,16 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
+
 }
 
 form {
-    margin-top: 20px;
+    margin: 10px;
+    margin-top: 2%;
 }
 
 input, button {
     margin-top: 10px;
+    margin: 10px;
+
 }
