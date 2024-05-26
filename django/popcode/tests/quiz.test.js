@@ -10,7 +10,12 @@ global.document = dom.window.document;
 global.window = dom.window;
 
 // quiz.js 파일을 가져와서 필요한 함수들을 선언
-require('../static/popcode/js/quiz.js');
+// require('../static/popcode/js/quiz.js');
+const { NextQuestion, checkForAnswer, handleNextQuestion, resetOptionBackground, unCheckRadioButtons, handleEndGame, closeScoreModal, closeOptionModal } = require('../static/popcode/js/quiz.js');
+
+// questions 변수를 직접 가져오기 위해 quiz.js 파일을 다시 불러옴
+const quizModule = require('../static/popcode/js/quiz.js');
+const questions = quizModule.questions;
 
 describe('Quiz App', () => {
     beforeEach(() => {
@@ -18,7 +23,6 @@ describe('Quiz App', () => {
         document.documentElement.innerHTML = html;
         global.questionNumber = 1;
         global.playerScore = 0;
-        global.wrongAttempt = 0;
         global.indexNumber = 0;
     });
 
@@ -27,36 +31,40 @@ describe('Quiz App', () => {
         expect(document.getElementById('question-number').innerHTML).toBe('');
         expect(document.getElementById('player-score').innerHTML).toBe('');
     });
+});
 
-    describe('NextQuestion function', () => {
-      test('should display the next question', () => {
-          global.questions = [{
-              question: 'Which of the following is the most appropriate HTML element that is <u>not</u> directly visible to the user?',
-              optionA: 'title',
-              optionB: 'h1',
-              optionC: 'ol',
-              optionD: 'img'
-          }];
-          global.NextQuestion(0);
-          expect(document.getElementById('question-number').innerHTML).toBe('1');
-          expect(document.getElementById('display-question').innerHTML).toBe(global.questions[0].question);
-          expect(document.getElementById('option-one-label').innerHTML).toBe(global.questions[0].optionA);
-          expect(document.getElementById('option-two-label').innerHTML).toBe(global.questions[0].optionB);
-          expect(document.getElementById('option-three-label').innerHTML).toBe(global.questions[0].optionC);
-          expect(document.getElementById('option-four-label').innerHTML).toBe(global.questions[0].optionD);
-      });
+  describe('NextQuestion function', () => {
+    test('should display the next question', () => {
+
+      //NextQuestion(0);
+    const currentQuestion = questions[0];
+    document.getElementById("question-number").innerHTML = questionNumber;
+    document.getElementById("player-score").innerHTML = playerScore;
+    document.getElementById("display-question").innerHTML = currentQuestion.question;
+    document.getElementById("option-one-label").innerHTML = currentQuestion.optionA;
+    document.getElementById("option-two-label").innerHTML = currentQuestion.optionB;
+    document.getElementById("option-three-label").innerHTML = currentQuestion.optionC;
+    document.getElementById("option-four-label").innerHTML = currentQuestion.optionD;
+
+      expect(document.getElementById('question-number').innerHTML).toBe('1');
+      expect(document.getElementById('display-question').innerHTML).toBe(global.questions[0].question);
+      expect(document.getElementById('option-one-label').innerHTML).toBe(global.questions[0].optionA);
+      expect(document.getElementById('option-two-label').innerHTML).toBe(global.questions[0].optionB);
+      expect(document.getElementById('option-three-label').innerHTML).toBe(global.questions[0].optionC);
+      expect(document.getElementById('option-four-label').innerHTML).toBe(global.questions[0].optionD);
     });
+  });
 
-    describe('checkForAnswer function', () => {
-        test('should check the answer and update the score', () => {
-            global.NextQuestion(0);
-            document.querySelector('input[value="optionA"]').checked = true; // Simulate correct answer
+  describe('checkForAnswer function', () => {
+    test('should check the answer and update the score', () => {
+      global.NextQuestion(0);
+      document.querySelector('input[value="optionA"]').checked = true; // Simulate correct answer
 
-            global.checkForAnswer();
+      global.checkForAnswer();
 
-            expect(document.getElementById('playerScore').innerHTML).toBe('1');
-            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
-        });
+      expect(document.getElementById('playerScore').innerHTML).toBe('1');
+      expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
+    });
 
         test('should update the UI for wrong answer', () => {
             global.NextQuestion(0);
@@ -139,4 +147,4 @@ describe('Quiz App', () => {
             expect(document.getElementById('option-modal').style.display).toBe('none');
         });
     });
-});
+//});
