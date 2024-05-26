@@ -9,8 +9,8 @@
         homepage
       {% endblock %}
     </title>
-    <!--  <link rel="stylesheet" href="homepage_globals.css" />
-    <link rel="stylesheet" href="homepage_style.css" />  -->
+    <!--    <link rel="stylesheet" href="homepage_globals.css" />
+    <link rel="stylesheet" href="homepage_style.css" />    -->
     <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet" />
     <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet" />
   </head>
@@ -32,7 +32,7 @@
               </div>
             </div>
             <div class="content">
-              <a href="{% url 'apiLogin' %}"><button class="button"><div class="text-wrapper">Log-in</div></button></a>
+              <a href="{% url 'login' %}"><button class="button"><div class="text-wrapper">Log-in</div></button></a>
               <a href="{% url 'signup' %}"><button class="button2"><div class="text-wrapper">Sign up</div></button></a>
               <div class="texts">
                 <p class="an-enim-nullam">Your altimate programming boot buddy</p>
@@ -41,9 +41,9 @@
             </div>
             <div class="top">
               <div class="sign-up">
-                <div class="text-wrapper">Sign up</div>
+                <a href="{% url 'signup' %}"><div class="text-wrapper">Sign up</div></a>
               </div>
-              <div class="text-wrapper-2">Login</div>
+              <a href="{% url 'login' %}"><div class="text-wrapper-2">Login</div></a>
               <div class="navbar">
                 <div class="text-wrapper-3">Demos</div>
                 <div class="text-wrapper-4">Features</div>
