@@ -194,21 +194,6 @@ def deleteLesson(req: HttpRequest):
 
 
 """
-    View a lesson with given title
-    Renders the lesson.html with lesson information
-    Or redirects to / if lesson not found
-"""
-
-
-def viewLesson(req: HttpRequest, title: str):
-    lesson = DB.lessons.find_one({"title": title})
-    if not lesson:
-        return redirect("/")
-    print(lesson)
-    return render(req, "popcode/lesson.html", context={"lesson": lesson})
-
-
-"""
     Create a new part with given lessonId, title and content
 """
 

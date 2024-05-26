@@ -1,105 +1,120 @@
 {% load static %}
 <!DOCTYPE html>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}login{% endblock %}</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
-    <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet">
-    <link href="{% static 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap' %}" rel="stylesheet">
-    {% comment %} <link rel="stylesheet" href="signup&login_style.css" /> {% endcomment %}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>
+  {% block title %}
+    login
+  {% endblock %}
+</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
+<link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
+<link href="{% static 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap' %}" rel="stylesheet" />
+{% comment %} <link rel="stylesheet" href="signup&login_style.css" /> {% endcomment %}
 
-    <div class="main-container">
-      <div class="popcode">
-        <div class="logo-group">
-          <div class="logo-center">
-            <div class="icon"></div>
-            <div class="title">
-              <div class="path"></div>
-              <div class="path-1"><div class="vector"></div></div>
-              <div class="path-2"><div class="vector-3"></div></div>
-              <div class="path-4"><div class="vector-5"></div></div>
-              <div class="path-6"><div class="vector-7"></div></div>
-              <div class="path-8"><div class="vector-9"></div></div>
-            </div>
+<div class="main-container">
+  <div class="popcode">
+    <div class="logo-group">
+      <div class="logo-center">
+        <div class="icon"></div>
+        <div class="title">
+          <div class="path"></div>
+          <div class="path-1">
+            <div class="vector"></div>
+          </div>
+          <div class="path-2">
+            <div class="vector-3"></div>
+          </div>
+          <div class="path-4">
+            <div class="vector-5"></div>
+          </div>
+          <div class="path-6">
+            <div class="vector-7"></div>
+          </div>
+          <div class="path-8">
+            <div class="vector-9"></div>
           </div>
         </div>
       </div>
-      <div class="pang-pang-pop"></div>
-      <div class="frame">
-        <div class="group">
-          <div class="frame-a">
-            <span class="message">Welcome back!</span>
+    </div>
+  </div>
+  <div class="pang-pang-pop"></div>
+  <div class="frame">
+    <div class="group">
+      <div class="frame-a">
+        <span class="message">Welcome back!</span>
+      </div>
+
+      <form action="{% url 'apiLogin' %}" method="post">
+        {% csrf_token %}
+        <div class="frame-b">
+          <div class="name-11">
+            <span class="name">Username</span>
           </div>
-
-
-          <form action="/login" method="post">
-            {% csrf_token %}
-          <div class="frame-b">
-            <div class="name-11"><span class="name">Username</span></div>
-            <div class="frame-d">
-              <input class="frame-input"  name="username" />
-              <div class="frame-e">
-                <span class="name-15">Enter your username</span>
-              </div>
+          <div class="frame-d">
+            <input class="frame-input" name="username" />
+            <div class="frame-e">
+              <span class="name-15">Enter your username</span>
             </div>
           </div>
-          <div class="frame-f">
-            <div class="frame-10">
-              <span class="name-11">Password</span>
-            </div>
-            <div class="frame-12">
-              <input class="frame-input-13"  name="password" />
-              <div class="frame-14">
-                <span class="name-15">Enter your password</span>
-              </div>
+        </div>
+        <div class="frame-f">
+          <div class="frame-10">
+            <span class="name-11">Password</span>
+          </div>
+          <div class="frame-12">
+            <input class="frame-input-13" name="password" />
+            <div class="frame-14">
+              <span class="name-15">Enter your password</span>
             </div>
           </div>
-          <div class="group-1d">
-            <div class="terms-policy">
-              <span class="agree-terms-policy">Remember for 30 days </span>
-            </div>
-    
-            <input type="checkbox" id="checkbox1">
-            <label for="checkbox1" class="agree-terms-policy-1e"></label>
+        </div>
+        <div class="group-1d">
+          <div class="terms-policy">
+            <span class="agree-terms-policy">Remember for 30 days</span>
           </div>
 
-          
+          <input type="checkbox" id="checkbox1" />
+          <label for="checkbox1" class="agree-terms-policy-1e"></label>
+        </div>
 
-
-          <a href="{% url 'readypage' %}"><button class="frame-1f" type="submit">
+        <a href="{% url 'readypage' %}">
+          <button class="frame-1f" type="submit">
             <div class="frame-20">
-              <div class="frame-21"><div class="frame-22"></div></div>
+              <div class="frame-21">
+                <div class="frame-22"></div>
+              </div>
             </div>
-           <span class="login">Log in</span>
+            <span class="login">Log in</span>
           </button>
         </a>
-        </form>
-          <div class="frame-23">
-            
-            <div class="frame-24">Or</div>
-            <div class="line"></div>
+      </form>
+      <div class="frame-23">
+        <div class="frame-24">Or</div>
+        <div class="line"></div>
+      </div>
+      <div class="frame-25">
+        <div class="group-26">
+          <div class="sign">
+            <span class="account">Don't have an account?</span><a href="{% url 'signup' %}"><span class="sign-in-27">Sign Up</span></a>
           </div>
-          <div class="frame-25">
-            <div class="group-26">
-              <div class="sign">
-                <span class="account">Don't have an account? </span
-                ><a href="{% url 'signup' %}"><span class="sign-in-27">Sign Up</span></a>
-              </div>
-            </div>
-          </div>
-          <button class="frame-28">
-            <div class="frame-29">
-              <div class="apple-logo"><div class="vector-2a"></div></div>
-              <span class="sign-in-apple">Sign in with Apple</span>
-            </div></button
-          ><button class="frame-2b">
-            <div class="frame-2c">
-              <div class="google"></div>
-              <span class="sign-in-google">Sign in with Google</span>
-            </div>
-          </button>
         </div>
       </div>
-      <div class="chris-lee-image"></div>
+      <button class="frame-28">
+        <div class="frame-29">
+          <div class="apple-logo">
+            <div class="vector-2a"></div>
+          </div>
+          <span class="sign-in-apple">Sign in with Apple</span>
+        </div>
+      </button><button class="frame-2b">
+        <div class="frame-2c">
+          <div class="google"></div>
+          <span class="sign-in-google">Sign in with Google</span>
+        </div>
+      </button>
     </div>
+  </div>
+  <div class="chris-lee-image"></div>
+</div>

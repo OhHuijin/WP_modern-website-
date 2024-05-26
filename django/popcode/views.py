@@ -8,34 +8,59 @@ from .utils import getLessons, getUser
 from .DB import DB
 
 
-def index(req: HttpRequest):
+def backendPlayground(req: HttpRequest):
+    """
+    path /bp
+    Backend Playground
+    """
     return render(
         req, "popcode/backendPlayground.html", context={"lessons": getLessons()}
     )
 
 
 def homepage(req: HttpRequest):
+    """
+    path /
+    Redirects to dashboard if user is logged in, else to homepage
+    """
+    user = getUser(req)
+    if user:
+        return render(req, "popcode/readypage.html", context={"user": user})
     return render(req, "popcode/homepage.html")
 
 
 def quiz(req: HttpRequest, title: str, part: int):
     l = DB.lessons.find_one({"title": title})
     if not l:
-        return redirect("/")
+        return redirect("/?error=lesson_not_found")
     pls = l["parts"]
     if part > len(pls):
-        return redirect("/")
+        return redirect("/?error=part_not_found")
     p = pls[part]
     if not p:
-        return redirect("/")
+        return redirect("/?error=part_not_found")
     return render(req, "popcode/quiz.html", context={"part": p})
 
 
 def login(req: HttpRequest, context={}):
+    """
+    path /login
+    Redirects to dashboard if user is logged in, else to login page
+    """
+    user = getUser(req)
+    if user:
+        return redirect("/")
     return render(req, "popcode/login.html")
 
 
 def signup(req: HttpRequest, context={}):
+    """
+    path /signup
+    Redirects to dashboard if user is logged in, else to signup page
+    """
+    user = getUser(req)
+    if user:
+        return redirect("/")
     return render(req, "popcode/signup.html")
 
 
@@ -59,5 +84,9 @@ def profile(req: HttpRequest, username=""):
     )
 
 
-def readypage(req: HttpRequest):
-    return render(req, "popcode/readypage.html")
+def lesson(req: HttpRequest, title: str):
+    lesson = DB.lessons.find_one({"title": title})
+    if not lesson:
+        return redirect("/")
+    print(lesson)
+    return render(req, "popcode/lesson.html", context={"lesson": lesson})

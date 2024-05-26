@@ -3,12 +3,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}homepage{% endblock %}</title>
-    <!-- <link rel="stylesheet" href="homepage_globals.css" />
-    <link rel="stylesheet" href="homepage_style.css" /> -->
-    <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet">
-    <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        homepage
+      {% endblock %}
+    </title>
+    <!--  <link rel="stylesheet" href="homepage_globals.css" />
+    <link rel="stylesheet" href="homepage_style.css" />  -->
+    <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet" />
+    <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet" />
   </head>
   <body>
     <div class="element-home">
@@ -21,26 +25,24 @@
                 <img class="elements" src="{% static 'popcode/images/popcode.svg' %}" />
                 <div class="image">
                   <img class="small_popcorn" src="{% static 'popcode/images/popcorn.png' %}" />
-                  <img class="CLIPBOARD-VERIFIED" src="{% static 'popcode/images/corn.png' %}"/>
+                  <img class="CLIPBOARD-VERIFIED" src="{% static 'popcode/images/corn.png' %}" />
                 </div>
                 <img class="mobile-screen" src="{% static 'popcode/images/1.png' %}" />
                 <img class="img" src="{% static 'popcode/images/1.png' %}" />
               </div>
             </div>
             <div class="content">
-              <a href="{% url 'login' %}">
-              <button class="button"><div class="text-wrapper">Log-in</div></button></a>
-              <a href="{% url 'signup' %}">
-              <button class="button2"><div class="text-wrapper">Sign up</div></button></a>
+              <a href="{% url 'apiLogin' %}"><button class="button"><div class="text-wrapper">Log-in</div></button></a>
+              <a href="{% url 'signup' %}"><button class="button2"><div class="text-wrapper">Sign up</div></button></a>
               <div class="texts">
-                <p class="an-enim-nullam">
-                  Your altimate programming boot buddy
-                </p>
+                <p class="an-enim-nullam">Your altimate programming boot buddy</p>
                 <p class="a-collaborative-time">Welcome to&nbsp;&nbsp;</p>
               </div>
             </div>
             <div class="top">
-              <div class="sign-up"><div class="text-wrapper">Sign up</div></div>
+              <div class="sign-up">
+                <div class="text-wrapper">Sign up</div>
+              </div>
               <div class="text-wrapper-2">Login</div>
               <div class="navbar">
                 <div class="text-wrapper-3">Demos</div>
@@ -49,11 +51,9 @@
                 <div class="text-wrapper-6">Contact</div>
               </div>
             </div>
-            <img class="logo" src= "{% static 'popcode/images/popcode.svg' %}" />
+            <img class="logo" src="{% static 'popcode/images/popcode.svg' %}" />
           </div>
         </header>
-        
- 
 
         <div class="fun-fact">
           <div class="expertises-wrapper">
@@ -75,6 +75,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>

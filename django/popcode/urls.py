@@ -20,28 +20,22 @@ from django.urls import path
 from . import views, apis
 
 urlpatterns = [
+    # General views
     path("", views.homepage, name="homepage"),
     path("quiz", views.quiz, name="quiz"),
-    path("signup", apis.signup, name="signup"),
+    path("signup", views.signup, name="signup"),
+    path("login", views.login, name="login"),
     path("settings", views.settings, name="settings"),
-    path("login", apis.login, name="login"),
-    path("readypage", views.readypage, name="readypage"),
-    path("contact", views.readypage, name="contact"),
-    path("admin/", admin.site.urls),
     path("profile", views.profile, name="profile"),
     path("profile/<str:username>", views.profile, name="profile"),
-    path("logout", apis.logout, name="logout"),
-    path("createLesson", apis.createLesson, name="createLesson"),
-    path("deleteLesson", apis.deleteLesson, name="deleteLesson"),
-    path("createPart", apis.createPart, name="createPart"),
-    path("addLevel", apis.addLevel, name="addLevel"),
-    path("lesson/<str:title>", apis.viewLesson, name="lesson"),
+    path("lesson/<str:title>", views.lesson, name="lesson"),
     path("lesson/<str:title>/<int:part>", views.quiz, name="part"),
+    path("contact", views.contact, name="contact"),
     # Backend Playground
-    path("bp", views.index, name="bp"),
-    path("bp/<str:title>", apis.viewLesson, name="bpLesson"),
+    path("bp", views.backendPlayground, name="bp"),
+    path("bp/<str:title>", views.lesson, name="bpLesson"),
     path("bp/<str:title>/<int:part>", apis.viewPart, name="bpPart"),
-    # POST & API
+    # Backend endpoints
     path("api/login", apis.login, name="apiLogin"),
     path("api/signup", apis.signup, name="apiSignup"),
     path("api/logout", apis.logout, name="apiLogout"),
@@ -50,6 +44,8 @@ urlpatterns = [
     path("api/createPart", apis.createPart, name="apiCreatePart"),
     path("api/addLevel", apis.addLevel, name="apiAddLevel"),
     path("api/run", apis.apiRun, name="apiRun"),
+    # Admin
+    path("admin/", admin.site.urls),
 ]
 
 # urlpatterns = [
