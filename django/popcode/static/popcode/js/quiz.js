@@ -24,9 +24,10 @@ function showSlide(n) {
 
     // If the current slide is an explanation, set the button text to "Next"
     canGoNext = levels[n].type == "EXPL";
-    nextBtn.textContent = canGoNext ? "Next" : "Check";
+    nextBtn.textContent = canGoNext ? "Next" : levels[n].type == "CODE" ? "Solve the code challenge !" : "Check";
 
     prevBtn.disabled = n <= 0;
+    nextBtn.disabled = levels[n].type == "CODE";
 }
 
 // Move to the next slide, or finish the quiz
@@ -59,11 +60,16 @@ nextBtn.addEventListener('click', ()=>{
             answersRevealed = false;
             shuffleChecks();
             nextBtn.textContent = "Check";
-            slides[currentSlide].querySelectorAll(".check").forEach(e => e.style.color = "black");
+            slides[currentSlide].querySelectorAll(".check").forEach(e => {
+                e.style.color = "black";
+                e.querySelector("input").disabled = false;
+                e.querySelector("input").checked = false;
+            });
         } else {
             answersRevealed = true;
             canGoNext = true;
             slides[currentSlide].querySelectorAll(".check").forEach((e,i) => {
+                e.querySelector("input").disabled = true;
                 e.style.color = levels[currentSlide].answers[i].valid ? "green" : "red";
                 canGoNext &= levels[currentSlide].answers[i].valid == e.querySelector("input").checked;
             });

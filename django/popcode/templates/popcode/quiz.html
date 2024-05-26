@@ -106,6 +106,8 @@
                           document.querySelector('#stdout-{{forloop.counter0}}').textContent = data.stdout
                           document.querySelector('#stderr-{{forloop.counter0}}').textContent = data.stderr
                           canGoNext = data.returnCode === 0
+                          nextBtn.disabled = !canGoNext
+                          nextBtn.innerText = canGoNext ? 'Next' : 'Solve the code challenge !'
                         })
                         .catch(console.error)
                     }
