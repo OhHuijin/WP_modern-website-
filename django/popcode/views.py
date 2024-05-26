@@ -18,6 +18,13 @@ def quiz(req: HttpRequest):
 def signup(req: HttpRequest,context={}):
     return render(req,"popcode/signup.html")
 
+def settings(req: HttpRequest,context={}):
+    return render(req,"popcode/settings.html")
+
+def contact(req: HttpRequest,context={}):
+    return render(req,"popcode/contact.html")
+
+
 def login(req: HttpRequest,context={}):
     return render(req,"popcode/login.html",context=context)
 

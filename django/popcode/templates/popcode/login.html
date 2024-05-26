@@ -1,15 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}login{% endblock %}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
     <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet">
+    <link href="{% static 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap' %}" rel="stylesheet">
     {% comment %} <link rel="stylesheet" href="signup&login_style.css" /> {% endcomment %}
-  </head>
-  <body>
+
     <div class="main-container">
       <div class="popcode">
         <div class="logo-group">
@@ -32,10 +31,6 @@
           <div class="frame-a">
             <span class="message">Welcome back!</span>
           </div>
-
-
-
-
 
 
           <form action="/login" method="post">
@@ -70,12 +65,13 @@
           
 
 
-          <button class="frame-1f" type="submit">
+          <a href="{% url 'readypage' %}"><button class="frame-1f" type="submit">
             <div class="frame-20">
               <div class="frame-21"><div class="frame-22"></div></div>
             </div>
            <span class="login">Log in</span>
           </button>
+        </a>
         </form>
           <div class="frame-23">
             
@@ -86,7 +82,7 @@
             <div class="group-26">
               <div class="sign">
                 <span class="account">Don't have an account? </span
-                ><a href="signup.html"><span class="sign-in-27">Sign Up</span></a>
+                ><a href="{% url 'signup' %}"><span class="sign-in-27">Sign Up</span></a>
               </div>
             </div>
           </div>
@@ -105,5 +101,3 @@
       </div>
       <div class="chris-lee-image"></div>
     </div>
-  </body>
-</html>

@@ -139,8 +139,6 @@ def signup(req: HttpRequest):
 """
 
 
-def editUser(req: HttpRequest):
-
 
 def editUser(req: HttpRequest):
     username = req.POST["username"]
@@ -203,9 +201,6 @@ def editUser(req: HttpRequest):
 
 
 def logout(req: HttpRequest):
-
-
-def logout(req: HttpRequest):
     req.session.pop("token")
     req.session.pop("username")
     req.session.pop("email")
@@ -221,9 +216,6 @@ def logout(req: HttpRequest):
     - notAdmin : If user is not admin
     - missingFields : If title or description is missing
 """
-
-
-def createLesson(req: HttpRequest):
 
 
 def createLesson(req: HttpRequest):
@@ -263,7 +255,6 @@ def createLesson(req: HttpRequest):
 """
 
 
-def deleteLesson(req: HttpRequest):
 
 
 def deleteLesson(req: HttpRequest):
@@ -411,7 +402,7 @@ def viewPart(req: HttpRequest, title: str, part: int):
     )
 
 
-def apiRun(req: HttpRequest):
+# def apiRun(req: HttpRequest):
 
 
 """

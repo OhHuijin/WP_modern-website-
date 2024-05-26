@@ -10,11 +10,11 @@
 <body>
     <div class="menu_container">
         <img src="{% static 'popcode/images/popcode.svg' %}">
-        <a href="readypage.html">Home</a>
-        <a href="settings.html">Settings</a>
+        <a href="{% url 'readypage' %}">Home</a>
+        <a href="{% url 'settings' %}">Settings</a>
         <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
         <a href="">link</a>
-        <a href="contact.html">Contact</a>
+        <a href="{% url 'contact' %}">Contact</a>
         <div class="logout_container">
 
             {% if request.session.username %}

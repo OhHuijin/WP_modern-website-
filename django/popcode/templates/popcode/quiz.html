@@ -1,10 +1,13 @@
+{% extends "./layout.html" %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}quiz{% endblock %}</title>
+
+    {% block nav %}
 <!--     
     <script src="quiz.js"></script>
     <link rel="stylesheet" href="quiz.css"> -->
@@ -13,7 +16,7 @@
     <script src="{% static 'popcode/js/quiz.js' %}"></script>
 <!-- 
     <title>Quiz</title> -->
-</head>
+
 <body onload="NextQuestion(0)">
 
     <div class="container">
@@ -149,4 +152,5 @@
     </main>
     <script src="index.js"></script>
 </body>
+{% endblock %}
 </html>
