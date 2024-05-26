@@ -11,7 +11,7 @@
 			<h3>{{level.type}}</h3>
 			{{level.content|safe}}
 			{% if level.type == "CODE" %}
-				<pre><code class="language-{{level.lang}}">{{level.startcode}}</code></pre>
+				<pre><code class="language-{{level.lang}}" contenteditable="true">{{level.startcode}}</code></pre>
 			{% elif level.type == "QUIZ" %}<br>
 				{% for ans in level.answers %}
 					{% if ans.valid %}

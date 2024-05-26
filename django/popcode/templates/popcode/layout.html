@@ -7,6 +7,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link href="{% static 'popcode/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'popcode/css/hljs.css' %}" rel="stylesheet">
+    {% block head %}{% endblock head %}
 </head>
 <body>
     <div class="menu_container">
@@ -27,7 +28,7 @@
             {% endif %}
         </div>
     </div>
-    <script src="settings.js"></script>
+    {# <script src="{% static 'popcode/js/settings.js' %}"></script> #}
     {% block nav %}
     {% endblock %}
     <script src="{% static 'popcode/js/hljs.js' %}"></script>
