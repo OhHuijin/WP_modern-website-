@@ -163,6 +163,7 @@ input[type=radio]:checked ~ .option {
     animation: fadeIn 1.2s ease-in-out;
 }
 
+/* 모달 글씨 담는 컨테이너 크기 */
 .modal-content-container{
     height: 20rem;
     width: 25rem;
@@ -174,7 +175,17 @@ input[type=radio]:checked ~ .option {
     border-radius: 25px;
 }
 
-.modal-content-container h1{
+/* 디스크립션  */
+#intro-modal-content{
+    height: 60rem;
+    width: 50rem;
+    
+    
+
+}
+
+/* 모달 글씨 */
+.modal-content-container h1, p{
     font-size: 1.3rem;
     height: 3rem;
 
@@ -247,6 +258,14 @@ input[type=radio]:checked ~ .option {
         width: 90%;
         height: 25rem;
     }
+
+    /* 디스크립션 */
+    #intro-modal-content{
+        width: 90%;
+        height: 25rem;
+    }
+
+
 
     .modal-content-container h1{
         font-size: 1.2rem;

@@ -27,15 +27,22 @@
         <!-- 문제 설명 모달, css, js 내용 아직 안만듬 -->
         <div class="modal-container" id="intro-modal">
 
-            <div class="modal-content-container">
+            <div class="modal-content-container" id="intro-modal-content" >
 
-                <h1 id="Quiz">the description : Say Hello to HTML Elements</h1>
-                <h1>The description : <span id="problem's topic"></span></h1>
+                <h1>the description : Say Hello to HTML Elements</h1>
+                <h2>The description</h2>
+                {% comment %} <h1>The description : <span id="problem's topic"></span></h1> {% endcomment %}
 
-                <div class="description-details">
+                {% comment %} <div class="description-details"> {% endcomment %}
                     <p>Welcome to popcode's HTML coding challenges. These will walk you through web development step-by-step. </p>
                     <p>First, you'll start by building a simple web page using HTML. </p>
-                    <!-- ds1 = h1 ds2= header
+                    <p>First, you'll start by building a simple web page using HTML. </p>
+                    <p>First, you'll start by building a simple web page using HTML. </p>
+                    <p>First, you'll start by building a simple web page using HTML. </p>
+                    <p>First, you'll start by building a simple web page using HTML. </p>
+                    <p>First, you'll start by building a simple web page using HTML. </p>
+                    <p>First, you'll start by building a simple web page using HTML. </p>
+                    {% comment %} <!-- ds1 = h1 ds2= header
                     opening_tag = <h1> closing_tag =</h1> -->
                     <!-- requirement=hello world! -->
                     <p><span id="ds1"></span> is one of the html elements to show the <span id="ds2"></span>.</p>
@@ -43,10 +50,10 @@
                     <p>Opening tags look like this: <span id="opening_tag"></span></p>
                     <p>Closing tags look like this: <span id="closing_tag"></span></p>
                     <p>Choose the right one to show the <span id="requirement"></span> in webpage using <span id="ds1"></span> . </p>
-                </div>
+                </div> {% endcomment %}
 
                 <div class="modal-button-container">
-                    <button onclick="closeScoreModal()">Continue</button>
+                    <button onclick="closeIntroModal()">Continue</button>
                 </div>
 
             </div>

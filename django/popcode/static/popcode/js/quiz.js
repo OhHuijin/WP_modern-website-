@@ -70,6 +70,7 @@ let indexNumber = 0; // 다음 질문을 표시하기 위한 인덱스
 
 // 다음 질문을 표시하고 퀴즈 정보를 업데이트하는 함수
 function NextQuestion(index) {
+    document.getElementById('intro-modal').style.display = "flex";
     const currentQuestion = questions[index]; // 순서대로 질문 가져오기
     document.getElementById("question-number").innerHTML = questionNumber;
     document.getElementById("player-score").innerHTML = playerScore;
@@ -93,11 +94,11 @@ function checkForAnswer() {
         }
     });
 
-    // 라디오 버튼이 체크되었는지 확인
-    if (options[0].checked === false && options[1].checked === false && options[2].checked === false && options[3].checked == false) {
-        document.getElementById('option-modal').style.display = "flex";
+    if (!checkIfOptionSelected()) { // 선택된 옵션이 없으면
+        checkForAnswer(); // 함수 종료
     }
-
+    alert("option is selected!");
+    
     // 선택한 옵션이 정답인지 확인
     options.forEach((option) => {
         if (option.checked === true && option.value === currentQuestionAnswer) {
@@ -107,7 +108,7 @@ function checkForAnswer() {
             setTimeout(() => {
                 questionNumber++;
                 handleNextQuestion(); // 다음 질문 처리
-            }, 500);
+            }, 250);
         } else if (option.checked && option.value !== currentQuestionAnswer) {
             const wrongLabelId = option.labels[0].id;
             document.getElementById(wrongLabelId).style.backgroundColor = "red";
@@ -117,13 +118,28 @@ function checkForAnswer() {
             setTimeout(() => {
                 questionNumber++;
                 handleNextQuestion(); // 다음 질문 처리
-            }, 1000);
+            },250);
         }
     });
+
+        // // 라디오 버튼이 체크되었는지 확인
+        // if (options[0].checked === false && options[1].checked === false && options[2].checked === false && options[3].checked === false) {
+        //     alert("Please select one to answer");
+        //     return; // 함수 종료
+        // }
 }
 
 function handleNextQuestion() {
-    checkForAnswer(); // 답변 확인
+        // 라디오 버튼이 체크되었는지 확인
+    // if (options[0].checked === false && options[1].checked === false && options[2].checked === false && options[3].checked == false) {
+    //     document.getElementById('option-modal').style.display = "flex";
+    //     NextQuestion(index)
+    // }
+    // checkForAnswer(); // 답변 확인
+    if (!checkIfOptionSelected()) { // 선택된 옵션이 없으면
+        return; // 함수 종료
+    }
+
     unCheckRadioButtons(); // 라디오 버튼 체크 해제
     setTimeout(() => {
         if (indexNumber < questions.length) {
@@ -133,8 +149,18 @@ function handleNextQuestion() {
             handleEndGame(); // 게임 종료 처리
         }
         resetOptionBackground(); // 옵션 배경 초기화
-    }, 1000);
+    }, 250);
 }
+
+function checkIfOptionSelected() {
+    const options = document.getElementsByName("option"); // 모든 옵션 가져오기
+    if (options[0].checked === false && options[1].checked === false && options[2].checked === false && options[3].checked === false) {
+        document.getElementById('option-modal').style.display = "flex"; // 모달 표시
+        return false; // 함수 종료
+    }
+    return true; // 체크된 옵션이 있으면 true 반환
+}
+
 
 function resetOptionBackground() {
     const options = document.getElementsByName("option");
@@ -185,4 +211,8 @@ function closeScoreModal() {
 
 function closeOptionModal() {
     document.getElementById('option-modal').style.display = "none";
+}
+
+function closeIntroModal() {
+    document.getElementById('intro-modal').style.display = "none";
 }
