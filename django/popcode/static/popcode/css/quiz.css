@@ -175,14 +175,7 @@ input[type=radio]:checked ~ .option {
     border-radius: 25px;
 }
 
-/* 디스크립션  */
-#intro-modal-content{
-    height: 60rem;
-    width: 50rem;
-    
-    
 
-}
 
 /* 모달 글씨 */
 .modal-content-container h1, p{
@@ -313,9 +306,10 @@ input[type=radio]:checked ~ .option {
 }
 
 .corn {
+    margin-top: 20000px;
     width: 110px;
     text-align: center;
-    position: relative;
+    /* position: relative; */
     z-index: 1;
 }
 
