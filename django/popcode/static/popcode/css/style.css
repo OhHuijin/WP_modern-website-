@@ -55,3 +55,8 @@ body{
     background-color:rgb(213, 80, 106);
     color: white;
 }
+.username{
+    right: 100px;
+    text-align: center;
+
+}
