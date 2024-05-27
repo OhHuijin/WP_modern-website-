@@ -48,34 +48,34 @@ body {
   padding: 10px;
 }
 
-.title {
-  text-align: center;
-  margin-top: 150px;
-  position: relative;
-  justify-content: center;
+.title{
+  /* display: flex; */
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-content: center;
+  /* justify-content: flex-start; */
+  top: 30%;
+  margin-top: 20%;
 }
 
 .title img {
-  width: 50vw;
+  width: 1000px;
+  margin-bottom: -200px;
+  margin-top: -200px;
+  margin-bottom: -200px;
 }
 
 .title h1 {
-  left: 50%;
-  margin-bottom: 40px;
-  transform: translate(-50%, -50%);
-  color: white;
-  /* 글자 색상 */
-  font-size: 60px;
-  /* 글자 크기 */
-  font-weight: bold;
-  /* 글자 두께 */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  /* 텍스트 그림자 */
-  z-index: 1;
+  /* top: 520px;
+  left: 50%; */
+  margin-bottom: 40px;;
+  color: white; /* 글자 색상 */
+  font-size: 60px; /* 글자 크기 */
+  font-weight: bold; /* 글자 두께 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 */
+  z-index: 1; 
 }
+
 
 .topbar {
   /* display: flex; */
