@@ -25,10 +25,11 @@ def homepage(req: HttpRequest):
     """
     user = getUser(req)
     if user:
+        lessons = getLessons()
         return render(
             req,
             "popcode/readypage.html",
-            context={"user": user, "lessons": getLessons()},
+            context={"user": user, "lessons": lessons},
         )
     return render(req, "popcode/homepage.html")
 

@@ -39,12 +39,13 @@ urlpatterns = [
     path("api/login", apis.login, name="apiLogin"),
     path("api/signup", apis.signup, name="apiSignup"),
     path("api/logout", apis.logout, name="apiLogout"),
-    path("api/editUser",apis.editUser,name='apiEditUser'),
+    path("api/editUser", apis.editUser, name="apiEditUser"),
     path("api/createLesson", apis.createLesson, name="apiCreateLesson"),
     path("api/deleteLesson", apis.deleteLesson, name="apiDeleteLesson"),
     path("api/createPart", apis.createPart, name="apiCreatePart"),
     path("api/addLevel", apis.addLevel, name="apiAddLevel"),
     path("api/run", apis.apiRun, name="apiRun"),
+    path("api/finishLesson", apis.finishLesson, name="apiFinishLesson"),
     # Admin
     path("admin/", admin.site.urls),
 ]

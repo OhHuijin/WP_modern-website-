@@ -9,6 +9,10 @@ let currentSlide = 0;
 let canGoNext = levels[currentSlide].type == "EXPL";
 let answersRevealed = false;
 
+let baseURL = `${window.location.protocol}//${window.location.host}/api/finishLesson`;
+let getP = window.location.pathname.split("/");
+baseURL += `?title=${getP[2]}&part=${getP[3]}`
+
 // Show slide n, hide the rest
 function showSlide(n) {
     // Sets the current slide to n, and updates the progress bar and slide indicator
@@ -34,7 +38,7 @@ function showSlide(n) {
 function nextSlide(){
     if(currentSlide+1 < slides.length){
         showSlide(currentSlide+1);
-    } else alert("You have completed the quiz!") //TODO: Redirect to next page
+    } else window.location.href = baseURL;
 }
 
 // Move to the previous slide, or reload the first slide

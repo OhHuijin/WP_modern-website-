@@ -5,7 +5,7 @@ import time
 from bson import ObjectId
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from .utils import getAdminUser
+from .utils import getAdminUser, getUser
 from .DB import DB
 
 from . import views
@@ -76,7 +76,7 @@ def signup(req: HttpRequest):
             "exp": 0,
             "coins": 0,
             "streak": 0,
-            "progress": [],
+            "progress": {},
             "token": token,
         }
     )
@@ -311,3 +311,28 @@ def apiRun(req: HttpRequest):
     cr.run()
     return HttpResponse(json.dumps(cr.outputDict()), content_type="application/json")
     # return HttpResponse(json.dumps({"returnValue":"waffle > croffle"}),content_type="application/json")
+
+
+def finishLesson(req: HttpRequest):
+    user = getUser(req)
+    if not user:
+        return redirect("/?error=You are not logged in")
+
+    title = req.GET.get("title")
+    part = req.GET.get("part")
+    if not title or not part:
+        return redirect("/?error=Couldn't update progress, missing fields")
+
+    lesson = DB.lessons.find_one({"title": title})
+    if not lesson:
+        return redirect("/?error=Lesson not found")
+
+    part = int(part)
+    if part < 0 or part >= len(lesson["parts"]):
+        return redirect("/?error=Invalid part index")
+
+    if title in user["progress"]:
+        part = max(part, user["progress"][title])
+
+    DB.users.update_one({"token": user["token"]}, {"$set": {f"progress.{title}": part}})
+    return redirect(f"/?success=Congrats for finishing {title} part {part}!")
