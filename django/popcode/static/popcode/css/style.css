@@ -7,7 +7,7 @@ body {
     /* 메뉴바를 상단에 고정 */
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100vw - 35px);
     /* 화면 전체 너비 */
     background-color: #ffecb4;
     display: flex;
@@ -28,7 +28,6 @@ body {
     text-decoration: none;
     /* 밑줄 제거 */
     font-size: 16px;
-    margin-right: 10px;
     /* 항목 간 간격 */
 }
 
@@ -54,15 +53,15 @@ body {
 }
 
 .logout {
-    margin-right: 50px;
     width: 100px;
     padding: 10px;
     border: 0;
     background-color: rgba(255, 0, 0, 0.5);
     color: black;
+    border-radius: 20px 0 0 20px;
     font-weight: bolder;
     cursor: pointer;
-    border-radius: 5px;
+
     transition-duration: 0.3s;
     /* 버튼 모서리 둥글둥글 */
 }
@@ -72,11 +71,42 @@ body {
     color: white;
 }
 
-.username {
-    margin-right: 10px;
+#username {
     font-size: 16px;
     background: yellowgreen;
     color: white;
-    border-radius: 20px;
+    font-weight: bold;
+    border-radius: 20px 0 0 20px;
     padding: 10px;
+}
+
+#admin {
+    text-decoration: none;
+    background: greenyellow;
+    color: white;
+    padding: 10px;
+}
+
+#streak {
+    background: white;
+    color: black;
+    border-radius: 0 20px 20px 0;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+b#streak {
+    background-color: red;
+    color: white;
+}
+
+#rightNav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+#rightNav * {
+    height: max-content;
 }

@@ -1,3 +1,4 @@
+import datetime
 from hashlib import md5
 import json
 import random
@@ -33,14 +34,28 @@ def login(req: HttpRequest):
     if user["password"] != password:
         return redirect("/login?error=Wrong password")
     newToken = md5(str(random.random()).encode("utf-8")).hexdigest()
+
+    newStreak = user["streak"]
+
+    todayStreak = False
+    if user["lastActivity"] != 0:
+        dt = datetime.datetime.fromtimestamp(user["lastActivity"]).date()
+        yt = datetime.date.today() - datetime.timedelta(days=1)
+        if dt < yt:
+            newStreak = 0
+        elif dt == datetime.date.today():
+            todayStreak = True
+
     DB.users.update_one(
         {"token": user["token"]},
-        {"$set": {"lastLogin": time.time(), "token": newToken}},
+        {"$set": {"lastLogin": time.time(), "token": newToken, "streak": newStreak}},
     )
     req.session["token"] = newToken
     req.session["username"] = user["username"]
     req.session["email"] = user["email"]
     req.session["admin"] = user["role"] == 1
+    req.session["streak"] = user["streak"]
+    req.session["todayStreak"] = todayStreak
     return redirect(f"/?success=Welcome back {user['username']}!")
 
 
@@ -67,11 +82,12 @@ def signup(req: HttpRequest):
     token = md5(str(random.random()).encode("utf-8")).hexdigest()
     DB.users.insert_one(
         {
-            "username": username,
+            "username": username,  # username is unique
             "password": password,
-            "email": email,
+            "email": email,  # email is unique
             "created": time.time(),
             "lastLogin": time.time(),
+            "lastActivity": 0,  # last activity time (updates to time.time() when completing a lesson)
             "role": 0,
             "exp": 0,
             "coins": 0,
@@ -84,6 +100,8 @@ def signup(req: HttpRequest):
     req.session["username"] = username
     req.session["email"] = email
     req.session["admin"] = False
+    req.session["streak"] = 0
+    req.session["todayStreak"] = False
     return redirect(f"/?success=Welcome to PopCode, {username}!")
 
 
@@ -334,5 +352,24 @@ def finishLesson(req: HttpRequest):
     if title in user["progress"]:
         part = max(part, user["progress"][title])
 
-    DB.users.update_one({"token": user["token"]}, {"$set": {f"progress.{title}": part}})
+    today = datetime.date.today()
+    last_activity = datetime.datetime.fromtimestamp(user["lastActivity"]).date()
+
+    newStreak = user["streak"] + 1
+    if last_activity >= today:
+        newStreak = 1
+
+    DB.users.update_one(
+        {"token": user["token"]},
+        {
+            "$set": {
+                f"progress.{title}": part,
+                "lastActivity": time.time(),
+                "streak": newStreak,
+            }
+        },
+    )
+
+    req.session["todayStreak"] = True
+    req.session["streak"] = newStreak
     return redirect(f"/?success=Congrats for finishing {title} part {part}!")

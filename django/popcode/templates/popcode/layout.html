@@ -25,15 +25,22 @@
       <a href="">link</a>
       <a href="{% url 'contact' %}">Contact</a>
     
-        {% if request.session.username %}
-          <b class="username">{{ request.session.username }}</b>
+        <div id="rightNav">
+          {% if request.session.username %}
+          <a id="username" href="{% url 'profile' %}">{{ request.session.username }}</a>
           {% if request.session.admin %}
-            <pre>(ADMIN)</pre>
+            <a id="admin" href="{% url 'bp' %}">⚙️ADMIN</a>
           {% endif %}
-          <a href="{% url 'apiLogout' %}" class="logout">Log Out</a>
+          {% if request.session.todayStreak %}
+          <span id="streak">🔥{{ request.session.streak }}</span>
+          {% else %}
+          <b id="streak">🥶{{ request.session.streak }}</b>
+          {% endif %}
+          <a href="{% url 'apiLogout' %}" class="logout">🚪Log-Out</a>
         {% else %}
           login or register
         {% endif %}
+        </div>
       </div>
     </div>
     {# <script src="{% static 'popcode/js/settings.js' %}"></script> #}
@@ -43,7 +50,7 @@
     <script src="{% static 'popcode/js/hljs.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
     <script>
-      hljs.initHighlightingOnLoad()
+      hljs.highlightAll()
     </script>
   </body>
 </html>

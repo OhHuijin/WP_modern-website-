@@ -29,10 +29,10 @@
     <div class="daycontainer">
       <div class="link-container">
         {% for part in lesson.parts %}
-        {% if user.progress|get_item:lesson.title is not None and user.progress|get_item:lesson.title < forloop.counter0 %}
-        <a href="{% url 'part' lesson.title forloop.counter0 %}"><img src="{% static 'popcode/images/corn.png' %}" /></a>
-        {% else %}
+        {% if user.progress|get_item:lesson.title is not None and user.progress|get_item:lesson.title <= forloop.counter0 %}
         <a href="{% url 'part' lesson.title forloop.counter0 %}"><img src="{% static 'popcode/images/popcorn.png' %}" /></a>
+        {% else %}
+        <a href="{% url 'part' lesson.title forloop.counter0 %}"><img src="{% static 'popcode/images/corn.png' %}" /></a>
         {% endif %}
         {% endfor %}
       </div>
