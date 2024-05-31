@@ -11,6 +11,24 @@ describe('quiz.html', () => {
     let window;
 
     beforeEach(async () => {
+
+        /*
+            const html = `<!DOCTYPE html>
+    <html>
+    <head>
+      <script type="text/javascript">
+        let parts = JSON.parse('{{ part|escapejs }}');
+        let currentSlide = 0; // Ensure currentSlide is initialized
+        function showSlide(n) {
+          // showSlide function logic
+        }
+      </script>
+    </head>
+    <body>
+      //body content
+    </body>
+    </html>`;
+        */
       dom = await new JSDOM(html, { runScripts: "dangerously", resources: "usable" });
       window = dom.window;
       document = window.document;
