@@ -10,7 +10,7 @@ describe('quiz.html', () => {
     let document;
     let window;
 
-    beforeEach(async () => {
+    beforeEach(async () => { 
 
         /*
             const html = `<!DOCTYPE html>
@@ -62,27 +62,28 @@ describe('quiz.html', () => {
     });
 
     test('should move to the next slide when next button is clicked', () => {
-      const nextBtn = document.querySelector('#next-btn');
+        const nextBtn = document.querySelector('#next-btn');
+        window.onload = function () {
+            // Show the first slide explicitly
+            window.showSlide(0);
+            expect(document.querySelector('#actual-slide-indicator').textContent).toBe('1');
 
-      // Show the first slide explicitly
-      window.showSlide(0);
-      expect(document.querySelector('#actual-slide-indicator').textContent).toBe('1');
+            // Click the next button
+            nextBtn.click();
 
-      // Click the next button
-      nextBtn.click();
+            // Explicitly call nextSlide
+            window.nextSlide();
 
-      // Explicitly call nextSlide
-      window.nextSlide();
+            const actualSlideIndicator = document.querySelector('#actual-slide-indicator');
+            expect(actualSlideIndicator.textContent).toBe('2');
 
-      const actualSlideIndicator = document.querySelector('#actual-slide-indicator');
-      expect(actualSlideIndicator.textContent).toBe('2');
+            const slides = document.querySelectorAll('.level');
+            const firstSlideStyle = window.getComputedStyle(slides[0]);
+            const secondSlideStyle = window.getComputedStyle(slides[1]);
 
-      const slides = document.querySelectorAll('.level');
-      const firstSlideStyle = window.getComputedStyle(slides[0]);
-      const secondSlideStyle = window.getComputedStyle(slides[1]);
-
-      expect(firstSlideStyle.display).toBe('none');
-      expect(secondSlideStyle.display).toBe('block');
+            expect(firstSlideStyle.display).toBe('none');
+            expect(secondSlideStyle.display).toBe('block');
+        }
     });
 
     test('should move to the previous slide when prev button is clicked', () => {
