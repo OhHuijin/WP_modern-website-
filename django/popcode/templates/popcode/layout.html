@@ -26,7 +26,7 @@
         <a href="{% url 'homepage' %}">Home</a>
         <a href="{% url 'settings' %}">Settings</a>
         <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
-        <a href="">link</a>
+        <a href="{% url 'link' %}">link</a>
         <a href="{% url 'contact' %}">Contact</a>
         <div id="rightNav">
           {% if request.session.username %}

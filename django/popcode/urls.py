@@ -31,6 +31,7 @@ urlpatterns = [
     path("lesson/<str:title>", views.lesson, name="lesson"),
     path("lesson/<str:title>/<int:part>", views.quiz, name="part"),
     path("contact", views.contact, name="contact"),
+    path("link", views.link, name="link"),
     # Backend Playground
     path("bp", views.backendPlayground, name="bp"),
     path("bp/<str:title>", views.lesson, name="bpLesson"),
