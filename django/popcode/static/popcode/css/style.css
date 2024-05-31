@@ -134,6 +134,7 @@ b#streak {
         background-color: #ffecb4;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         z-index: 1;
+        justify-self: flex-end;
     }
 
     #menuL {
@@ -163,6 +164,7 @@ b#streak {
 
     #rightNav {
         width: calc(100vw - 10px);
+        padding: 10px;
     }
 
     #username {
