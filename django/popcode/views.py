@@ -44,7 +44,9 @@ def quiz(req: HttpRequest, title: str, part: int):
     p = pls[part]
     if not p:
         return redirect("/?error=part_not_found")
-    return render(req, "popcode/quiz.html", context={"part": p})
+    return render(
+        req, "popcode/quiz.html", context={"part": p, "lessonTitle": l["title"]}
+    )
 
 
 def login(req: HttpRequest, context={}):

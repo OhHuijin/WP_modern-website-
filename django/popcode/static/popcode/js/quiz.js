@@ -3,6 +3,7 @@ const nextBtn = document.querySelector('#next-btn');
 const prevBtn = document.querySelector('#prev-btn');
 const actualSlideIndicator = document.querySelector('#actual-slide-indicator');
 const actualSlideProgress = document.querySelector('#actual-slide-progress');
+const lvlType = document.querySelector('#lvl-type');
 
 let slides = document.querySelectorAll('.level');
 let currentSlide = 0;
@@ -19,6 +20,10 @@ function showSlide(n) {
     currentSlide = n;
     actualSlideIndicator.innerHTML = n+1;
     actualSlideProgress.value = n+1;
+
+    if(levels[n].type == "EXPL") lvlType.innerHTML = "Explanation";
+    else if(levels[n].type == "CODE") lvlType.innerHTML = "Code Challenge";
+    else if(levels[n].type == "QUIZ") lvlType.innerHTML = "Quiz";
 
     // Hide all slides, and show the one at index n
     slides.forEach((e,i) => e.style.display = i == n ? "block" : "none");
@@ -65,7 +70,7 @@ nextBtn.addEventListener('click', ()=>{
             shuffleChecks();
             nextBtn.textContent = "Check";
             slides[currentSlide].querySelectorAll(".check").forEach(e => {
-                e.style.color = "black";
+                e.style.backgroundColor = "whitesmoke";
                 e.querySelector("input").disabled = false;
                 e.querySelector("input").checked = false;
             });
@@ -74,12 +79,9 @@ nextBtn.addEventListener('click', ()=>{
             canGoNext = true;
             slides[currentSlide].querySelectorAll(".check").forEach((e,i) => {
                 e.querySelector("input").disabled = true;
-                e.style.color = levels[currentSlide].answers[i].valid ? "green" : "red";
+                if(e.querySelector("input").checked) e.style.backgroundColor = levels[currentSlide].answers[i].valid ? "yellowgreen" : "tomato";
                 canGoNext &= levels[currentSlide].answers[i].valid == e.querySelector("input").checked;
             });
-            if(canGoNext != true) {
-                alert('Not correct! Press the button to try again');
-            }
             nextBtn.textContent = canGoNext ? "Next" : "Okay got it!";
         }
     }
