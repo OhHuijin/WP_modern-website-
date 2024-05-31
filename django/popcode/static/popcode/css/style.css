@@ -25,7 +25,7 @@ body {
     padding: 10px 35px;
     text-decoration: none;
     /* 밑줄 제거 */
-    font-size: 25px;
+    font-size: 16px;
     /* 항목 간 간격 */
     font-weight: bolder;
     margin-left: 3%;
@@ -54,8 +54,8 @@ body {
 .logout {
     padding: 10px;
     border: 0;
-    background-color: red;
-    color: white !important;
+    background-color: rgba(255, 0, 0, 0.5);
+    color: black;
     border-radius: 20px;
     font-weight: bolder;
     cursor: pointer;
@@ -64,12 +64,12 @@ body {
 }
 
 .logout:hover {
-    background-color: rgba(255, 0, 0, 0.5) !important;
+    background-color: red;
     color: white;
 }
 
 #username {
-    font-size: 20px;
+    font-size: 16px;
     background: yellowgreen;
     color: white;
     font-weight: bold;
