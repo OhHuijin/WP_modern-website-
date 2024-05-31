@@ -1,3 +1,3 @@
 def universalAnswer():
-    return 42;
+    return
 assert universalAnswer() == 42
