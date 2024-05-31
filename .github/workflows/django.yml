@@ -36,3 +36,4 @@ jobs:
       run: |
         cd django
         python manage.py test
+        python manage.py runserver
