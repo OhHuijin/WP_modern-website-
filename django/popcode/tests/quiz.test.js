@@ -31,6 +31,7 @@ describe('quiz.html', () => {
       });
     });
 
+<<<<<<< HEAD
     // Test 타임아웃을 30초로 설정
     jest.setTimeout(30000);
 
@@ -138,5 +139,127 @@ describe('quiz.html', () => {
           expect(slides[index + 1].style.display).toBe('block');
         }
       });
+=======
+    test('initial state of the form', () => {
+        // 초기 상태 확인
+        expect(document.getElementById('question-number').innerHTML).toBe('');
+        expect(document.getElementById('player-score').innerHTML).toBe('');
     });
 });
+
+  describe('NextQuestion function', () => {
+    test('should display the next question', () => {
+
+      //NextQuestion(0);
+    const currentQuestion = questions[0];
+    document.getElementById("question-number").innerHTML = questionNumber;
+    document.getElementById("player-score").innerHTML = playerScore;
+    document.getElementById("display-question").innerHTML = currentQuestion.question;
+    document.getElementById("option-one-label").innerHTML = currentQuestion.optionA;
+    document.getElementById("option-two-label").innerHTML = currentQuestion.optionB;
+    document.getElementById("option-three-label").innerHTML = currentQuestion.optionC;
+    document.getElementById("option-four-label").innerHTML = currentQuestion.optionD;
+
+      expect(document.getElementById('question-number').innerHTML).toBe('1');
+      expect(document.getElementById('display-question').innerHTML).toBe(global.questions[0].question);
+      expect(document.getElementById('option-one-label').innerHTML).toBe(global.questions[0].optionA);
+      expect(document.getElementById('option-two-label').innerHTML).toBe(global.questions[0].optionB);
+      expect(document.getElementById('option-three-label').innerHTML).toBe(global.questions[0].optionC);
+      expect(document.getElementById('option-four-label').innerHTML).toBe(global.questions[0].optionD);
+    });
+  });
+
+  describe('checkForAnswer function', () => {
+    test('should check the answer and update the score', () => {
+      global.NextQuestion(0);
+      document.querySelector('input[value="optionA"]').checked = true; // Simulate correct answer
+
+      global.checkForAnswer();
+
+      expect(document.getElementById('playerScore').innerHTML).toBe('1');
+      expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
+    });
+
+        test('should update the UI for wrong answer', () => {
+            global.NextQuestion(0);
+            document.querySelector('input[value="optionB"]').checked = true; // Simulate wrong answer
+
+            global.checkForAnswer();
+
+            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
+            expect(document.getElementById('option-two-label').style.backgroundColor).toBe('red');
+        });
+    });
+
+    describe('handleNextQuestion function', () => {
+        test('should call checkForAnswer and unCheckRadioButtons', () => {
+            const checkForAnswerMock = jest.fn();
+            const unCheckRadioButtonsMock = jest.fn();
+            global.checkForAnswer = checkForAnswerMock;
+            global.unCheckRadioButtons = unCheckRadioButtonsMock;
+
+            global.handleNextQuestion();
+
+            expect(checkForAnswerMock).toHaveBeenCalled();
+            expect(unCheckRadioButtonsMock).toHaveBeenCalled();
+        });
+    });
+
+    describe('resetOptionBackground function', () => {
+        test('should reset the background color of options', () => {
+            document.getElementById('option-one-label').style.backgroundColor = 'red';
+            document.getElementById('option-two-label').style.backgroundColor = 'green';
+
+            global.resetOptionBackground();
+
+            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('');
+            expect(document.getElementById('option-two-label').style.backgroundColor).toBe('');
+        });
+    });
+
+    describe('unCheckRadioButtons function', () => {
+        test('should uncheck all radio buttons', () => {
+            document.querySelector('input[value="optionA"]').checked = true;
+
+            global.unCheckRadioButtons();
+
+            expect(document.querySelector('input[value="optionA"]').checked).toBe(false);
+        });
+    });
+
+    describe('handleEndGame function', () => {
+        test('should display end game modal with correct remarks', () => {
+            global.playerScore = 3;
+            global.wrongAttempt = 1;
+
+            global.handleEndGame();
+
+            expect(document.getElementById('remarks').innerHTML).toBe('Excellent, Keep the good work going.');
+            expect(document.getElementById('remarks').style.color).toBe('green');
+            expect(document.getElementById('score-modal').style.display).toBe('flex');
+        });
+    });
+
+    describe('closeScoreModal function', () => {
+        test('should reset game state and hide score modal', () => {
+            global.closeScoreModal();
+
+            expect(document.getElementById('score-modal').style.display).toBe('none');
+            expect(global.questionNumber).toBe(1);
+            expect(global.playerScore).toBe(0);
+            expect(global.wrongAttempt).toBe(0);
+            expect(global.indexNumber).toBe(0);
+        });
+    });
+
+    describe('closeOptionModal function', () => {
+        test('should hide option modal', () => {
+            document.getElementById('option-modal').style.display = 'flex';
+
+            global.closeOptionModal();
+
+            expect(document.getElementById('option-modal').style.display).toBe('none');
+        });
+>>>>>>> 14b85e790652f8488c734334c74b2197dd62e717
+    });
+//});
