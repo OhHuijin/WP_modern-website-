@@ -1,9 +1,28 @@
-.email{
-    font-size: larger;
-    font-weight: bolder;
+body{
+    text-align: center;
+    background-color: #ffecb4;
 }
 
-.Eungyeol{
+.email{
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+    padding: 20px;
+}
 
-    width: 10px;
+
+.developer1.developer2{
+    align-items: center;
+    font-size: larger;
+    font-weight: bolder;
+    padding: 20px;
+    text-align: center;
+}
+
+.email a:hover{
+    color: chocolate;
+}
+
+.email a{
+    color: rgb(224, 156, 199);
 }

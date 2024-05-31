@@ -3,26 +3,71 @@
 
 <!DOCTYPE html>
 <html>
-
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {% block title %}Contact{% endblock title %}
   
     <link href="{% static 'popcode/css/contact.css' %}" rel="stylesheet" />
-
-
+</head>
+<body>
 {% block nav %}
+<body>
+    
+{% comment %} <br /><br /><br /><br /> {% endcomment %}
+
+<h1>Send to email to front-end developers ! </h1>
 
 <div class="email">
-    <div id="developer1">
-        <a href="mailto:sillaboratory@naver.com, huijin0904@naver.com, dreamscape1567@gmail.com">Send mail to front-end developer</a>
-        <img class="Eungyeol" src="{% static 'popcode/images/bestbackgroundeverlmao.jpg' %}" alt="" />
+    
+    <div class="developer1">
+
+       
+        
+            <img class="Eungyeol" src="{% static 'popcode/images/bestbackgroundeverlmao.jpg' %}" alt="" style = "width:400px; height:300px;"/>
+            <div class="e"><a href="mailto:sillaboratory@naver.com">Send mail to front-end developer : Eungyeol Kim</a>
+            
+            <br /><br /><br /><br />
+
+        </div>
+
+
+        
+
+            <img class="Huijin" src="{% static 'popcode/images/huijin.jpg' %}" alt="" style = "width:250px; height:300px;" />
+            <div class="h"><a href="mailto:huijin0904@naver.com" >Send mail to front-end developer : Huijin Oh</a>
+
+            <br /><br /><br /><br />
+                
+        </div>
+
+
+        
+            
+            
+            <img class="Juchan" src="{% static 'popcode/images/Juchan.jpg' %}" alt="" style = "width:250px; height:300px;"/>
+            <div class="j"><a href="mailto:dreamscape1567@gmail.com">Send mail to front-end developer : Juchan Yang</a>
+            <br /><br /><br /><br />
+        </div>
+
+    
+        
+
 
     </div>
+
+    <h1>Send to email to back-end developers ! </h1>
     <div id="developer2">
-        <a href="mailto:charvin.esteban@gmail.com">Send mail to back-end developer</a>
+
+        <img class="Estéban" src="{% static 'popcode/images/Estéban.jpg' %}" alt="" style = "width:250px; height:300px;"/>
+        <div class="t"><a href="mailto:charvin.esteban@gmail.com">Send mail to back-end developer : Estéban</a>
+        
+        <br /><br /><br /><br />
+            
+        </div>
+
     </div>
 </div>
-
+</body>
 {% endblock nav %}
