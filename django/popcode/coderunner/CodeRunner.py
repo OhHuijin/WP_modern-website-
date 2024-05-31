@@ -65,9 +65,10 @@ class CodeRunner:
             )
             stdout_data, stderr_data = process.communicate()
             self.returnCode = process.returncode
+            self.stdout = stdout_data
+            self.stderr = stderr_data
+            print(">>>>", stderr_data, stdout_data, self.returnCode)
             if self.returnCode != 0:
-                self.stdout = stdout_data
-                self.stderr = stderr_data
                 return self.returnCode
             process = subprocess.Popen(
                 ["./temp"],
@@ -77,17 +78,18 @@ class CodeRunner:
             )
             try:
                 stdout_data, stderr_data = process.communicate(timeout=15)
+                self.stdout += stdout_data
+                self.stderr += stderr_data
                 self.returnCode = process.returncode
+                return self.returnCode
             except subprocess.TimeoutExpired:
                 process.kill()
                 stdout_data, stderr_data = process.communicate()
                 self.stdout = "🤖 [PopBot] Process took too long to complete !"
                 self.returnCode = 2
-                return 2
-            self.stdout = stdout_data
-            self.stderr = stderr_data
-            return self.returnCode
-
+                self.stdout += stdout_data
+                self.stderr += stderr_data
+                return self.returnCode
         else:
             print("Language not supported")
             return 3
@@ -111,7 +113,7 @@ class CodeRunner:
         }
 
     def cleanAll(self):
-        subprocess.Popen(["rm", "temp.py"])
-        subprocess.Popen(["rm", "temp.c"])
-        subprocess.Popen(["rm", "temp"])
+        subprocess.Popen(["rm", "temp.py", "-f"])
+        subprocess.Popen(["rm", "temp.c", "-f"])
+        subprocess.Popen(["rm", "temp", "-f"])
         return 0
