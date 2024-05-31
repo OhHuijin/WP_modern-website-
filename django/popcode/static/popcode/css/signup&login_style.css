@@ -24,8 +24,8 @@ button {
 
 .main-container {
   position: relative;
-  width: 1536px;
-  height: 1042px;
+  width: 100vw;
+  height: 100vh;
   margin: 0 auto;
   background: #ffffff;
   overflow: hidden;
@@ -207,6 +207,8 @@ button {
   gap: 10px;
   position: absolute;
   width: 404px;
+  max-width: 90vw;
+
   height: 583px;
   top: 217px;
   left: 220px;
@@ -218,6 +220,8 @@ button {
   flex-shrink: 0;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 638px;
   z-index: 2;
 }
@@ -229,6 +233,7 @@ button {
   gap: 10px;
   position: relative;
   width: 262px;
+  max-width: 90vw;
   height: 52.528px;
   margin: 0 0 0 0;
   z-index: 3;
@@ -260,6 +265,8 @@ button {
   flex-wrap: nowrap;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 58px;
   margin: 58px 0 0 0;
   z-index: 5;
@@ -299,6 +306,8 @@ button {
   gap: 10px;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   padding: 10px 0 10px 10px;
   border: 1px solid #d9d9d9;
@@ -311,6 +320,8 @@ button {
   flex-shrink: 0;
   position: absolute;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   top: -1px;
   left: -1px;
@@ -355,6 +366,8 @@ button {
   flex-wrap: nowrap;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 58px;
   margin: 19.698px 0 0 0;
   z-index: 12;
@@ -394,6 +407,8 @@ button {
   gap: 5px;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   padding: 10px 0 10px 10px;
   border: 1px solid #d9d9d9;
@@ -406,6 +421,8 @@ button {
   flex-shrink: 0;
   position: absolute;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   top: -1px;
   left: -1px;
@@ -450,6 +467,8 @@ button {
   flex-wrap: nowrap;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 58px;
   margin: 19.698px 0 0 0;
   z-index: 19;
@@ -489,6 +508,8 @@ button {
   gap: 10px;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   padding: 10px 0 10px 10px;
   border: 1px solid #d9d9d9;
@@ -501,6 +522,8 @@ button {
   flex-shrink: 0;
   position: absolute;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   top: -1px;
   left: -1px;
@@ -597,6 +620,8 @@ button {
 .frame-1f {
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 35.019px;
   margin: 29.547px 0 0 0;
   cursor: pointer;
@@ -612,6 +637,8 @@ button {
   flex-wrap: nowrap;
   position: absolute;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   top: 0;
   left: 0;
@@ -626,6 +653,8 @@ button {
   gap: 10px;
   position: relative;
   width: 404px;
+  max-width: 90vw;
+
   height: 32px;
   padding: 10px 0 10px 10px;
   background: #ffc107;
@@ -671,6 +700,7 @@ button {
   position: relative;
   align-items: center;
   width: 300px;
+  max-width: 90vw;
   height: 15.321px;
   margin: 59.094px 0 0 3px;
   z-index: 26;
@@ -696,6 +726,7 @@ button {
 .line {
   position: absolute;
   width: 400px;
+  max-width: 90vw;
   height: 2px;
   top: 7px;
   left: 0;
@@ -891,6 +922,7 @@ button {
 .chris-lee-image {
   position: absolute;
   width: 453px;
+  max-width: 90vw;
   height: 510px;
   top: 359px;
   left: 977px;

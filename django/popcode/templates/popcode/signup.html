@@ -1,4 +1,5 @@
-{%load static %}
+{% load static %}
+{% include './components/alert.html' %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,34 +15,35 @@
   </head>
   <body>
     <div class="main-container">
+     <div class="login-container">
       <div class="popcode">
         <div class="logo-group">
           <div class="logo-center">
             <div class="icon"></div>
             <a href="{% url 'homepage' %}">
-            <div class="title">
-              <div class="path"></div>
-              <div class="path-1">
-                <div class="vector"></div>
+              <div class="title">
+                <div class="path"></div>
+                <div class="path-1">
+                  <div class="vector"></div>
+                </div>
+                <div class="path-2">
+                  <div class="vector-3"></div>
+                </div>
+                <div class="path-4">
+                  <div class="vector-5"></div>
+                </div>
+                <div class="path-6">
+                  <div class="vector-7"></div>
+                </div>
+                <div class="path-8">
+                  <div class="vector-9"></div>
+                </div>
               </div>
-              <div class="path-2">
-                <div class="vector-3"></div>
-              </div>
-              <div class="path-4">
-                <div class="vector-5"></div>
-              </div>
-              <div class="path-6">
-                <div class="vector-7"></div>
-              </div>
-              <div class="path-8">
-                <div class="vector-9"></div>
-              </div>
-            </div>
-          </a>
+            </a>
           </div>
         </div>
       </div>
-      <div class="pang-pang-pop"></div>
+
       <div class="frame">
         <div class="group">
           <div class="frame-a">
@@ -127,8 +129,10 @@
           </button>
         </div>
       </div>
+      <div class="pang-pang-pop"></div>
       <div class="chris-lee-image"></div>
     </div>
+  </div>
     <script>
       document.getElementById('policy').addEventListener('click', function () {
         alert('<Popcord Terms of Use> \n 1. Collection and Use of Personal Information\nWe collect and use your personal information for data analysis and marketing purposes.\n2. Retention Period\nYour personal information will be retained for one year after you unsubscribe.\n This concise version includes the key points about data collection, use, and retention.')
@@ -167,4 +171,5 @@
       });
       
     </script>
-    
+  </body>
+</html>

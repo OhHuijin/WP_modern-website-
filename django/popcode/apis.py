@@ -314,6 +314,7 @@ def apiRun(req: HttpRequest):
     lang = post["lang"]
     cr = CodeRunner(lang=lang, code=code)
     cr.run()
+    cr.cleanAll()
     return HttpResponse(json.dumps(cr.outputDict()), content_type="application/json")
     # return HttpResponse(json.dumps({"returnValue":"waffle > croffle"}),content_type="application/json")
 
