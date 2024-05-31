@@ -39,7 +39,7 @@
             {% else %}
               <b id="streak">🥶{{ request.session.streak }}</b>
             {% endif %}
-            <a href="{% url 'apiLogout' %}" class="logout">🚪</a>
+            <a href="{% url 'apiLogout' %}" class="logout">Logout</a>
           {% else %}
             login or register
           {% endif %}

@@ -12,17 +12,15 @@ from .DB import DB
 from . import views
 from .coderunner.CodeRunner import CodeRunner
 
-"""
-    Tries to login the user using given username and password.
-    Redirect to / if successful
-    Else redirect to /login with error message :
-    - missingFields : If username or password is missing
-    - userNotFound : If user with given username is not found
-    - wrongPassword : If password is wrong
-"""
-
 
 def login(req: HttpRequest):
+    """
+    Try to login the user using given username and password.
+    Redirects to / if successful
+    Otherwise redirects to /login with error message.
+    Automatically changes the user's token and updates lastLogin time.
+    The streak is also updated if the user has not completed a lesson before yesterday.
+    """
     username = req.POST.get("username")
     password = req.POST.get("password")
     if not username or not password:
@@ -59,15 +57,13 @@ def login(req: HttpRequest):
     return redirect(f"/?success=Welcome back {user['username']}!")
 
 
-"""
-    Tries to signup the user using given username, password and email.
-    Redirects to / if successful
-    Else redirects to /signup with error message :
-    - usernameOrEmailExists : If username or email is already taken
-"""
-
-
 def signup(req: HttpRequest):
+    """
+    Create a new user with given username, password and email.
+    Redirects to / if successful
+    Otherwise redirects to /signup with error message.
+    Username and email are unique.
+    """
     username = req.POST.get("username")
     password = req.POST.get("password")
     email = req.POST.get("email")
@@ -105,15 +101,13 @@ def signup(req: HttpRequest):
     return redirect(f"/?success=Welcome to PopCode, {username}!")
 
 
-"""
-    Edit the user information, with given username, password, newPassword and email.
-    Redirects to /profile if successful
-    Else redirects to /profile with error message :
-    - wrongPasswordOrToken : If password is wrong, or token is invalid
-"""
-
-
 def editUser(req: HttpRequest):
+    """
+    Edit the user's profile with given username, password, email and newPassword.
+    Applies changes if password and token are correct.
+    Redirects to / with success message.
+    Otherwise redirects to /settings with error message.
+    """
     username = req.POST.get("username")
     password = req.POST.get("password")
     newPassword = req.POST.get("newPassword")
@@ -144,16 +138,14 @@ def editUser(req: HttpRequest):
 
     req.session["username"] = username
     req.session["email"] = email
-    return redirect("/profile?success=Profile updated!")
-
-
-"""
-    Logout the user
-    Redirects to /
-"""
+    return redirect("/?success=Profile updated!")
 
 
 def logout(req: HttpRequest):
+    """
+    Logout the user, cleaning the session.
+    Redirects to /
+    """
     req.session.pop("token")
     req.session.pop("username")
     req.session.pop("email")
@@ -161,16 +153,13 @@ def logout(req: HttpRequest):
     return redirect("/?success=Logged out successfully!")
 
 
-"""
-    Create a new lesson with given title and description
-    Redirects to / with success message lessonCreated
-    Else redirects to / with error message :
-    - notAdmin : If user is not admin
-    - missingFields : If title or description is missing
-"""
-
-
 def createLesson(req: HttpRequest):
+    """
+    Create a new lesson with given title and description
+    The user must be an admin and the fields must not be empty.
+    We assume
+    Always redirect to / with a message
+    """
     user = getAdminUser(req)
     if not user:
         return redirect("/?error=You are not an admin")
@@ -189,16 +178,12 @@ def createLesson(req: HttpRequest):
     return redirect("/?success=Lession created successfully!")
 
 
-"""
-    Delete a lesson with given lessonId
-    Redirects to / with success message lessonDeleted
-    Else redirects to / with error message :
-    - notAdmin : If user is not admin
-    - missingFields : If lessonId is missing
-"""
-
-
 def deleteLesson(req: HttpRequest):
+    """
+    Delete a lesson with given title
+    Requires admin rights
+    Always redirect to / with a message
+    """
     user = getAdminUser(req)
     if not user:
         return redirect("/?error=You are not an admin")
@@ -209,12 +194,10 @@ def deleteLesson(req: HttpRequest):
     return redirect("/?success=Lession deleted successfully!")
 
 
-"""
-    Create a new part with given lessonId, title and content
-"""
-
-
 def createPart(req: HttpRequest):
+    """
+    Create a new part with given lessonId, title and content
+    """
     if not req.POST:
         return redirect("/")
     user = getAdminUser(req)
@@ -237,12 +220,10 @@ def createPart(req: HttpRequest):
     return redirect(f"/lesson/{lessonId}?success=partCreated")
 
 
-"""
-    Add a new level to a part with given lessonId, partIndex, title and content    
-"""
-
-
 def addLevel(req: HttpRequest):
+    """
+    Add a new level to a part with given lessonId, partIndex, title and content
+    """
     type = req.POST.get("type")
     lessonId = req.POST.get("lessonId")
     partId = req.POST.get("partId")
@@ -308,6 +289,9 @@ def addLevel(req: HttpRequest):
 
 
 def viewPart(req: HttpRequest, title: str, part: int):
+    """
+    View a part of a lesson with given title and part index
+    """
     lesson = DB.lessons.find_one({"title": title})
     if not lesson:
         return redirect("/")
@@ -322,6 +306,9 @@ def viewPart(req: HttpRequest, title: str, part: int):
 
 
 def apiRun(req: HttpRequest):
+    """
+    Run the given code in the given language
+    """
     post = json.loads(req.body.decode("utf-8"))
     code = post["code"]
     lang = post["lang"]
@@ -332,6 +319,11 @@ def apiRun(req: HttpRequest):
 
 
 def finishLesson(req: HttpRequest):
+    """
+    Finish a lesson with given title and part index
+    Updates the user's progress and streak
+    Redirects to / with a message
+    """
     user = getUser(req)
     if not user:
         return redirect("/?error=You are not logged in")
