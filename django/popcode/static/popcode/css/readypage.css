@@ -5,6 +5,7 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  align-items: center;
   background-color: rgba(255, 254, 186, 0.986);
 }
 
@@ -14,32 +15,40 @@ body {
 
 .title{
   /* display: flex; */
+  display: inline-block;
+
+  text-align: center;
   align-items: center;
-  flex-direction: row;
-  flex-direction: column-reverse;
+  max-width: 20000px;
+  width: 50%;
+
   align-content: center;
-  /* justify-content: flex-start; */
-  margin-top: 21%;
+  justify-content: flex-start;
+  margin-top: 400px;
   margin-bottom: 5%;
 }
 
 .title img {
-  width: 1000px;
+  text-align: center;
+  width: 100%;
+  left: -40%;
+  margin-right: 100%;
+  height: auto;
   margin-bottom: -200px;
   margin-top: -280px;
-  margin-bottom: -200px;
+
 }
 
 .title h1 {
   /* top: 520px;
   left: 50%; */
-  margin-top: -107px;
+  margin-top: -37px;
   margin-bottom: 40px;;
   color: white; /* 글자 색상 */
   font-size: 100px; /* 글자 크기 */
   font-weight: bold; /* 글자 두께 */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 */
-  z-index: 1; 
+
 }
 
 

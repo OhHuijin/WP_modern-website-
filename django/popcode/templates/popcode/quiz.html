@@ -30,7 +30,7 @@
   <div>
     <div class="container">
       <img class="corn" src="{% static 'popcode/images/corn.png' %}" />
-      <h3 class="day">Day1</h3>
+      <h3 class="day">{{ lessonTitle }} - {{ part.title }}</h3>
     </div>
 
     <main>
@@ -65,36 +65,48 @@
 
       <div class="game-quiz-container">
         <div class="game-details-container">
-          <h1>Slide <span id="actual-slide-indicator">1</span>/{{ part.levels|length }}</h1>
-          <progress id="actual-slide-progress" max="{{ part.levels|length }}" min="1"></progress>
+          <h1 id="lvl-type">EXPLAINATION</h1>
+          <div class="progbar">
+            <span id="actual-slide-indicator">1</span>
+            <progress id="actual-slide-progress" max="{{ part.levels|length }}" min="1"></progress>
+            <span>{{ part.levels|length }}</span>
+          </div>
         </div>
 
         <div class="game-question-container">
           {% for level in part.levels %}
             <section id="lvl-{{ forloop.counter0 }}" class="level">
-              <h3>{{ level.type }} ----> {{ forloop.counter0 }}</h3> <br /><br />
               {{ level.content|safe }}
 
               {% if level.type == 'CODE' %}
-                <pre>
-                  <code class="language-{{ level.lang }}" contenteditable="true" id="code-{{ forloop.counter0 }}">{{ level.startcode }}</code>
+                <h3>Write your own code</h3>
+                <textarea id="codeInput-{{ forloop.counter0 }}" spellcheck="false" class="codeInput">{{ level.startcode }}</textarea>
+                <pre class="codeRender">
+                  <code class="language-{{ level.lang }}" id="code-{{ forloop.counter0 }}">{{ level.startcode }}</code>
                 </pre>
-                <button class="run" id="codeSubmit-{{ forloop.counter0 }}">RUN</button>
-                <div style="border:5px black dotted; width=200px; height=60px;">
-                  The last code ran with output code : <span id="returnCode-{{ forloop.counter0 }}"></span>
-                  <h6>(0 : success, 1 : error, 2 : timeout, 3 : unknown error)</h6> <br />
-                  Output:<br />
-                  <pre class="language-bash">
+                <button class="run" id="codeSubmit-{{ forloop.counter0 }}">RUN (it may take some time)</button>
+                <h3>Last code results</h3>
+                <div class="codeWindow">
+                  <span id="returnCode-{{ forloop.counter0 }}">🧑‍💻 Write some code, then run it to see results !</span>
+                  <pre class="codeWindowTitle">stdout</pre>
+                  <pre class="language-bash codeWindowLog">
                     <code id="stdout-{{ forloop.counter0 }}"></code>
                   </pre> <br />
-                  Error:<br />
-                  <pre class="language-bash">
+                  <pre class="codeWindowTitle">stderr</pre>
+                  <pre class="language-bash codeWindowLog">
                     <code id="stderr-{{ forloop.counter0 }}"></code>
                   </pre>
                 </div>
 
                 <script>
+                  document.querySelector('#codeInput-{{forloop.counter0}}').addEventListener('input', (e) => {
+                    document.querySelector('#code-{{forloop.counter0}}').dataset.highlighted = ''
+                    document.querySelector('#code-{{forloop.counter0}}').innerHTML = document.querySelector('#codeInput-{{forloop.counter0}}').value
+                    hljs.highlightElement(document.querySelector('#code-{{forloop.counter0}}'))
+                    // Tab insert tabs instead of moving to the next element
+                  })
                   document.querySelector('#codeSubmit-{{forloop.counter0}}').addEventListener('click', () => {
+                    document.querySelector('#codeSubmit-{{forloop.counter0}}').disabled = true
                     if (document.querySelector('#code-{{forloop.counter0}}').innerText) {
                       fetch("{% url 'apiRun' %}", {
                         method: 'POST',
@@ -105,8 +117,12 @@
                       })
                         .then((res) => (res.ok ? res.json() : console.error(res)))
                         .then((data) => {
+                          document.querySelector('#codeSubmit-{{forloop.counter0}}').disabled = false
                           console.log(data)
-                          document.querySelector('#returnCode-{{forloop.counter0}}').textContent = data.returnCode
+                          let codeStatus = '✅ Code runned successfully ! You may go next !'
+                          if (data.returnCode == 1) codeStatus = '❌ Code failed to run, please check your code !'
+                          if (data.returnCode == 2) codeStatus = '⏲️ Your code took too much time !'
+                          document.querySelector('#returnCode-{{forloop.counter0}}').textContent = codeStatus
                           document.querySelector('#stdout-{{forloop.counter0}}').textContent = data.stdout
                           document.querySelector('#stderr-{{forloop.counter0}}').textContent = data.stderr
                           canGoNext = data.returnCode === 0
@@ -119,9 +135,12 @@
                 </script>
               {% elif level.type == 'QUIZ' %}
                 <br />
-                <div style="display:flex;flex-direction: column;font-size:27px;">
+                <div id="answerGrid">
                   {% for ans in level.answers %}
-                    <span class="check" data-index="{{ forloop.counter0 }}"><input type="checkbox" />{{ ans.content }}<br /></span>
+                    <span class="check" data-index="{{ forloop.counter0 }}">
+                      <input type="checkbox" id="check-{{ forloop.parent.counter0 }}-{{ forloop.counter0 }}" />
+                      <label for="check-{{ forloop.parent.counter0 }}-{{ forloop.counter0 }}">{{ ans.content }}</label>
+                    </span>
                   {% endfor %}
                 </div>
               {% endif %}
