@@ -1,12 +1,28 @@
+body{
+    text-align: center;
+    background-color: #ffecb4;
+}
+
 .email{
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+    padding: 20px;
+}
+
+
+.developer1.developer2{
+    align-items: center;
     font-size: larger;
     font-weight: bolder;
     padding: 20px;
     text-align: center;
 }
 
-.developer1{
-    width: 500px;
-    height: 400px;
+.email a:hover{
+    color: chocolate;
 }
 
+.email a{
+    color: rgb(224, 156, 199);
+}
