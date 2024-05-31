@@ -18,7 +18,7 @@ class CodeRunner:
      """
 
     def run(self) -> int:
-        if self.lang == "python3":
+        if self.lang == "python" or self.lang == "python3" or self.lang == "py":
             if "import " in self.code or "open(" in self.code or "exec(" in self.code:
                 self.stdout = "🤖 [PopBot] Illegal imports detected !"
                 self.returnCode = 1
