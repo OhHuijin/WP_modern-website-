@@ -37,8 +37,8 @@ body {
 .menu_container img {
     width: 200px;
     height: auto;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 30px;
 }
 
 .logout_container {
