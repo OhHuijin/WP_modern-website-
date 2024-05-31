@@ -15,8 +15,7 @@ body {
     padding: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    /* height: 50px; */
-    height: 6%;
+    height: 50px;
 
 }
 
@@ -28,7 +27,6 @@ body {
     font-size: 16px;
     /* 항목 간 간격 */
     font-weight: bolder;
-    margin-left: 3%;
 }
 
 .menu_container a:hover {
@@ -40,7 +38,7 @@ body {
     width: 200px;
     height: auto;
     padding-left: 12%;
-    margin-right: 15%;
+    padding-right: 15%;
 }
 
 .logout_container {
@@ -60,7 +58,7 @@ body {
     font-weight: bolder;
     cursor: pointer;
     transition-duration: 0.3s;
-    margin-right: 5%;
+    padding-right: 5%;
 }
 
 .logout:hover {
@@ -69,7 +67,7 @@ body {
 }
 
 #username {
-    font-size: 16px;
+    font-size: px;
     background: yellowgreen;
     color: white;
     font-weight: bold;
