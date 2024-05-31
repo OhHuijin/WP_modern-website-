@@ -1,6 +1,8 @@
 import subprocess
 from time import sleep
 
+from django.urls import include
+
 
 class CodeRunner:
     returnCode = 0
@@ -17,6 +19,10 @@ class CodeRunner:
 
     def run(self) -> int:
         if self.lang == "python3":
+            if "import " in self.code or "open(" in self.code or "exec(" in self.code:
+                self.stdout = "🤖 [PopBot] Illegal imports detected !"
+                self.returnCode = 1
+                return 1
             f = open("temp.py", "w")
             f.write(self.code)
             f.close()
@@ -34,7 +40,9 @@ class CodeRunner:
                 # If the process is not completed in 15 seconds kill it
                 process.kill()
                 stdout_data, stderr_data = process.communicate()
+                self.stdout = "🤖 [PopBot] Process took too long to complete !"
                 self.returnCode = 2
+                return 2
 
             self.stdout = stdout_data
             self.stderr = stderr_data
