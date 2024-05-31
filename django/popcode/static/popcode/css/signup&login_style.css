@@ -204,14 +204,19 @@ button {
   background-size: cover;
   z-index: 51;
 }
-
+.login-container{
+  flex-wrap: wrap;
+  flex-direction: row;
+  max-width: 200px;
+}
 .frame {
-  display: flex;
+
+  display: inline-block;
   align-items: flex-start;
   flex-wrap: nowrap;
   gap: 10px;
   position: absolute;
-  width: 404px;
+  width: 100%;
   max-width: 90vw;
 
   height: 583px;
