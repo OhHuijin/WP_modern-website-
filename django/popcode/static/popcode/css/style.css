@@ -49,8 +49,8 @@ body {
 .logout {
     padding: 10px;
     border: 0;
-    background-color: rgba(255, 0, 0, 0.5);
-    color: black;
+    background-color: red;
+    color: white !important;
     border-radius: 20px;
     font-weight: bolder;
     cursor: pointer;
@@ -59,7 +59,7 @@ body {
 }
 
 .logout:hover {
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.5) !important;
     color: white;
 }
 
