@@ -4,18 +4,10 @@
 {% block title %}Contact{% endblock title %}
 
 {% block nav %}
-{% comment %} <br><br><br><br><br><br><br><br><br><br> {% endcomment %}
-<link href="{% static 'popcode/css/contact.css' %}" rel="stylesheet" />
+<br><br><br><br><br><br><br><br><br><br>
     <div id="root"></div>
     <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel" src="{% static "popcode/js/contact.js" %}"></script>
-{% comment %} 
-    <div id="detail">
-        <textarea placeholder="Inquiry details" name="details" style="width: 60%; height: 100px;"></textarea> {% endcomment %}
-
     {% endblock nav %}
-
-
-

@@ -1,4 +1,7 @@
 body {
+  background: url(../images/wave-haikei.svg) no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
@@ -7,134 +10,41 @@ body {
 
 
 
-.container {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 20px;
-}
 
-
-.accordion {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.accordion-item {
-  flex: 0 1 calc(33.33% - 20px);
-  background-color: rgb(247, 148, 148);
-  margin: 10px;
-  padding: 10px;
-}
-
-
-.container {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 20px;
-}
-
-
-.accordion {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.accordion-item {
-  flex: 0 1 calc(33.33% - 20px);
-  background-color: rgb(247, 148, 148);
-  margin: 10px;
-  padding: 10px;
-}
 
 .title{
   /* display: flex; */
   align-items: center;
   flex-direction: row;
+  flex-direction: column-reverse;
   align-content: center;
   /* justify-content: flex-start; */
-  top: 30%;
-  margin-top: 20%;
+  margin-top: 21%;
+  margin-bottom: 5%;
 }
 
 .title img {
   width: 1000px;
   margin-bottom: -200px;
-  margin-top: -200px;
+  margin-top: -280px;
   margin-bottom: -200px;
 }
 
 .title h1 {
   /* top: 520px;
   left: 50%; */
+  margin-top: -107px;
   margin-bottom: 40px;;
   color: white; /* 글자 색상 */
-  font-size: 60px; /* 글자 크기 */
+  font-size: 100px; /* 글자 크기 */
   font-weight: bold; /* 글자 두께 */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 텍스트 그림자 */
   z-index: 1; 
 }
 
 
-.topbar {
-  /* display: flex; */
-  flex-wrap: wrap;
-  overflow: hidden;
-  height: 60px;
-  background-color: rgba(255, 254, 186, 0.986);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-}
-
-.topbar {
-  /* display: flex; */
-  flex-wrap: wrap;
-  overflow: hidden;
-  height: 60px;
-  background-color: rgba(255, 254, 186, 0.986);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-}
-
-.topbar a {
-  display: flex;
-  top: -10px;
-  align-items: center;
-  text-decoration: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-}
 
 
-.user {
-  float: right;
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  overflow: hidden;
-  margin: 10px;
-  width: 50px;
-  text-align: end;
-
-}
-
-.logo {
-  display: flex;
-  flex-wrap: wrap;
-  overflow: hidden;
-  margin-bottom: -100px;
-  margin-top: -110px;
-  width: 250px;
-
-
-}
 
 button.accordion-button {
   background-color: #e9b98c;
@@ -171,11 +81,12 @@ button {
 .link-container a {
   display: inline-block;
   cursor: pointer;
+  font-size: 200px;
 }
 
 .link-container img {
   margin-top: 100px;
-  height: 120px;
+  height: 220px;
 }
 
 .link-container p {
@@ -185,7 +96,32 @@ button {
 }
 
 .day-container {
+  margin-top: 100px;
+  margin-bottom: -200px;
   position: relative;
   display: inline-block;
 
+}
+.lessontitle{
+  font-size: 70px;
+  margin-top: 10px;
+
+}
+.lessondescription{
+  font-size: 30px;
+  margin-bottom: -50px;
+}
+
+.parttitle{
+  font-size: 25px;
+  width: 100px;
+  margin-left: 50px;
+  margin-right: 20px;
+  margin-bottom: -100px;
+  white-space: nowrap;
+}
+
+.line{
+  font-size: 40px;
+  color: rgb(201, 192, 66);
 }
