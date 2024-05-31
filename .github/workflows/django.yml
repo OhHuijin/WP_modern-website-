@@ -20,7 +20,7 @@ jobs:
     - name: List files in the repository
       run: ls -al
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4  # 최신 버전으로 업데이트
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
