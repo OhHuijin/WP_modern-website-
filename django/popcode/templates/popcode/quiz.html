@@ -115,7 +115,7 @@
                         headers: {
                           'X-CSRFToken': getCookie('csrftoken')
                         },
-                        body: JSON.stringify({ code: document.querySelector('#code-{{forloop.counter0}}').innerText + `\n{{level.testcase}}`, lang: 'python3' })
+                        body: JSON.stringify({ code: document.querySelector('#code-{{forloop.counter0}}').innerText + `\n{{level.testcase}}`, lang: `{{level.lang}}` })
                       })
                         .then((res) => (res.ok ? res.json() : console.error(res)))
                         .then((data) => {
@@ -161,7 +161,7 @@
   </div>
 
   <script>
-    var parts = JSON.parse('{{ part|safe }}')
+    var parts = {{ part|safe }}
   </script>
   <script src="{% static 'popcode/js/quiz.js' %}"></script>
 {% endblock %}
