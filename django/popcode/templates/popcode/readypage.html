@@ -24,8 +24,9 @@
     <div style="text-align: center; font-size: 50px; width: 150px; height: 70px; background-color: rgba(226, 118, 17, 0.596);">25%</div> {% endcomment %}
 
     {% for lesson in lessons %}
-        <h1>{{lesson.title}}</h1>
-        <p>{{lesson.description}}</p>
+    <p class="line">_________________________________________________________________________________</p>
+        <h1 class="lessontitle">{{lesson.title}}</h1>
+        <p class="lessondescription">{{lesson.description}}</p>
     <div class="daycontainer">
       <div class="link-container">
         {% for part in lesson.parts %}
@@ -38,9 +39,11 @@
       </div>
       <div class="link-container">
         {% for part in lesson.parts %}
-        <p>{{part.title}}</p>
+        <p class="parttitle">{{part.title}}</p>
         {% endfor %}
+        
       </div>
+
     </div>
   {% endfor %}
 {% endblock nav %}
