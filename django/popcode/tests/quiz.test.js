@@ -34,115 +34,118 @@ describe('Quiz App', () => {
     });
 });
 
-describe('NextQuestion function', () => {
+  describe('NextQuestion function', () => {
     test('should display the next question', () => {
-        //NextQuestion(0);
-        const currentQuestion = questions[0];
-        document.getElementById("question-number").innerHTML = questionNumber;
-        document.getElementById("player-score").innerHTML = playerScore;
-        document.getElementById("display-question").innerHTML = currentQuestion.question;
-        document.getElementById("option-one-label").innerHTML = currentQuestion.optionA;
-        document.getElementById("option-two-label").innerHTML = currentQuestion.optionB;
-        document.getElementById("option-three-label").innerHTML = currentQuestion.optionC;
-        document.getElementById("option-four-label").innerHTML = currentQuestion.optionD;
 
-        expect(document.getElementById('question-number').innerHTML).toBe('1');
-        expect(document.getElementById('display-question').innerHTML).toBe(global.questions[0].question);
-        expect(document.getElementById('option-one-label').innerHTML).toBe(global.questions[0].optionA);
-        expect(document.getElementById('option-two-label').innerHTML).toBe(global.questions[0].optionB);
-        expect(document.getElementById('option-three-label').innerHTML).toBe(global.questions[0].optionC);
-        expect(document.getElementById('option-four-label').innerHTML).toBe(global.questions[0].optionD);
+      //NextQuestion(0);
+    const currentQuestion = questions[0];
+    document.getElementById("question-number").innerHTML = questionNumber;
+    document.getElementById("player-score").innerHTML = playerScore;
+    document.getElementById("display-question").innerHTML = currentQuestion.question;
+    document.getElementById("option-one-label").innerHTML = currentQuestion.optionA;
+    document.getElementById("option-two-label").innerHTML = currentQuestion.optionB;
+    document.getElementById("option-three-label").innerHTML = currentQuestion.optionC;
+    document.getElementById("option-four-label").innerHTML = currentQuestion.optionD;
+
+      expect(document.getElementById('question-number').innerHTML).toBe('1');
+      expect(document.getElementById('display-question').innerHTML).toBe(global.questions[0].question);
+      expect(document.getElementById('option-one-label').innerHTML).toBe(global.questions[0].optionA);
+      expect(document.getElementById('option-two-label').innerHTML).toBe(global.questions[0].optionB);
+      expect(document.getElementById('option-three-label').innerHTML).toBe(global.questions[0].optionC);
+      expect(document.getElementById('option-four-label').innerHTML).toBe(global.questions[0].optionD);
     });
-});
+  });
 
-describe('checkForAnswer function', () => {
+  describe('checkForAnswer function', () => {
     test('should check the answer and update the score', () => {
-        global.NextQuestion(0);
-        document.querySelector('input[value="optionA"]').checked = true; // Simulate correct answer
+      global.NextQuestion(0);
+      document.querySelector('input[value="optionA"]').checked = true; // Simulate correct answer
 
-        global.checkForAnswer();
+      global.checkForAnswer();
 
-        expect(document.getElementById('playerScore').innerHTML).toBe('1');
-        expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
+      expect(document.getElementById('playerScore').innerHTML).toBe('1');
+      expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
     });
 
-    test('should update the UI for wrong answer', () => {
-        global.NextQuestion(0);
-        document.querySelector('input[value="optionB"]').checked = true; // Simulate wrong answer
+        test('should update the UI for wrong answer', () => {
+            global.NextQuestion(0);
+            document.querySelector('input[value="optionB"]').checked = true; // Simulate wrong answer
 
-        global.checkForAnswer();
-        expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
-        expect(document.getElementById('option-two-label').style.backgroundColor).toBe('red');
+            global.checkForAnswer();
+
+            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('green');
+            expect(document.getElementById('option-two-label').style.backgroundColor).toBe('red');
+        });
     });
-});
 
-describe('handleNextQuestion function', () => {
-    test('should call checkForAnswer and unCheckRadioButtons', () => {
-        const checkForAnswerMock = jest.fn();
-        const unCheckRadioButtonsMock = jest.fn();
-        global.checkForAnswer = checkForAnswerMock;
-        global.unCheckRadioButtons = unCheckRadioButtonsMock;
+    describe('handleNextQuestion function', () => {
+        test('should call checkForAnswer and unCheckRadioButtons', () => {
+            const checkForAnswerMock = jest.fn();
+            const unCheckRadioButtonsMock = jest.fn();
+            global.checkForAnswer = checkForAnswerMock;
+            global.unCheckRadioButtons = unCheckRadioButtonsMock;
 
-        global.handleNextQuestion();
+            global.handleNextQuestion();
 
-        expect(checkForAnswerMock).toHaveBeenCalled();
-        expect(unCheckRadioButtonsMock).toHaveBeenCalled();
+            expect(checkForAnswerMock).toHaveBeenCalled();
+            expect(unCheckRadioButtonsMock).toHaveBeenCalled();
+        });
     });
-});
 
-describe('resetOptionBackground function', () => {
-    test('should reset the background color of options', () => {
-        document.getElementById('option-one-label').style.backgroundColor = 'red';
-        document.getElementById('option-two-label').style.backgroundColor = 'green';
+    describe('resetOptionBackground function', () => {
+        test('should reset the background color of options', () => {
+            document.getElementById('option-one-label').style.backgroundColor = 'red';
+            document.getElementById('option-two-label').style.backgroundColor = 'green';
 
-        global.resetOptionBackground();
+            global.resetOptionBackground();
 
-        expect(document.getElementById('option-one-label').style.backgroundColor).toBe('');
-        expect(document.getElementById('option-two-label').style.backgroundColor).toBe('');
+            expect(document.getElementById('option-one-label').style.backgroundColor).toBe('');
+            expect(document.getElementById('option-two-label').style.backgroundColor).toBe('');
+        });
     });
-});
 
-describe('unCheckRadioButtons function', () => {
-    test('should uncheck all radio buttons', () => {
-        document.querySelector('input[value="optionA"]').checked = true;
+    describe('unCheckRadioButtons function', () => {
+        test('should uncheck all radio buttons', () => {
+            document.querySelector('input[value="optionA"]').checked = true;
 
-        global.unCheckRadioButtons();
+            global.unCheckRadioButtons();
 
-        expect(document.querySelector('input[value="optionA"]').checked).toBe(false);
+            expect(document.querySelector('input[value="optionA"]').checked).toBe(false);
+        });
     });
-});
 
-describe('handleEndGame function', () => {
-    test('should display end game modal with correct remarks', () => {
-        global.playerScore = 3;
-        global.wrongAttempt = 1;
+    describe('handleEndGame function', () => {
+        test('should display end game modal with correct remarks', () => {
+            global.playerScore = 3;
+            global.wrongAttempt = 1;
 
-        global.handleEndGame();
+            global.handleEndGame();
 
-        expect(document.getElementById('remarks').innerHTML).toBe('Excellent, Keep the good work going.');
-        expect(document.getElementById('remarks').style.color).toBe('green');
-        expect(document.getElementById('score-modal').style.display).toBe('flex');
+            expect(document.getElementById('remarks').innerHTML).toBe('Excellent, Keep the good work going.');
+            expect(document.getElementById('remarks').style.color).toBe('green');
+            expect(document.getElementById('score-modal').style.display).toBe('flex');
+        });
     });
-});
 
-describe('closeScoreModal function', () => {
-    test('should reset game state and hide score modal', () => {
-        global.closeScoreModal();
+    describe('closeScoreModal function', () => {
+        test('should reset game state and hide score modal', () => {
+            global.closeScoreModal();
 
-        expect(document.getElementById('score-modal').style.display).toBe('none');
-        expect(global.questionNumber).toBe(1);
-        expect(global.playerScore).toBe(0);
-        expect(global.wrongAttempt).toBe(0);
-        expect(global.indexNumber).toBe(0);
+            expect(document.getElementById('score-modal').style.display).toBe('none');
+            expect(global.questionNumber).toBe(1);
+            expect(global.playerScore).toBe(0);
+            expect(global.wrongAttempt).toBe(0);
+            expect(global.indexNumber).toBe(0);
+        });
     });
-});
 
-describe('closeOptionModal function', () => {
-    test('should hide option modal', () => {
-        document.getElementById('option-modal').style.display = 'flex';
+    describe('closeOptionModal function', () => {
+        test('should hide option modal', () => {
+            document.getElementById('option-modal').style.display = 'flex';
 
-        global.closeOptionModal();
+            global.closeOptionModal();
 
-        expect(document.getElementById('option-modal').style.display).toBe('none');
+            expect(document.getElementById('option-modal').style.display).toBe('none');
+        });
     });
-});
+//});
