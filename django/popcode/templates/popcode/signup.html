@@ -134,40 +134,11 @@
         alert('<Popcord Terms of Use> \n 1. Collection and Use of Personal Information\nWe collect and use your personal information for data analysis and marketing purposes.\n2. Retention Period\nYour personal information will be retained for one year after you unsubscribe.\n This concise version includes the key points about data collection, use, and retention.')
       })
       
-      {% comment %} document.getElementById('signupForm').addEventListener('submit', function (event) {
-        const checkbox = document.getElementById('checkbox').checked
-        
-        if (!checkbox) {
-          event.preventDefault(); // 폼 제출을 막음
-          alert("Please click 'personal information collecting' to read and agree to the privacy notice."); // 체크박스가 체크되지 않았다는 경고창 띄움
-        }
-      }) {% endcomment %}
-
-      
       document.getElementById('signupForm').addEventListener('submit', function (event) {
-        const usernameValue = document.getElementById('username').value;
-        const emailValue = document.getElementById('email').value;
-        const passwordValue = document.getElementById('password').value;
-        const checkbox = document.getElementById('checkbox').checked;
+        const checkbox = document.getElementById('checkbox').checked
       
-        if (usernameValue === "") {
-          event.preventDefault();
-          alert("Please enter your username.");
-        }else if (usernameValue === "{{ request.session.username }}"){
-          alert("Please enter your username.");
-        }
-        
-        else if (emailValue === "") {
-          event.preventDefault();
-          alert("Please enter your email address.");
-        } else if (passwordValue === "") {
-          event.preventDefault();
-          alert("Please enter your password.");
-        } else if (!checkbox) {
-          event.preventDefault();
-          alert("Please click 'personal information collecting' to read and agree to the privacy notice.");
-        }
-      });
-      
+        if (!checkbox) event.preventDefault()
+      })
     </script>
-    
+  </body>
+</html>

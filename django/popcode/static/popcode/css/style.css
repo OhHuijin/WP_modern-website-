@@ -7,7 +7,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: calc(100vw - 10px);
     background-color: #ffecb4;
     display: flex;
     justify-content: start;
@@ -98,7 +98,6 @@ b#streak {
 
 #menuL {
     display: flex;
-    background-color: #ffecb4;
     justify-content: flex-start;
     align-items: center;
     flex: 1;
@@ -131,7 +130,7 @@ b#streak {
     }
 
     #logoNav {
-        width: 100vw;
+        width: calc(100vw - 10px);
         background-color: #ffecb4;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         z-index: 1;
