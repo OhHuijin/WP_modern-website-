@@ -1,25 +1,21 @@
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-top: 60px;
 }
 
 .menu_container {
     position: fixed;
-    /* 메뉴바를 상단에 고정 */
     top: 0;
     left: 0;
-    width: calc(100vw - 35px);
-    /* 화면 전체 너비 */
+    width: calc(100vw - 10px);
     background-color: #ffecb4;
     display: flex;
     justify-content: start;
     align-items: center;
-    /* 메뉴 항목을 왼쪽 정렬 */
-    padding: 5px 20px;
-    /* 상하 10px, 좌우 20px 패딩 */
+    padding: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    /* 그림자 효과 */
     z-index: 1000;
-    /* 다른 요소 위에 위치 */
+    height: 50px;
 }
 
 .menu_container a {
@@ -37,8 +33,6 @@ body {
 }
 
 .menu_container img {
-    margin-top: -50px;
-    margin-bottom: -50px;
     width: 200px;
     height: auto;
     margin-right: 20px;
@@ -53,17 +47,15 @@ body {
 }
 
 .logout {
-    width: 100px;
     padding: 10px;
     border: 0;
     background-color: rgba(255, 0, 0, 0.5);
     color: black;
-    border-radius: 20px 0 0 20px;
+    border-radius: 20px;
     font-weight: bolder;
     cursor: pointer;
-
     transition-duration: 0.3s;
-    /* 버튼 모서리 둥글둥글 */
+    margin-right: 20px;
 }
 
 .logout:hover {
@@ -78,6 +70,7 @@ body {
     font-weight: bold;
     border-radius: 20px 0 0 20px;
     padding: 10px;
+    width: max-content;
 }
 
 #admin {
@@ -100,13 +93,87 @@ b#streak {
     color: white;
 }
 
-#rightNav {
+#menuL {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     flex: 1;
 }
 
-#rightNav * {
-    height: max-content;
+#rightNav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    flex: 1;
+}
+
+#menuToggle {
+    display: none;
+    justify-self: flex-end;
+}
+
+#logoNav {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+    .menu_container {
+        flex-direction: column;
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    #logoNav {
+        width: calc(100vw - 10px);
+        background-color: #ffecb4;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    #menuL {
+        display: flex;
+        flex-direction: column;
+        background-color: #ffecb4;
+        animation: slideOut 0.5s;
+        transform: translateY(-50vh);
+        opacity: 0;
+    }
+
+    #menuL.open {
+        animation: slideIn 0.5s;
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    #menuToggle {
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        background-color: #ffecb4;
+        border: 0;
+        border-radius: 20px;
+        margin: 5px;
+    }
+
+    #rightNav {
+        width: calc(100vw - 10px);
+    }
+
+    #username {
+        flex: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50vh);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

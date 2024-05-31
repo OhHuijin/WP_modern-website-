@@ -18,28 +18,31 @@
   </head>
   <body>
     <div class="menu_container">
-      <img src="{% static 'popcode/images/popcode.svg' %}" />
-      <a href="{% url 'homepage' %}">Home</a>
-      <a href="{% url 'settings' %}">Settings</a>
-      <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
-      <a href="">link</a>
-      <a href="{% url 'contact' %}">Contact</a>
-    
+      <div id="logoNav">
+        <img src="{% static 'popcode/images/popcode.svg' %}" />
+        <button id="menuToggle">☰</button>
+      </div>
+      <div id="menuL" class="preload">
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'settings' %}">Settings</a>
+        <a href="https://cs50.harvard.edu/web/2020/weeks/0/">Reference</a>
+        <a href="">link</a>
+        <a href="{% url 'contact' %}">Contact</a>
         <div id="rightNav">
           {% if request.session.username %}
-          <a id="username" href="{% url 'profile' %}">{{ request.session.username }}</a>
-          {% if request.session.admin %}
-            <a id="admin" href="{% url 'bp' %}">⚙️ADMIN</a>
-          {% endif %}
-          {% if request.session.todayStreak %}
-          <span id="streak">🔥{{ request.session.streak }}</span>
+            <a id="username" href="{% url 'profile' %}">{{ request.session.username }}</a>
+            {% if request.session.admin %}
+              <a id="admin" href="{% url 'bp' %}">⚙️</a>
+            {% endif %}
+            {% if request.session.todayStreak %}
+              <span id="streak">🔥{{ request.session.streak }}</span>
+            {% else %}
+              <b id="streak">🥶{{ request.session.streak }}</b>
+            {% endif %}
+            <a href="{% url 'apiLogout' %}" class="logout">🚪</a>
           {% else %}
-          <b id="streak">🥶{{ request.session.streak }}</b>
+            login or register
           {% endif %}
-          <a href="{% url 'apiLogout' %}" class="logout">🚪Log-Out</a>
-        {% else %}
-          login or register
-        {% endif %}
         </div>
       </div>
     </div>
@@ -51,6 +54,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
     <script>
       hljs.highlightAll()
+      document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('menuL').classList.toggle('open')
+      })
     </script>
   </body>
 </html>
