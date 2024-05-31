@@ -5,6 +5,12 @@
     "Source Han Sans CN", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+
 .main-container {
   overflow: hidden;
 }
@@ -28,7 +34,7 @@ button {
   height: 1042px;
   margin: 0 auto;
   background: #ffffff;
-  overflow: hidden;
+  overflow: hidden auto;
 }
 
 .popcode {
@@ -36,7 +42,7 @@ button {
   width: 378px;
   height: 321px;
   top: -56px;
-  left: 162px;
+  left: 10vw;
   z-index: 52;
   overflow: hidden;
 }
@@ -209,7 +215,7 @@ button {
   width: 404px;
   height: 583px;
   top: 217px;
-  left: 220px;
+  left: 10vw;
   padding: 0 0 64px 0;
   z-index: 1;
 }
@@ -739,7 +745,7 @@ button {
   text-overflow: initial;
   white-space: nowrap;
   z-index: 35;
-  
+
 }
 
 .account {
@@ -750,7 +756,7 @@ button {
   font-weight: 500;
   line-height: 21px;
   text-align: left;
-  
+
 }
 
 .sign-in-27 {
@@ -898,4 +904,12 @@ button {
   background-size: cover;
   z-index: 50;
   border-radius: 45px 0 0 45px;
+}
+
+@media screen and (max-width: 600px) {
+  .main-container {
+    width: 100%;
+    height: 100%;
+  }
+
 }
