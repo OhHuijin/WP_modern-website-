@@ -37,8 +37,8 @@ body {
 .menu_container img {
     width: 200px;
     height: auto;
-    padding-left: 12%;
-    padding-right: 15%;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .logout_container {
@@ -108,6 +108,7 @@ b#streak {
     justify-content: flex-end;
     align-items: stretch;
     flex: 1;
+    padding-right: 30px;
 }
 
 #menuToggle {
