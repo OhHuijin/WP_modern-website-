@@ -1,5 +1,5 @@
 body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     padding-top: 60px;
 }
 
@@ -15,16 +15,20 @@ body {
     padding: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    height: 50px;
+    /* height: 50px; */
+    height: 6%;
+
 }
 
 .menu_container a {
     color: black;
-    padding: 10px 15px;
+    padding: 10px 45px;
     text-decoration: none;
     /* 밑줄 제거 */
-    font-size: 16px;
+    font-size: 25px;
     /* 항목 간 간격 */
+    font-weight: bolder;
+    margin-left: 3%;
 }
 
 .menu_container a:hover {
@@ -35,7 +39,8 @@ body {
 .menu_container img {
     width: 200px;
     height: auto;
-    margin-right: 20px;
+    padding-left: 12%;
+    margin-right: 15%;
 }
 
 .logout_container {
