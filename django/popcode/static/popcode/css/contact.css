@@ -1,9 +1,12 @@
 .email{
     font-size: larger;
     font-weight: bolder;
+    padding: 20px;
+    text-align: center;
 }
 
-.Eungyeol{
-
-    width: 10%;
+.developer1{
+    width: 500px;
+    height: 400px;
 }
+

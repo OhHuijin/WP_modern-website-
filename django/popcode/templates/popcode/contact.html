@@ -1,27 +1,36 @@
 {% extends "./layout.html" %}
 {% load static %}
+{% block title %}Contact{% endblock %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block head %}
+<link href="{% static 'popcode/css/contact.css' %}" rel="stylesheet" />
+{% endblock head %}
 
-        {% block title %}Contact{% endblock title %}
-  
-    <link href="{% static 'popcode/css/contact.css' %}" rel="stylesheet" />
-</head>
-<body>
+
 {% block nav %}
-
 <div class="email">
+    <h1>Send to email to front-end developers ! </h1>
     <div id="developer1">
-        <a href="mailto:sillaboratory@naver.com, huijin0904@naver.com, dreamscape1567@gmail.com">Send mail to front-end developer</a>
+        <a href="mailto:sillaboratory@naver.com">Send mail to front-end developer</a>
+        <br /><br /><br /><br />
         <img class="Eungyeol" src="{% static 'popcode/images/bestbackgroundeverlmao.jpg' %}" alt="" />
 
+        <a href="mailto:huijin0904@naver.com">Send mail to front-end developer</a>
+        <br /><br /><br /><br />
+        <img class="Huijin" src="{% static 'popcode/images/huijin.jpg' %}" alt="" />
+
+        <a href="mailto:dreamscape1567@gmail.com">Send mail to front-end developer</a>
+        <br /><br /><br /><br />
+        <img class="Juchan" src="{% static 'popcode/images/Juchan.jpg' %}" alt="" />
+
+
     </div>
+
     <div id="developer2">
+        <br /><br /><br /><br />
         <a href="mailto:charvin.esteban@gmail.com">Send mail to back-end developer</a>
+        <img class="Juchan" src="{% static 'popcode/images/Estéban.jpg' %}" alt="" />
+
     </div>
 </div>
 
