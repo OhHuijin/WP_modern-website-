@@ -1,0 +1,30 @@
+{% extends './layout.html' %}
+{% load static %}
+
+{% block title %}link{% endblock %}
+
+{% block head %}
+  <link href="{% static 'popcode/css/link.css' %}" rel="stylesheet" />
+ {% endblock head %}
+
+{% block nav %}
+  <div class="title">
+    <img src="{% static 'popcode/images/popcode.svg' %}" />
+    <h1>Take a Look at Our Official Links!</h1>
+
+
+
+    <h1>Take a Look at Our Official Links!</h1>
+    <h1>Take a Look at Our Official Links!</h1>
+    <h1>Take a Look at Our Official Links!</h1>
+
+
+
+  </div>
+  <a href="https://github.com/OhHuijin/WP_modern-website-"><img class="git" src="{% static 'popcode/images/git.png' %}" alt="" /></a>
+  <a href="https://github.com/OhHuijin/WP_modern-website-"><p class="git">POPCODE GitHub</p></a>
+  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><img class="ppt" src="{% static 'popcode/images/popcode3.svg' %}" alt="" /></a>
+  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><p class="git">POPCODE Introduction Slides</p></a>
+  <a href="https://pypi.org/project/pymongo/"><img class="mongo" src="{% static 'popcode/images/pymongo.png' %}" alt="" /></a>
+  <a href="https://pypi.org/project/pymongo/"><p class="mongo">Our Framework - Pymongo</p></a>
+  {% endblock nav %}
