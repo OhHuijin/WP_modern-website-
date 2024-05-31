@@ -369,9 +369,33 @@ p {
     transition-duration: .3s;
 }
 
+.codeInputCt {
+    position: relative;
+    min-height: 200px;
+}
+
 .codeInput {
     width: 100%;
     resize: vertical;
+    border: none;
+    background-color: transparent;
+    color: transparent;
+    caret-color: orange;
+    z-index: 1;
+    padding: 1em;
+    transform: translate(-2px, 15px);
+    min-height: 100%;
+    outline: none;
+}
+
+.codeRender {
+    width: 100%;
+    min-height: 100%;
+}
+
+.codeInput,
+.codeRender {
+    position: absolute;
 }
 
 .codeWindow {
