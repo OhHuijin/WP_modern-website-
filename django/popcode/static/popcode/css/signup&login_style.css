@@ -5,8 +5,13 @@
     "Source Han Sans CN", sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
 .main-container {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .main-container,
@@ -770,7 +775,7 @@ button {
   text-overflow: initial;
   white-space: nowrap;
   z-index: 35;
-  
+
 }
 
 .account {
@@ -781,7 +786,7 @@ button {
   font-weight: 500;
   line-height: 21px;
   text-align: left;
-  
+
 }
 
 .sign-in-27 {
