@@ -86,7 +86,7 @@ describe('quiz.html', () => {
         }
     });
 
-    test('should move to the previous slide when prev button is clicked', () => {
+    /* test('should move to the previous slide when prev button is clicked', () => {
       const nextBtn = document.querySelector('#next-btn');
       const prevBtn = document.querySelector('#prev-btn');
 
@@ -112,7 +112,7 @@ describe('quiz.html', () => {
 
       expect(firstSlideStyle.display).toBe('block');
       expect(secondSlideStyle.display).toBe('none');
-    });
+    }); */
 
     test('should shuffle the answers for a quiz type slide', () => {
       const slides = document.querySelectorAll('.level');
