@@ -1,16 +1,19 @@
+/* Reset CSS */
+/* Apply box-sizing to all elements */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Set up height and overflow for HTML and body */
 html,
 body {
     height: 100%;
     overflow-x: hidden;
 }
 
-
+/* Styling for the body */
 body {
     width: 100%;
     min-height: 100vh;
@@ -18,15 +21,10 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     background-color: rgb(255, 206, 206);
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 
-/* 최상단 로고 컨테이너 (여기부터) */
+/* Styling for the main container */
 .container {
     margin-bottom: -2%;
     position: relative;
@@ -35,20 +33,19 @@ body {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    /* background-color: grey; */
 }
 
+/* Styling for the logo image */
 .corn {
     width: 50vw;
     margin-bottom: -4%;
     max-width: 128px;
     text-align: center;
-    /* position: relative; */
     z-index: 1;
     top: 40%;
-
 }
 
+/* Styling for the day text */
 .day {
     width: 80px;
     margin-bottom: 1%;
@@ -57,20 +54,13 @@ body {
     z-index: 2;
     font-size: 17px;
     transform: translateY(-60px);
-
 }
 
-/* 최상단 로고 컨테이너 (여기까지) */
-
-
-/* 퀴즈 컨테이너 */
+/* Quiz container styling */
 .game-quiz-container {
     width: 80vw;
-    /* 뷰포트 너비의 80% */
     max-width: 60rem;
-    /* 최대 너비 제한 */
     max-height: 50rem;
-    /* 최대 높이 제한 */
     margin-bottom: 50px;
     display: flex;
     flex-direction: column;
@@ -79,8 +69,7 @@ body {
     border-radius: 30px;
 }
 
-/* 슬라이드, 프로그레스 바 */
-/* Score : 0 / 5 Question : 1 / 10 크기 */
+/* Styling for the game details container */
 .game-details-container {
     display: flex;
     justify-content: space-around;
@@ -92,11 +81,12 @@ body {
     box-shadow: 5px 5px darkgray;
 }
 
+/* Styling for the level type */
 .game-details-container h1 {
     font-size: 30px;
 }
 
-/* 문제 컨테이너 */
+/* Styling for the game question container */
 .game-question-container {
     width: 90%;
     flex: 1;
@@ -109,53 +99,91 @@ body {
     border-radius: 25px;
 }
 
+/* Styling for the game question text */
 .game-question-container h1 {
     font-size: 1.1rem;
     text-align: left;
-    /* 문제텍스트를 왼쪽 정렬 */
     line-height: 1.6;
-    /* 원하는 줄 간격 값으로 설정 */
     padding: 3px;
 }
 
-/* 이게 뭐죠? */
-.game-options-container {
-    width: 90%;
-    height: 12rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    /* background-color: aqua; */
-
+/* Styling for the answer grid */
+#answerGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
 }
 
-.game-options-container span {
-    width: 45%;
-    height: 3rem;
-    border: 2px solid darkgray;
-    background-color: beige;
-    border-radius: 20px;
-    overflow: hidden;
+/* Styling for the checkbox */
+.check {
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
+    transition-duration: .3s;
 }
 
-input[type="radio"] {
+/* Styling for the code input container */
+.codeInputCt {
     position: relative;
-    display: none;
+    min-height: 200px;
 }
 
-
-input[type=radio]:checked~.option {
-    background: paleturquoise;
+/* Styling for the code input */
+.codeInput {
+    width: 100%;
+    resize: vertical;
+    border: none;
+    background-color: transparent;
+    color: transparent;
+    caret-color: orange;
+    z-index: 1;
+    padding: 1em;
+    transform: translate(-2px, 15px);
+    min-height: 100%;
+    outline: none;
 }
 
-.next-button-container {
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+/* Styling for the code render */
+.codeRender {
+    width: 100%;
+    min-height: 100%;
 }
 
+/* Styling for the code window */
+.codeWindow {
+    background: rgb(25, 25, 25);
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+/* Styling for the code window title */
+.codeWindowTitle {
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
+    color: black;
+    background-color: aliceblue;
+    width: min-content;
+}
+
+/* Styling for the code window log */
+.codeWindowLog {
+    background: #f3f3f3;
+    border-radius: 0px 10px 10px 10px;
+    height: 100%;
+}
+
+/* Styling for disabled buttons */
+.run[disabled],
+button[disabled] {
+    background-color: gray;
+    color: #ffc107;
+    cursor: wait;
+}
+
+/* Styling for the next and previous buttons */
 .next-button-container button {
     margin-left: 50px;
     margin-right: 50px;
@@ -174,266 +202,9 @@ input[type=radio]:checked~.option {
     transition-duration: 0.3s;
 }
 
+/* Hover effect for the next and previous buttons */
 .next-button-container button:hover {
     background-color: #ffc824;
     box-shadow: none;
     transform: translate(2px, 2px);
-}
-
-.modal-container {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* -webkit-animation: fadeIn 1.2s ease-in-out; */
-    animation: fadeIn 1.2s ease-in-out;
-}
-
-/* 모달 글씨 담는 컨테이너 크기 */
-.modal-content-container {
-    height: 20rem;
-    width: 25rem;
-    background-color: rgb(43, 42, 42);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 25px;
-}
-
-/* 모달 글씨 */
-.modal-content-container h1,
-p {
-    font-size: 1.3rem;
-    height: 3rem;
-
-    color: rgb(253, 255, 244);
-
-    text-align: center;
-}
-
-.grade-details {
-    width: 15rem;
-    height: 10rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.grade-details p {
-    color: white;
-    text-align: center;
-}
-
-.modal-button-container {
-    height: 10rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-button-container button {
-    width: 10rem;
-    height: 2rem;
-    background: none;
-    outline: none;
-    border: 1px solid rgb(252, 242, 241);
-    color: #ffc107;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 20px;
-}
-
-.modal-button-container button:hover {
-    background-color: rgb(83, 82, 82);
-}
-
-
-
-@media(min-width : 300px) and (max-width : 350px) {
-    .game-quiz-container {
-        width: 90%;
-        height: 80vh;
-    }
-
-    .game-details-container h1 {
-        font-size: 0.8rem;
-    }
-
-    .game-question-container h1 {
-        font-size: 0.9rem;
-    }
-
-    .game-options-container span {
-        width: 90%;
-        height: 2.5rem;
-    }
-
-    .game-options-container span label {
-        font-size: 0.8rem;
-    }
-
-    .modal-content-container {
-        width: 90%;
-        height: 25rem;
-    }
-
-    /* 디스크립션 */
-    #intro-modal-content {
-        width: 90%;
-        height: 25rem;
-    }
-
-    .modal-content-container h1 {
-        font-size: 1.2rem;
-    }
-}
-
-
-
-@media(min-width : 350px) and (max-width : 700px) {
-    .game-quiz-container {
-        width: 100%;
-    }
-
-    .game-details-container h1 {
-        font-size: 1rem;
-    }
-
-    .game-question-container h1 {
-        font-size: 0.9rem;
-    }
-
-    .game-options-container span {
-        width: 90%;
-    }
-
-    .modal-content-container {
-        width: 90%;
-        height: 25rem;
-    }
-
-    .modal-content-container h1 {
-        font-size: 1.2rem;
-    }
-
-    .level {
-        max-width: 90vw;
-    }
-}
-
-
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.language {
-    font-size: 700px;
-}
-
-.run {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #ffc107;
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
-    border: none;
-}
-
-#answerGrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-}
-
-.check {
-    padding: 10px;
-    font-size: 20px;
-    border-radius: 10px;
-    background-color: whitesmoke;
-    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
-    transition-duration: .3s;
-}
-
-.codeInputCt {
-    position: relative;
-    min-height: 200px;
-}
-
-.codeInput {
-    width: 100%;
-    resize: vertical;
-    border: none;
-    background-color: transparent;
-    color: transparent;
-    caret-color: orange;
-    z-index: 1;
-    padding: 1em;
-    transform: translate(-2px, 15px);
-    min-height: 100%;
-    outline: none;
-}
-
-.codeRender {
-    width: 100%;
-    min-height: 100%;
-}
-
-.codeInput,
-.codeRender {
-    position: absolute;
-}
-
-.codeWindow {
-    background: rgb(25, 25, 25);
-    color: white;
-    padding: 5px;
-    border-radius: 10px;
-}
-
-.codeWindowTitle {
-    padding: 5px;
-    border-radius: 10px 10px 0 0;
-    color: black;
-    background-color: aliceblue;
-    width: min-content;
-}
-
-.codeWindowLog {
-    background: #f3f3f3;
-    border-radius: 0px 10px 10px 10px;
-    height: 100%;
-}
-
-.run[disabled],
-button[disabled] {
-    background-color: gray;
-    color: #ffc107;
-    cursor: wait;
-}
-
-.run[disabled]:hover,
-button[disabled]:hover {
-    background-color: gray;
-    color: #ffc107;
-    cursor: wait;
 }
