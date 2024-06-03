@@ -1,16 +1,33 @@
 {% extends './layout.html' %}
+{% load static %}
 
 {% block title %}
   Profile - {{ user.username }} {{ requestedname }}
 {% endblock %}
 
+{% block head %}
+  <link rel="stylesheet" href="{% static 'popcode/css/profile.css' %}" />
+{% endblock %}
+
 {% block nav %}
-  {% if user %}
-    <!-- Display user information -->
-    <h1>{{ user.username }}</h1>
-    <i>Last login : {{ user.lastLogin }}</i>
-  {% else %}
-    <!-- Message for no user found -->
-    <i>No user were found with {{ requestedname }}</i>
-  {% endif %}
+  <section id="profileBG">
+    {% if user %}
+      <div class="card">
+        <img src="https://api.dicebear.com/8.x/adventurer-neutral/svg?seed={{ user.username }}" alt="" />
+        <h1>{{ user.username }}</h1>
+        <div class="stat">
+          <span><i>🔥</i>Streak of {{ user.streak }}</span>
+          <span><i>📅</i>Created the {{ created }}</span>
+        </div>
+        <h2>Courses</h2>
+        <div id="courseList">
+          {% for course in user.progress %}
+            <span>{{ course }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <i>No user were found with {{ requestedname }}</i>
+    {% endif %}
+  </section>
 {% endblock %}
