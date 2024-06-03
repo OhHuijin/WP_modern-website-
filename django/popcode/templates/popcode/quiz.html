@@ -1,5 +1,5 @@
 {% extends './layout.html' %}
-{% load static %}
+
 {% block title %}
   PopCode🍿 - Quiz ✅
 {% endblock %}
@@ -51,6 +51,7 @@
               {{ level.content|safe }}
 
               {% if level.type == 'CODE' %}
+                <!-- Code section -->
                 <h3>Write your own code</h3>
                 <div class="codeInputCt">
                   <textarea id="codeInput-{{ forloop.counter0 }}" spellcheck="false" class="codeInput">{{ level.startcode }}</textarea>
@@ -72,6 +73,7 @@
                   </pre>
                 </div>
 
+                <!-- JavaScript for running code -->
                 <script>
                   document.querySelector('#codeInput-{{forloop.counter0}}').addEventListener('input', (e) => {
                     document.querySelector('#code-{{forloop.counter0}}').dataset.highlighted = ''
@@ -108,6 +110,7 @@
                   })
                 </script>
               {% elif level.type == 'QUIZ' %}
+                <!-- Quiz section -->
                 <br />
                 <div id="answerGrid">
                   {% for ans in level.answers %}
@@ -120,11 +123,13 @@
               {% endif %}
             </section>
           {% empty %}
+            <!-- No sections in this part -->
             <p>No sections in this part</p>
           {% endfor %}
         </div>
 
         <div class="next-button-container">
+          <!-- Navigation buttons -->
           <button id="prev-btn">Previous</button>
           <button id="next-btn">Next Question</button>
         </div>
@@ -132,6 +137,7 @@
     </main>
   </div>
 
+  <!-- JavaScript variables and scripts -->
   <script>
     var parts = {{ part|safe }}
   </script>

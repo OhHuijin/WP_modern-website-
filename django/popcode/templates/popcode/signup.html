@@ -11,27 +11,33 @@
         {% endblock %}
     </title>
 
+    <!-- Link to Google Fonts stylesheet -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
+    <!-- Load CSS file from the static directory -->
     <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
     <link href="{% static 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap' %}" rel="stylesheet" />
 </head>
 <body>
     <div class="main-container">
         <div class="image" style="width: 100px;">
+            <!-- Load image from the static directory -->
             <img class="popcorn" src="{% static 'popcode/images/chris-lee-70l1tdai6rm-unsplash-1.png' %}" alt="" />
         </div>
 
         <div class="frame">
             <div class="group">
+                <!-- Link to homepage -->
                 <a href="{% url 'homepage' %}">
+                    <!-- Load logo image from the static directory -->
                     <img class="popcode" src="{% static 'popcode/images/popcode.svg' %}" alt="" />
                 </a>
                 <div class="frame-a">
                     <span class="message">Get Started Now</span>
                 </div>
 
+                <!-- Signup form -->
                 <form id="signupForm" action="{% url 'apiSignup' %}" method="post">
-                    {% csrf_token %}
+                    {% csrf_token %} <!-- Add CSRF token for security -->
                     <div class="frame-b">
                         <div class="frame-c">
                             <span class="name">Username</span>
@@ -93,10 +99,12 @@
     </div>
 
     <script>
+        // Click event to show personal information collection agreement
         document.getElementById('policy').addEventListener('click', function () {
             alert('<Popcord Terms of Use> \n 1. Collection and Use of Personal Information\nWe collect and use your personal information for data analysis and marketing purposes.\n2. Retention Period\nYour personal information will be retained for one year after you unsubscribe.\n This concise version includes the key points about data collection, use, and retention.');
         });
 
+        // Form submission validation
         document.getElementById('signupForm').addEventListener('submit', function (event) {
             const usernameValue = document.getElementById('username').value;
             const emailValue = document.getElementById('email').value;

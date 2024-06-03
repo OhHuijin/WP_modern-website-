@@ -1,27 +1,41 @@
 {% extends './layout.html' %}
 {% block nav %}
+  <!-- Spacing -->
   <br /><br /><br /><br />
+  <!-- Lesson and part information -->
   <h1>{{ lesson.title }} - {{ part.title }} ({{ partIndex }})</h1>
+  <!-- Author information -->
   <i>By {{ lesson.author }}</i>
+  <!-- Part description -->
   <p>{{ part.description }}</p>
+  <!-- Section headers -->
   <h2>Sections</h2>
+  <!-- Section list -->
   <ul>
     {% for level in part.levels %}
       <li>
+        <!-- Section type -->
         <h3>{{ level.type }}</h3>
+        <!-- Section content -->
         {{ level.content|safe }}
+        <!-- Code section -->
         {% if level.type == 'CODE' %}
           <pre>
+            <!-- Editable code block -->
             <code class="language-{{ level.lang }}" contenteditable="true" id="code-{{ forloop.counter0 }}">{{ level.startcode }}</code>
           </pre>
+          <!-- Run button -->
           <button id="codeSubmit-{{ forloop.counter0 }}">RUN</button>
+          <!-- Output display -->
           <div style="border:5px black dotted">
+            <!-- Output code -->
             The last code ran with output code : <span id="returnCode-{{ forloop.counter0 }}"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br />
             Output:<br />
             <code id="stdout-{{ forloop.counter0 }}"></code> <br />
             Error:<br />
             <code id="stderr-{{ forloop.counter0 }}"></code>
           </div>
+          <!-- Script for code execution -->
           <script>
             document.querySelector('#codeSubmit-{{forloop.counter0}}').addEventListener('click', () => {
               if (document.querySelector('#code-{{forloop.counter0}}').innerText) {
@@ -59,8 +73,10 @@
               return cookieValue
             }
           </script>
+        <!-- Quiz section -->
         {% elif level.type == 'QUIZ' %}
           <br />
+          <!-- Display quiz answers -->
           {% for ans in level.answers %}
             {% if ans.valid %}
               <input type="checkbox" disabled checked />{{ ans.content }}<br />
@@ -71,19 +87,23 @@
         {% endif %}
       </li>
     {% empty %}
+      <!-- Message for no sections -->
       <p>No sections in this part</p>
     {% endfor %}
   </ul>
+  <!-- Admin options -->
   {% if request.session.admin %}
-    <h1>Add explaination to this level ?</h1>
+    <!-- Form for adding explanation -->
+    <h1>Add explanation to this level ?</h1>
     <form action="{% url 'apiAddLevel' %}" method="post">
       {% csrf_token %}
-      <textarea name="content" placeholder="Explaination"></textarea>
+      <textarea name="content" placeholder="Explanation"></textarea>
       <input type="hidden" name="type" value="EXPL" />
       <input type="hidden" name="lessonId" value="{{ lesson.title }}" />
       <input type="hidden" name="partId" value="{{ partIndex }}" />
       <button type="submit">Create</button>
     </form>
+    <!-- Form for adding question -->
     <h1>Add question to this level ?</h1>
     <form action="{% url 'apiAddLevel' %}" method="post">
       {% csrf_token %}
@@ -107,6 +127,7 @@
       <input type="hidden" name="partId" value="{{ partIndex }}" />
       <button type="submit">Create</button>
     </form>
+    <!-- Form for adding code challenge -->
     <h1>Add code challenge to this level ?</h1>
     <form action="{% url 'apiAddLevel' %}" method="post">
       {% csrf_token %}
@@ -120,7 +141,4 @@
       <input type="hidden" name="type" value="CODE" />
       <input type="hidden" name="lessonId" value="{{ lesson.title }}" />
       <input type="hidden" name="partId" value="{{ partIndex }}" />
-      <button type="submit">Create</button>
-    </form>
-  {% endif %}
-{% endblock %}
+     
