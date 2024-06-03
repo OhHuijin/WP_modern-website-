@@ -30,6 +30,7 @@
         <a href="{% url 'contact' %}">Contact</a>
         <div id="rightNav">
           {% if request.session.username %}
+            <img src="https://api.dicebear.com/8.x/adventurer-neutral/svg?seed={{ request.session.username }}" alt="avatar" id="avatar" />
             <a id="username" href="{% url 'profile' %}">{{ request.session.username }}</a>
             {% if request.session.admin %}
               <a id="admin" href="{% url 'bp' %}">⚙️</a>
