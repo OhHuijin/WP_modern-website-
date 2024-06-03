@@ -4,32 +4,34 @@
 {% block title %}PopCode🍿 - Links 🕸️{% endblock %}
 
 {% block head %}
+  <!-- Load link.css file from the static directory -->
   <link href="{% static 'popcode/css/link.css' %}" rel="stylesheet" />
  {% endblock head %}
 
 {% block nav %}
+  <!-- Title section -->
   <div class="title">
     <h1>
 
 
     </h1>
  
+    <!-- Title for official links page -->
     <h1>Take a Look at Our Official Links!</h1>
+    <!-- Divider -->
     <h2>__________________________________________</h1>
 
 
 
   </div class=container>
 
+  <!-- Links list -->
   <div>
-  <a href="https://github.com/OhHuijin/WP_modern-website-"><img class="gitimg" src="{% static 'popcode/images/git.png' %}" alt="" /></a>
-  <a href="https://github.com/OhHuijin/WP_modern-website-"><p class="git">POPCODE GitHub</p></a>
-  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><img class="pptimg" src="{% static 'popcode/images/popcode3.svg' %}" alt="" /></a>
-  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><p class="ppt">POPCODE Introduction Slides</p></a>
-  <a href="https://pypi.org/project/pymongo/"><img class="mongoimg" src="{% static 'popcode/images/pymongo.png' %}" alt="" /></a>
-  <a href="https://pypi.org/project/pymongo/"><p class="mongo">Our Framework - Pymongo</p></a>
-
-  <p id="info">Do you need more information?</p>
-  <a href="{% url 'contact' %}"><button class="mongo">Go to Contact</button></a>
-</div>
-  {% endblock nav %}
+    <!-- POPCODE GitHub link and image -->
+    <a href="https://github.com/OhHuijin/WP_modern-website-"><img class="gitimg" src="{% static 'popcode/images/git.png' %}" alt="" /></a>
+    <!-- POPCODE GitHub link text -->
+    <a href="https://github.com/OhHuijin/WP_modern-website-"><p class="git">POPCODE GitHub</p></a>
+    <!-- POPCODE Introduction Slides link and image -->
+    <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><img class="pptimg" src="{% static 'popcode/images/popcode3.svg' %}" alt="" /></a>
+    <!-- POPCODE Introduction Slides link text -->
+    <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-j

@@ -5,13 +5,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Load favicon.ico file from the static directory -->
     <link rel="shortcut icon" href="{% static 'popcode/favicon.ico' %}" type="image/x-icon" />
     <title>
       {% block title %}
         PopCode🍿 - Your ultimate coding boot buddy
       {% endblock %}
     </title>
+    <!-- Load style.css file from the static directory -->
     <link href="{% static 'popcode/css/style.css' %}" rel="stylesheet" />
+    <!-- Load hljs.css file from the static directory -->
     <link href="{% static 'popcode/css/hljs.css' %}" rel="stylesheet" />
     {% block head %}
 
@@ -20,6 +23,7 @@
   <body>
     <div class="menu_container">
       <div id="logoNav">
+        <!-- Logo that links to the homepage -->
         <a href="{% url 'homepage' %}"><img src="{% static 'popcode/images/popcode.svg' %}" /></a>
         <button id="menuToggle">☰</button>
       </div>
@@ -31,6 +35,7 @@
         <a href="{% url 'contact' %}">Contact</a>
         <div id="rightNav">
           {% if request.session.username %}
+            <!-- Avatar image generated based on the username -->
             <img src="https://api.dicebear.com/8.x/adventurer-neutral/svg?seed={{ request.session.username }}" alt="avatar" id="avatar" />
             <a id="username" href="{% url 'profile' %}">{{ request.session.username }}</a>
             {% if request.session.admin %}
@@ -52,7 +57,9 @@
     {% block nav %}
 
     {% endblock %}
+    <!-- Load hljs.js file from the static directory -->
     <script src="{% static 'popcode/js/hljs.js' %}"></script>
+    <!-- Load hljs_python.js file from the static directory -->
     <script src="{% static 'popcode/js/hljs_python.js' %}"></script>
     <script>
       hljs.highlightAll()

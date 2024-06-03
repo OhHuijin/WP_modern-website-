@@ -6,23 +6,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>
   {% block title %}
+    <!-- Page title -->
     login
   {% endblock %}
 </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" />
+<!-- Load signup&login_style.css file -->
 <link href="{% static 'popcode/css/signup&login_style.css' %}" rel="stylesheet" />
+<!-- Load Google Fonts style sheet -->
 <link href="{% static 'https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap' %}" rel="stylesheet" />
 
 <div class="main-container">
+  <!-- Image container -->
   <div class ="image" style = "width : 100px">
-<img class = popcorn src="{% static 'popcode/images/chris-lee-70l1tdai6rm-unsplash-1.png' %}" alt="" />
-</div>
+    <!-- Popcorn image -->
+    <img class = popcorn src="{% static 'popcode/images/chris-lee-70l1tdai6rm-unsplash-1.png' %}" alt="" />
+  </div>
 
-
+  <!-- Login form -->
   <div class="frame">
     <div class="group">
+      <!-- Link to homepage -->
       <a href="{% url 'homepage' %}"><img class="popcode" src="{% static 'popcode/images/popcode.svg' %}" alt="" /></a>
       <div class="frame-a">
+        <!-- Welcome message -->
         <span class="message">Welcome back!</span>
       </div>
 
@@ -30,28 +37,33 @@
         {% csrf_token %}
         <div class="frame-b">
           <div class="name-11">
+            <!-- Username field label -->
             <span class="name">Username</span>
           </div>
           <div class="frame-d">
             <input class="frame-input" name="username" />
             <div class="frame-e">
+              <!-- Username input guidance message -->
               <span class="name-15">Enter your username</span>
             </div>
           </div>
         </div>
         <div class="frame-f">
           <div class="frame-10">
+            <!-- Password field label -->
             <span class="name-11">Password</span>
           </div>
           <div class="frame-12">
             <input class="frame-input-13" name="password" type="password" />
             <div class="frame-14">
+              <!-- Password input guidance message -->
               <span class="name-15">Enter your password</span>
             </div>
           </div>
         </div>
         <div class="group-1d">
           <div class="terms-policy">
+            <!-- Remember for 30 days option -->
             <span class="agree-terms-policy">Remember for 30 days</span>
           </div>
 
@@ -59,23 +71,25 @@
           <label for="checkbox1" class="agree-terms-policy-1e"></label>
         </div>
 
+        <!-- Login button -->
         <a href="{% url 'homepage' %}">
           <div class="B">
-          <button class="frame-1f" type="submit">
-            <div class="frame-20">
-              Log in
+            <button class="frame-1f" type="submit">
+              <div class="frame-20">
+                <!-- Login button text -->
+                Log in
+              </div>
+            </button>
           </div>
-          </button>
-        </div>
         </a>
       </form>
 
-
-        <div class="group-26">
-          <div class="sign">
-            <span class="account">Don't have an account?</span><a href="{% url 'signup' %}"><span class="sign-in-27">Sign Up</span></a>
-          </div>
+      <!-- Link to signup page -->
+      <div class="group-26">
+        <div class="sign">
+          <span class="account">Don't have an account?</span><a href="{% url 'signup' %}"><span class="sign-in-27">Sign Up</span></a>
         </div>
+      </div>
 
     </div>
   </div>

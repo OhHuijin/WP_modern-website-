@@ -1,30 +1,33 @@
 {% extends './layout.html' %}
-{% load get_item %}
-{% include './components/alert.html' %}
 
-{% load static %}
+{% load get_item %} <!-- Custom template tag for accessing dictionary items -->
+
+{% include './components/alert.html' %} <!-- Include alert component -->
+
+{% load static %} <!-- Load static files -->
 
 {% block title %}
-PopCode🍿 - For You 😎
+PopCode🍿 - For You 😎 <!-- Page title -->
 {% endblock %}
 
 {% block head %}
-  <link href="{% static 'popcode/css/readypage.css' %}" rel="stylesheet" />
+  <link href="{% static 'popcode/css/readypage.css' %}" rel="stylesheet" /> <!-- Link to the CSS file -->
 {% endblock %}
 
 {% block nav %}
   <div class="title">
-    <img src="{% static 'popcode/images/popcode.svg' %}" />
-    <h1>For You</h1>
+    <img src="{% static 'popcode/images/popcode.svg' %}" /> <!-- PopCode logo -->
+    <h1>For You</h1> <!-- Section title -->
   </div>
 
-    {% for lesson in lessons %}
-        <h1 class="lessontitle">{{lesson.title}}</h1>
-        <p class="lessondescription">{{lesson.description}}</p>
+    {% for lesson in lessons %} <!-- Loop through lessons -->
+        <h1 class="lessontitle">{{lesson.title}}</h1> <!-- Lesson title -->
+        <p class="lessondescription">{{lesson.description}}</p> <!-- Lesson description -->
     <div class="daycontainer">
       <div class="link-container">
-        {% for part in lesson.parts %}
+        {% for part in lesson.parts %} <!-- Loop through parts -->
         {% if user.progress|get_item:lesson.title is not None and user.progress|get_item:lesson.title >= forloop.counter0 %}
+        <!-- Check user progress and set appropriate link -->
         <a href="{% url 'part' lesson.title forloop.counter0 %}"><img src="{% static 'popcode/images/popcorn.png' %}" /></a>
         {% else %}
         <a href="{% url 'part' lesson.title forloop.counter0 %}"><img src="{% static 'popcode/images/corn.png' %}" /></a>
@@ -33,7 +36,7 @@ PopCode🍿 - For You 😎
       </div>
       <div class="link-container">
         {% for part in lesson.parts %}
-        <p class="parttitle">{{part.title}}</p>
+        <p class="parttitle">{{part.title}}</p> <!-- Display part title -->
         {% endfor %}
         
       </div>

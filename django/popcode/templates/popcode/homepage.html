@@ -1,4 +1,5 @@
-{% load static %}
+{% load static %} <!-- Load static files -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,26 +10,26 @@
         PopCode🍿 - Your ultimate coding boot buddy
       {% endblock %}
     </title>
-    <meta name="description" content="Discover PopCode, the ultimate companion for your coding journey. Whether you're a beginner or looking to sharpen your skills, PopCode offers a dynamic and interactive learning experience similar to SoloLearn and Duolingo. Dive into fun, gamified lessons, challenges, and real-world projects that make coding enjoyable and effective. Join our community of passionate learners and start building your coding skills with PopCode today!" />
-    <link rel="shortcut icon" href="{% static 'popcode/favicon.ico' %}" type="image/x-icon" />
-    <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet" />
-    <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'popcode/css/hljs_dark.css' %}" />
+    <meta name="description" content="Discover PopCode, the ultimate companion for your coding journey. Whether you're a beginner or looking to sharpen your skills, PopCode offers a dynamic and interactive learning experience similar to SoloLearn and Duolingo. Dive into fun, gamified lessons, challenges, and real-world projects that make coding enjoyable and effective. Join our community of passionate learners and start building your coding skills with PopCode today!" /> <!-- Meta description -->
+    <link rel="shortcut icon" href="{% static 'popcode/favicon.ico' %}" type="image/x-icon" /> <!-- Favicon -->
+    <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet" /> <!-- Homepage style -->
+    <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet" /> <!-- Homepage global styles -->
+    <link rel="stylesheet" href="{% static 'popcode/css/hljs_dark.css' %}" /> <!-- Syntax highlighting style -->
   </head>
   <body>
     <div class="home">
       <nav>
-        <a href="{% url 'homepage' %}"><img src="{% static 'popcode/images/popcode.svg' %}" alt="" /></a>
+        <a href="{% url 'homepage' %}"><img src="{% static 'popcode/images/popcode.svg' %}" alt="" /></a> <!-- Homepage logo -->
         <div class="leftlinks">
-          <a class="btn whiteborder" href="{% url 'login' %}">Login</a>
-          <a class="btn redborder" href="{% url 'signup' %}">Sign up</a>
+          <a class="btn whiteborder" href="{% url 'login' %}">Login</a> <!-- Login button -->
+          <a class="btn redborder" href="{% url 'signup' %}">Sign up</a> <!-- Sign up button -->
         </div>
       </nav>
       <div class="centerContent">
         <h1>Welcome to</h1>
-        <img src="{% static 'popcode/images/popcode.svg' %}" alt="" />
+        <img src="{% static 'popcode/images/popcode.svg' %}" alt="" /> <!-- PopCode logo -->
         <p>Your ultimate coding boot buddy</p>
-        <a href="{% url 'signup' %}" class="btn redborder">Join the adventure !</a>
+        <a href="{% url 'signup' %}" class="btn redborder">Join the adventure !</a> <!-- Join button -->
       </div>
       <pre id="flyingCode" class="language-python">
         <!-- prettier-ignore --> <code>from sleep import time
@@ -46,10 +47,10 @@ def is_odd(number):
 
       <img src="{% static 'popcode/images/0420ebc6188c4868fb91e01f14caf662051b0325.png' %}" alt="" id="flyingImage" />
     </div>
-    <script src="{% static 'popcode/js/hljs.js' %}"></script>
-    <script src="{% static 'popcode/js/hljs_python.js' %}"></script>
+    <script src="{% static 'popcode/js/hljs.js' %}"></script> <!-- Syntax highlighting script -->
+    <script src="{% static 'popcode/js/hljs_python.js' %}"></script> <!-- Python syntax highlighting script -->
     <script>
-      hljs.highlightAll()
+      hljs.highlightAll() <!-- Apply syntax highlighting to all code blocks -->
     </script>
   </body>
 </html>

@@ -34,8 +34,9 @@
   }
 </style>
 {% if error or request.GET.error %}
-  <aside class="redAlert">{{ error }}{{ request.GET.error }}</aside>
+  <aside class="redAlert">{{ error }}{{ request.GET.error }}</aside> <!-- Display red alert message for error -->
 {% endif %}
 {% if success or request.GET.success %}
-  <aside class="greenAlert">{{ success }}{{ request.GET.success }}</aside>
+  <aside class="greenAlert">{{ success }}{{ request.GET.success }}</aside> <!-- Display green alert message for success -->
 {% endif %}
+

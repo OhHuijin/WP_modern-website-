@@ -6,9 +6,11 @@
 
 {% block nav %}
   {% if user %}
+    <!-- Display user information -->
     <h1>{{ user.username }}</h1>
     <i>Last login : {{ user.lastLogin }}</i>
   {% else %}
+    <!-- Message for no user found -->
     <i>No user were found with {{ requestedname }}</i>
   {% endif %}
 {% endblock %}

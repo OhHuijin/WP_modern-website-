@@ -1,20 +1,24 @@
-{% extends './layout.html' %}
+{% extends './layout.html' %} <!-- Extend the base template -->
+
 {% block nav %}
   {% if error %}
-    <markee>{{ error }}</markee>
+    <markee>{{ error }}</markee> <!-- Display error message using marquee -->
   {% endif %}
-  <h1>Backend Playground</h1>
-  <hr />
-  <h1>Run Code</h1>
-  <textarea id="codeInput"></textarea>
-  <button id="codeSubmit"></button>
-  <div style="border:5px black dotted">
+  
+  <h1>Backend Playground</h1> <!-- Backend Playground section -->
+  <hr /> <!-- Horizontal line -->
+  
+  <h1>Run Code</h1> <!-- Run Code section -->
+  <textarea id="codeInput"></textarea> <!-- Code input area -->
+  <button id="codeSubmit"></button> <!-- Submit button -->
+  <div style="border:5px black dotted"> <!-- Output display area -->
     The last code ran with output code : <span id="returnCode"></span> (0=success, 1=error, 2=timeout, 3=unknown error)<br />
     Output:<br />
-    <code id="stdout"></code> <br />
+    <code id="stdout"></code> <br /> <!-- Standard output -->
     Error:<br />
-    <code id="stderr"></code>
+    <code id="stderr"></code> <!-- Standard error -->
   </div>
+  
   <script>
     const codeSubmit = document.querySelector('#codeSubmit')
     const codeInput = document.querySelector('#codeInput')
@@ -22,11 +26,11 @@
     const stdout = document.querySelector('#stdout')
     const stderr = document.querySelector('#stderr')
     
-    codeSubmit.addEventListener('click', () => {
+    codeSubmit.addEventListener('click', () => { <!-- Event listener for code submission -->
       const code = codeInput.value
       const lang = 'python3'
       if (code) {
-        fetch('api/run', {
+        fetch('api/run', { <!-- API endpoint for code execution -->
           method: 'POST',
           headers: {
             'X-CSRFToken': getCookie('csrftoken')
@@ -59,7 +63,8 @@
       return cookieValue
     }
   </script>
-
+  
+  <!-- Login Section -->
   <h1>Login</h1>
   <form action="{% url 'apiLogin' %}" method="post">
     {% csrf_token %}
@@ -67,7 +72,8 @@
     <input type="password" name="password" placeholder="Password" />
     <button type="submit">Login</button>
   </form>
-
+  
+  <!-- Signup Section -->
   <h1>Signup</h1>
   <form action="{% url 'apiSignup' %}" method="post">
     {% csrf_token %}
@@ -76,7 +82,8 @@
     <input type="password" name="password" placeholder="Password" />
     <button type="submit">Register</button>
   </form>
-
+  
+  <!-- Edit Profile Section -->
   <h1>Edit profile</h1>
   {% if request.session.username and request.session.token %}
     <p>
@@ -95,7 +102,8 @@
   {% else %}
     <p>You need to login to edit your profile</p>
   {% endif %}
-
+  
+  <!-- Create Lesson Section -->
   <h1>Create Lesson</h1>
   {% if request.session.admin %}
     <form action="{% url 'apiCreateLesson' %}" method="post">
@@ -108,6 +116,7 @@
     <p>You need to be an admin to create a lesson</p>
   {% endif %}
 
+<!-- Lessons Section -->
   <h1>Lessons</h1>
   {% for lesson in lessons %}
     <a href="lesson/{{ lesson.title }}"><h2>{{ lesson.title }}</h2></a>
