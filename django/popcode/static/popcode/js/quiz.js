@@ -1,15 +1,20 @@
+// Imported from django
 const levels = parts.levels;
+
+// HTML elements
 const nextBtn = document.querySelector('#next-btn');
 const prevBtn = document.querySelector('#prev-btn');
 const actualSlideIndicator = document.querySelector('#actual-slide-indicator');
 const actualSlideProgress = document.querySelector('#actual-slide-progress');
 const lvlType = document.querySelector('#lvl-type');
 
+// Related to the slides
 let slides = document.querySelectorAll('.level');
 let currentSlide = 0;
 let canGoNext = levels[currentSlide].type == "EXPL";
 let answersRevealed = false;
 
+// Base URL for the finishLesson API
 let baseURL = `${window.location.protocol}//${window.location.host}/api/finishLesson`;
 let getP = window.location.pathname.split("/");
 baseURL += `?title=${getP[2]}&part=${getP[3]}`
@@ -64,6 +69,7 @@ function shuffleChecks(){
 nextBtn.addEventListener('click', ()=>{
     if(canGoNext) return nextSlide();
 
+    // If the current slide is a quiz, check the answers, and show the correct ones or shuffle them.
     if(levels[currentSlide].type == "QUIZ"){
         if(answersRevealed){
             answersRevealed = false;
@@ -89,4 +95,5 @@ nextBtn.addEventListener('click', ()=>{
 
 prevBtn.addEventListener('click', prevSlide);
 
+// Show the first slide by default
 showSlide(0);
