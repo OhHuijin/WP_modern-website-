@@ -34,7 +34,8 @@ class Tester(unittest.TestCase):
     def test_logout(self):
         self.client.session["username"] = "test"
         self.client.session["token"] = "test"
+        self.client.session.save()
         response = self.client.get("/api/logout")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.client.session.get("username"), None)
-        self.assertEqual(self.client.session.get("token"), None)
+        self.assertTrue("username" not in self.client.session)
+        self.assertTrue("token" not in self.client.session)

@@ -146,10 +146,14 @@ def logout(req: HttpRequest):
     Logout the user, cleaning the session.
     Redirects to /
     """
-    req.session.pop("token")
-    req.session.pop("username")
-    req.session.pop("email")
-    req.session.pop("admin")
+    if "token" in req.session:
+        req.session.pop("token")
+    if "username" in req.session:
+        req.session.pop("username")
+    if "email" in req.session:
+        req.session.pop("email")
+    if "admin" in req.session:
+        req.session.pop("admin")
     return redirect("/?success=Logged out successfully!")
 
 
