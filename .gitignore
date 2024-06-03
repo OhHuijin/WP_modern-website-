@@ -3,3 +3,5 @@ __pycache__
 node_modules/
 django/db.sqlite3
 temp*
+*.Identifier
+*.sqlite3

@@ -5,9 +5,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'popcode/favicon.ico' %}" type="image/x-icon" />
     <title>
       {% block title %}
-
+        PopCode🍿 - Your ultimate coding boot buddy
       {% endblock %}
     </title>
     <link href="{% static 'popcode/css/style.css' %}" rel="stylesheet" />
@@ -52,7 +53,7 @@
 
     {% endblock %}
     <script src="{% static 'popcode/js/hljs.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="{% static 'popcode/js/hljs_python.js' %}"></script>
     <script>
       hljs.highlightAll()
       document.getElementById('menuToggle').addEventListener('click', () => {
