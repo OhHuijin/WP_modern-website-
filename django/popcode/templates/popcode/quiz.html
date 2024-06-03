@@ -1,7 +1,7 @@
 {% extends './layout.html' %}
 {% load static %}
 {% block title %}
-  quiz
+  PopCode🍿 - Quiz ✅
 {% endblock %}
 
 {% block head %}
@@ -30,16 +30,11 @@
   <div>
     <div class="container">
       <img class="corn" src="{% static 'popcode/images/corn.png' %}" />
-      <h3 class="day">{{ lessonTitle }} 
-  </h3>
-         <h3 class="day">
-          -{{ part.title }}</h3>
+      <h3 class="day">{{ lessonTitle }}</h3>
+      <h3 class="day">-{{ part.title }}</h3>
     </div>
 
     <main>
-
-
-
       <div class="game-quiz-container">
         <div class="game-details-container">
           <h1 id="lvl-type">EXPLAINATION</h1>

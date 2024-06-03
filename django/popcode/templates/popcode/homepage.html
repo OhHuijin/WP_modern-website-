@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       {% block title %}
-        homepage
+        PopCode🍿 - Your ultimate coding boot buddy
       {% endblock %}
     </title>
-    <!--                              <link rel="stylesheet" href="homepage_globals.css" />
-    <link rel="stylesheet" href="homepage_style.css" />                              -->
+    <meta name="description" content="Discover PopCode, the ultimate companion for your coding journey. Whether you're a beginner or looking to sharpen your skills, PopCode offers a dynamic and interactive learning experience similar to SoloLearn and Duolingo. Dive into fun, gamified lessons, challenges, and real-world projects that make coding enjoyable and effective. Join our community of passionate learners and start building your coding skills with PopCode today!" />
+    <link rel="shortcut icon" href="{% static 'popcode/favicon.ico' %}" type="image/x-icon" />
+    <!--                                     <link rel="stylesheet" href="homepage_globals.css" />
+    <link rel="stylesheet" href="homepage_style.css" />                                     -->
     <link href="{% static 'popcode/css/homepage_style.css' %}" rel="stylesheet" />
     <link href="{% static 'popcode/css/homepage_globals.css' %}" rel="stylesheet" />
   </head>
@@ -30,5 +32,13 @@
         <a href="{% url 'signup' %}" class="btn redborder">Join the adventure !</a>
       </div>
     </div>
+    <script src="{% static 'popcode/js/hljs.js' %}"></script>
+    <script src="{% static 'popcode/js/hljs_python.js' %}"></script>
+    <script>
+      hljs.highlightAll()
+      document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('menuL').classList.toggle('open')
+      })
+    </script>
   </body>
 </html>

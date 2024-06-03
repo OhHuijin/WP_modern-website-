@@ -78,9 +78,9 @@ def settings(req: HttpRequest, context={}):
 def contact(req: HttpRequest, context={}):
     return render(req, "popcode/contact.html")
 
+
 def link(req: HttpRequest, context={}):
     return render(req, "popcode/link.html")
-
 
 
 def profile(req: HttpRequest, username=""):

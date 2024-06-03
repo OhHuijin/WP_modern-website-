@@ -1,6 +1,6 @@
 {% extends "./layout.html" %}
 {% load static %}
-{% block title %}settings{% endblock %}
+{% block title %}PopCode🍿 - Settings ⚙️{% endblock %}
 
 
 {% block head %}
@@ -21,7 +21,8 @@
             <form action="{% url 'apiEditUser' %}" method="post">
               {% csrf_token %}
               <p>Username:</p>
-              <input type="text" name="username" placeholder="Username" value="{{ request.session.username }}" />
+              <input type="text" name="username" placeholder="Username" value="{{ request.session.username }}" id="usernameInput"/><br>
+              <p id="avatarContainer"><i>This username gives this avatar 😎 </i><img src="https://api.dicebear.com/8.x/adventurer-neutral/svg?seed={{ request.session.username }}" alt="" id="avatarSettings"></p>
               <p>Email:</p>
               <input type="text" name="email" id="email" placeholder="Email" value="{{ request.session.email }}" />
               <p>Password:<p/>
@@ -36,5 +37,5 @@
           {% endif %}
         </div>
     </div>
-    <script src="settings.js"></script>
+    <script src="{% static 'popcode/js/settings.js' %}"></script>
     {% endblock nav %}
