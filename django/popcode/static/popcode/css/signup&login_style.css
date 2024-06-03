@@ -669,3 +669,48 @@ button {
     width: 60%;
   }
 }
+
+@media screen and (max-width: 650px) {
+
+  .main-container {
+    display: flex;
+    padding-bottom: 100px;
+
+  margin: -50px;
+  margin-left: -230px;
+  width: 150%;
+    height: auto;
+    margin-top: -120px;
+  }
+  
+
+  .popcorn {
+    display: none;
+    
+  }
+  .group{
+    padding: -30px;
+    justify-content: center;
+
+  }
+  .frame-d{
+    width: 60%;
+
+  }
+  .frame-12{
+    width: 60%;
+  }
+
+  .frame-19{
+    width: 60%;
+  }
+
+
+  .frame-20{
+    width: 105%;
+  }
+
+  .frame-1f{
+    width: 60%;
+  }
+}
