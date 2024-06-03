@@ -9,16 +9,27 @@
 
 {% block nav %}
   <div class="title">
-    <img src="{% static 'popcode/images/popcode.svg' %}" />
+    <h1>
+
+
+    </h1>
+ 
     <h1>Take a Look at Our Official Links!</h1>
+    <h2>__________________________________________</h1>
 
 
 
-  </div>
-  <a href="https://github.com/OhHuijin/WP_modern-website-"><img class="git" src="{% static 'popcode/images/git.png' %}" alt="" /></a>
+  </div class=container>
+{% comment %} site logo and title {% endcomment %}
+  <div>
+  <a href="https://github.com/OhHuijin/WP_modern-website-"><img class="gitimg" src="{% static 'popcode/images/git.png' %}" alt="" /></a>
   <a href="https://github.com/OhHuijin/WP_modern-website-"><p class="git">POPCODE GitHub</p></a>
-  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><img class="ppt" src="{% static 'popcode/images/popcode3.svg' %}" alt="" /></a>
-  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><p class="git">POPCODE Introduction Slides</p></a>
-  <a href="https://pypi.org/project/pymongo/"><img class="mongo" src="{% static 'popcode/images/pymongo.png' %}" alt="" /></a>
+  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><img class="pptimg" src="{% static 'popcode/images/popcode3.svg' %}" alt="" /></a>
+  <a href="https://docs.google.com/presentation/d/1Jalt1F8wE_KSWxxg8olA-jkVDGZRZQDmlEOY6or_67A/edit?usp=sharing"><p class="ppt">POPCODE Introduction Slides</p></a>
+  <a href="https://pypi.org/project/pymongo/"><img class="mongoimg" src="{% static 'popcode/images/pymongo.png' %}" alt="" /></a>
   <a href="https://pypi.org/project/pymongo/"><p class="mongo">Our Framework - Pymongo</p></a>
+
+  <p id="info">Do you need more information?</p>
+  <a href="{% url 'contact' %}"><button class="mongo">Go to Contact</button></a>
+</div>
   {% endblock nav %}
