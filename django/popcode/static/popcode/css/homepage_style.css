@@ -74,6 +74,55 @@
   height: 100px;
 }
 
+#flyingCode {
+  position: absolute;
+  top: 35vh;
+  height: 20vh;
+  left: 1vw;
+  width: 30vw;
+  font-size: 1.25vw;
+  background-color: gold;
+  animation: flyingcodeanim 10s linear infinite;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes flyingcodeanim {
+  0% {
+    transform: rotateX(9deg) rotateY(21deg) rotateZ(341deg) scale(1) translateY(0);
+  }
+
+  50% {
+    transform: rotateX(16deg) rotateY(26deg) rotateZ(341deg) scale(0.95) translateY(30px);
+  }
+
+  100% {
+    transform: rotateX(9deg) rotateY(21deg) rotateZ(341deg) scale(1) translateY(0);
+  }
+}
+
+#flyingImage {
+  position: absolute;
+  top: 35vh;
+  right: 5vw;
+  width: 20vw;
+  animation: flyingimageanim 10s linear infinite;
+}
+
+@keyframes flyingimageanim {
+  0% {
+    transform: rotateX(9deg) rotateY(21deg) rotateZ(18deg) scale(1) translateY(0);
+  }
+
+  50% {
+    transform: rotateX(16deg) rotateY(26deg) rotateZ(23deg) scale(0.95) translateY(30px);
+  }
+
+  100% {
+    transform: rotateX(9deg) rotateY(21deg) rotateZ(18deg) scale(1) translateY(0);
+  }
+}
+
+
 @media screen and (max-width: 768px) {
   .leftlinks {
     display: none;
@@ -88,5 +137,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  #flyingCode,
+  #flyingImage {
+    display: none;
   }
 }
