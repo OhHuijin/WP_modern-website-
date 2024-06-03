@@ -6,7 +6,7 @@
 }
 
 body {
-  margin: -250px, auto;
+  margin:  auto;
   display: flex;
   justify-content: center;
 }
@@ -472,11 +472,11 @@ button {
   position: relative;
   width: 404px;
   max-width: 90vw;
-
+  left: -7px;
   height: 35.019px;
   margin: 29.547px 0 0 0;
   cursor: pointer;
-  background: #edf2f7;
+  background: transparent;
   border: none;
   z-index: 36;
 }
@@ -511,44 +511,6 @@ button {
 
 }
 
-/* .frame-21 {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  flex-shrink: 0;
-  gap: 10px;
-  position: relative;
-  width: 404px;
-  max-width: 90vw;
-
-  height: 32px;
-  padding: 10px 0 10px 10px;
-  background: #ffc107;
-  border: 1px solid #3a5b22;
-  z-index: 38;
-  overflow: hidden;
-  border-radius: 10px;
-} */
-
-/* 
-
-.login {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  position: absolute;
-  height: 20px;
-  top: 6px;
-  left: 185px;
-  color: #ffffff;
-  font-family: Poppins, var(--default-font-family);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 19.5px;
-  text-align: left;
-  white-space: nowrap;
-  z-index: 40;
-} */
 
 .frame-25 {
   display: flex;
@@ -641,6 +603,7 @@ button {
   }
   .group{
     /* margin: 10px; */
+    
 
   }
   .frame-d{
@@ -656,7 +619,8 @@ button {
 
 
   .frame-20{
-    width: 100%;
+    width: 105%;
+    
     
   }
 

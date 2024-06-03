@@ -12,23 +12,7 @@ describe('quiz.html', () => {
 
     beforeEach(async () => { 
 
-        /*
-            const html = `<!DOCTYPE html>
-    <html>
-    <head>
-      <script type="text/javascript">
-        let parts = JSON.parse('{{ part|escapejs }}');
-        let currentSlide = 0; // Ensure currentSlide is initialized
-        function showSlide(n) {
-          // showSlide function logic
-        }
-      </script>
-    </head>
-    <body>
-      //body content
-    </body>
-    </html>`;
-        */
+  
       dom = await new JSDOM(html, { runScripts: "dangerously", resources: "usable" });
       window = dom.window;
       document = window.document;
@@ -86,34 +70,7 @@ describe('quiz.html', () => {
         }
     });
 
-    /* test('should move to the previous slide when prev button is clicked', () => {
-      const nextBtn = document.querySelector('#next-btn');
-      const prevBtn = document.querySelector('#prev-btn');
-
-      // Show the first slide explicitly
-      window.showSlide(0);
-      expect(document.querySelector('#actual-slide-indicator').textContent).toBe('1');
-
-      // Move to the second slide
-      nextBtn.click();
-      window.nextSlide();
-      expect(document.querySelector('#actual-slide-indicator').textContent).toBe('2');
-
-      // Click the previous button
-      prevBtn.click();
-      window.prevSlide();
-
-      const actualSlideIndicator = document.querySelector('#actual-slide-indicator');
-      expect(actualSlideIndicator.textContent).toBe('1');
-
-      const slides = document.querySelectorAll('.level');
-      const firstSlideStyle = window.getComputedStyle(slides[0]);
-      const secondSlideStyle = window.getComputedStyle(slides[1]);
-
-      expect(firstSlideStyle.display).toBe('block');
-      expect(secondSlideStyle.display).toBe('none');
-    }); */
-
+   
     test('should shuffle the answers for a quiz type slide', () => {
       const slides = document.querySelectorAll('.level');
       slides.forEach((slide, index) => {
