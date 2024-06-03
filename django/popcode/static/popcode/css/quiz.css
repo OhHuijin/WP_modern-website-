@@ -28,7 +28,7 @@ body {
 
 /* 최상단 로고 컨테이너 (여기부터) */
 .container {
-    margin-bottom: 0.1%;
+    margin-bottom: -2%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -40,19 +40,24 @@ body {
 
 .corn {
     width: 50vw;
+    margin-bottom: -4%;
     max-width: 128px;
     text-align: center;
     /* position: relative; */
     z-index: 1;
+    top: 40%;
+
 }
 
 .day {
     width: 80px;
+    margin-bottom: 1%;
     margin-left: 27px;
     position: relative;
     z-index: 2;
+    font-size: 17px;
     transform: translateY(-60px);
-    white-space: nowrap;
+
 }
 
 /* 최상단 로고 컨테이너 (여기까지) */
