@@ -6,14 +6,14 @@
 }
 
 body {
-  margin:  auto;
+  margin: -300px, auto;
   display: flex;
   justify-content: center;
 }
 
 .popcorn{
 
-  padding-top: 300px;
+  padding-top: 350px;
  width: 1100px;
   padding-left: 800px;
   /* padding-top: 500px; */
@@ -38,8 +38,8 @@ button {
   padding-top: -100px;
   position: relative;
   width: 100%;
-  height: 100%;
-  margin: -100 auto;
+  height: 120%;
+  margin: -150 auto;
   background: #ffffff;
   overflow: hidden;
 }
@@ -101,8 +101,8 @@ button {
   height: 48px;
   color: #000000;
   font-family: Poppins, var(--default-font-family);
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 31px;
+  font-weight: 400;
   line-height: 48px;
   text-align: center;
   white-space: nowrap;
@@ -511,6 +511,44 @@ button {
 
 }
 
+/* .frame-21 {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 10px;
+  position: relative;
+  width: 404px;
+  max-width: 90vw;
+
+  height: 32px;
+  padding: 10px 0 10px 10px;
+  background: #ffc107;
+  border: 1px solid #3a5b22;
+  z-index: 38;
+  overflow: hidden;
+  border-radius: 10px;
+} */
+
+/* 
+
+.login {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  height: 20px;
+  top: 6px;
+  left: 185px;
+  color: #ffffff;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 19.5px;
+  text-align: left;
+  white-space: nowrap;
+  z-index: 40;
+} */
 
 .frame-25 {
   display: flex;
@@ -586,13 +624,13 @@ button {
 
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 700px) {
 
   .main-container {
     display: flex;
     margin-top: -150px;
     margin-left: -100px;
-    padding: 50px;
+  
     height: auto;
   }
   
@@ -603,11 +641,13 @@ button {
   }
   .group{
     /* margin: 10px; */
-    
+    padding: -30px;
+    justify-content: center;
 
   }
   .frame-d{
     width: 80%;
+
   }
   .frame-12{
     width: 80%;
@@ -620,11 +660,54 @@ button {
 
   .frame-20{
     width: 105%;
-    
-    
   }
 
   .frame-1f{
     width: 80%;
+  }
+}
+
+
+
+@media screen and (max-width: 650px) {
+
+  .main-container {
+    display: flex;
+    margin-top: -150px;
+    margin-left: -120px;
+  
+    height: auto;
+  }
+  
+
+  .popcorn {
+    display: none;
+    
+  }
+  .group{
+    /* margin: 10px; */
+    padding: -30px;
+    justify-content: center;
+
+  }
+  .frame-d{
+    width: 60%;
+
+  }
+  .frame-12{
+    width: 60%;
+  }
+
+  .frame-19{
+    width: 60%;
+  }
+
+
+  .frame-20{
+    width: 105%;
+  }
+
+  .frame-1f{
+    width: 60%;
   }
 }
