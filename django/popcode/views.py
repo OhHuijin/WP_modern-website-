@@ -1,3 +1,4 @@
+import datetime
 from email.policy import HTTP
 import json
 from django.http import HttpRequest
@@ -88,10 +89,16 @@ def profile(req: HttpRequest, username=""):
         user = getUser(req)
         if not user:
             return redirect("/")
-        return render(req, "popcode/profile.html", context={"user": user})
+        created = datetime.datetime.fromtimestamp(user["created"]).strftime("%d %B %Y")
+        return render(
+            req, "popcode/profile.html", context={"user": user, "created": created}
+        )
     user = DB.users.find_one({"username": username})
+    created = datetime.datetime.fromtimestamp(user["created"]).strftime("%d %B %Y")
     return render(
-        req, "popcode/profile.html", context={"requestedname": username, "user": user}
+        req,
+        "popcode/profile.html",
+        context={"requestedname": username, "user": user, "created": created},
     )
 
 
