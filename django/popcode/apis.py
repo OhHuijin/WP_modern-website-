@@ -23,6 +23,7 @@ def login(req: HttpRequest):
     """
     username = req.POST.get("username")
     password = req.POST.get("password")
+    save = req.POST.get("save",False)
     if not username or not password:
         return redirect("/login?error=Missing username or password")
     password = md5(password.encode("utf-8")).hexdigest()
@@ -54,6 +55,8 @@ def login(req: HttpRequest):
     req.session["admin"] = user["role"] == 1
     req.session["streak"] = user["streak"]
     req.session["todayStreak"] = todayStreak
+    if save:
+        req.session.set_expiry(60 * 60 * 24 * 30)
     return redirect(f"/?success=Welcome back {user['username']}!")
 
 
@@ -67,6 +70,7 @@ def signup(req: HttpRequest):
     username = req.POST.get("username")
     password = req.POST.get("password")
     email = req.POST.get("email")
+    save = req.POST.get("save", False)
 
     if not username or not password or not email:
         return redirect("/signup?error=Missing username, password or email")
@@ -98,6 +102,8 @@ def signup(req: HttpRequest):
     req.session["admin"] = False
     req.session["streak"] = 0
     req.session["todayStreak"] = False
+    if save:
+        req.session.set_expiry(60 * 60 * 24 * 30)
     return redirect(f"/?success=Welcome to PopCode, {username}!")
 
 
