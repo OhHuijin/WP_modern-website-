@@ -33,7 +33,7 @@ describe('quiz.html', () => {
       });
     });
 
-    // Test 타임아웃을 30초로 설정
+    // Test 30sec timeout
     jest.setTimeout(30000);
 
     test('should show the first slide on load', () => {

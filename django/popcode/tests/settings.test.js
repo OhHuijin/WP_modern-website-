@@ -1,7 +1,7 @@
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-// settings.js의 로직을 모의 DOM 환경에서 테스트하기 위한 HTML 구조를 설정합니다.
+// Setting up the HTML structure for testing the logic in settings.js in a mock DOM environment.
 const html = `
 <!DOCTYPE html>
 <html>
@@ -17,26 +17,26 @@ const html = `
 </html>
 `;
 
-// jsdom을 사용하여 모의 DOM 환경을 생성
+// Creating a mock DOM environment using jsdom.
 const dom = new JSDOM(html);
 global.document = dom.window.document;
 global.window = dom.window;
 
-// settings.js
+// Importing settings.js
 require('../static/popcode/js/settings.js');
 
 describe('settings form interaction', () => {
   test('edit button enables input fields and save button', () => {
-    // 초기 상태 확인
+    // Checking initial state
     expect(document.getElementById('name').disabled).toBeTruthy();
     expect(document.getElementById('email').disabled).toBeTruthy();
     expect(document.getElementById('password').disabled).toBeTruthy();
     expect(document.getElementById('saveButton').disabled).toBeTruthy();
 
-    // editButton 클릭 이벤트 시뮬레이션
+    // Simulating click event on editButton
     document.getElementById('editButton').click();
 
-    // 클릭 이벤트 후의 상태 검증
+    // Verifying state after click event
     expect(document.getElementById('name').disabled).toBeTruthy();
     expect(document.getElementById('email').disabled).toBeFalsy();
     expect(document.getElementById('password').disabled).toBeFalsy();
@@ -44,13 +44,13 @@ describe('settings form interaction', () => {
   });
 
   test('settingsForm submit disables input fields and save button', () => {
-    // settingsForm 제출 이벤트 시뮬레이션을 위해 먼저 모든 필드를 활성화
+    // Enabling all fields for simulating settingsForm submit event
     document.getElementById('editButton').click();
 
-    // settingsForm 제출 이벤트 시뮬레이션
+    // Simulating settingsForm submit event
     document.getElementById('settingsForm').dispatchEvent(new window.Event('submit', { 'bubbles': true, 'cancelable': true }));
 
-    // 제출 이벤트 후의 상태 검증
+    // Verifying state after submit event
     expect(document.getElementById('name').disabled).toBeTruthy();
     expect(document.getElementById('email').disabled).toBeTruthy();
     expect(document.getElementById('password').disabled).toBeTruthy();
